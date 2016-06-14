@@ -25,6 +25,7 @@
             var api = {
                 
                 currentLayer : 0,
+                pebbleWon : 0,
                 
                 // toggle the layer
                 stepLayer : function(){
@@ -37,6 +38,16 @@
                         
                     }
                             
+                },
+                
+                userAction : function(x,y){
+                    
+                    //console.log(x+','+y);
+                    
+                    var cellX = Math.floor( (x-20) / (400 / land.w) ),
+                        cellY = Math.floor( (y-20) / (400 / land.h) );
+                    
+                    console.log(cellX + ',' + cellY);
                 }
                 
             };
@@ -99,7 +110,13 @@
         // events
         canvas.addEventListener('mousedown', function(e){
             
-            state.stepLayer();
+            var box = e.target.getBoundingClientRect(),
+                x = e.clientX - box.left,
+                y = e.clientY - box.top;
+            
+            state.userAction(x,y);
+            
+            //state.stepLayer();
             draw();
             
         });
