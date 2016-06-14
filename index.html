@@ -118,6 +118,7 @@
             
             ctx.strokeStyle = '#000000';
             ctx.textAlign = 'center';
+            
             i = 0, len = cells.length;
             while(i < len){
                 
@@ -126,8 +127,19 @@
                 
                 //console.log(x+','+y);
                 
+                ctx.fillStyle = '#ffa050';
+                if(cells[i].done){
+                    
+                    ctx.fillStyle = '#aa5020';
+                }
+                
                 ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
+                ctx.fillRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
+                
+                ctx.save();
+                ctx.fillStyle = '#ffff00';
                 ctx.fillText(cells[i].amount, 20 + (x * cellWidth) + (cellWidth / 2), 20 + (y * cellHeight) + (cellHeight / 2));
+                ctx.restore();
                 
                 i++;
             }
