@@ -154,16 +154,25 @@ var land = (function(){
         
         var cell = this.getCell(x,y,z),
         status = {     
-            amount : 0
+            amount : 0,
+            dropDown : false
         };
         
-        if(cell.amount > 0){
-            
-            status.amount = cell.amount
-            cell.amount = 0;
-        }
+        if(cell.done){
         
-        cell.done = true;
+            status.dropDown = true
+            
+        }else{
+            
+            if(cell.amount > 0){
+            
+                status.amount = cell.amount
+                cell.amount = 0;
+            }
+        
+            cell.done = true;
+        
+        }
         
         done(status);
         

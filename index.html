@@ -59,8 +59,20 @@
                             
                             console.log(status);
                             
-                            self.pebble += status.amount;
+                            if(status.dropDown){
+                                
+                                if(self.currentLayer < land.d-1){
+                                    
+                                    self.currentLayer += 1;
+                                    
+                                }
+                                
+                                
+                            }else{
                             
+                                self.pebble += status.amount;
+                            
+                            }
                         });
                         
                     // player clicked elsewhere.
