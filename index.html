@@ -51,7 +51,9 @@
                         cellX = Math.floor( (x-20) / (400 / land.w) );
                         cellY = Math.floor( (y-20) / (400 / land.h) );
                     
-                        console.log(cellX + ',' + cellY);
+                        //console.log(cellX + ',' + cellY);
+                        
+                        console.log(land.getCell(cellX, cellY, state.currentLayer));
                         
                     // player clicked elsewhere.
                     }else{
@@ -102,7 +104,7 @@
                 x = Math.floor(i / land.h);
                 y = i % land.h;
                 
-                console.log(x+','+y);
+                //console.log(x+','+y);
                 
                 ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
                 ctx.fillText(cells[i].amount, 20 + (x * cellWidth) + (cellWidth / 2), 20 + (y * cellHeight) + (cellHeight / 2));
@@ -110,7 +112,7 @@
                 i++;
             }
             
-            console.log(cells);
+            //console.log(cells);
             ctx.strokeStyle = '#ff0000';
             ctx.strokeRect(20,20,400,400);
             
