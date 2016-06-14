@@ -95,6 +95,7 @@ var land = (function(){
             
             api.cells.push({
                 amount: 0,
+                done:false,
                 i:i,x:x,y:y,z:z
             });
 
@@ -145,6 +146,26 @@ var land = (function(){
     api.getDepth = function(x,y){
         
         return api.cells.splice(y * api.d + api.d * api.w * x, api.d);
+        
+    };
+    
+    // dig at a location
+    api.digAt = function(x,y,z,done){
+        
+        var cell = this.getCell(x,y,z),
+        status = {     
+            amount : 0
+        };
+        
+        if(cell.amount > 0){
+            
+            status.amount = cell.amount
+            cell.amount = 0;
+        }
+        
+        cell.done = true;
+        
+        done(status);
         
     };
     
