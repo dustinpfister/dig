@@ -160,20 +160,23 @@ var land = (function(){
             dropDown : false
         };
         
-        if(cell.done){
+        if(cell.canDig){
         
-            status.dropDown = true
+            if(cell.done){
+        
+                status.dropDown = true
             
-        }else{
+            }else{
             
-            if(cell.amount > 0){
+                if(cell.amount > 0){
             
-                status.amount = cell.amount
-                cell.amount = 0;
+                    status.amount = cell.amount
+                    cell.amount = 0;
+                }
+        
+                cell.done = true;
+        
             }
-        
-            cell.done = true;
-        
         }
         
         done(status);
