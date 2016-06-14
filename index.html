@@ -97,7 +97,7 @@
         
         var draw = function(){
           
-            ctx.strokeStyle = '#000000';
+            ctx.fillStyle = '#000000';
             ctx.textAlign = 'left';
             
             ctx.clearRect(0,0,640,480);
@@ -127,10 +127,18 @@
                 
                 //console.log(x+','+y);
                 
-                ctx.fillStyle = '#ffa050';
-                if(cells[i].done){
+                if(cells[i].canDig){
+                
+                    ctx.fillStyle = '#ffa050';
+                    if(cells[i].done){
                     
-                    ctx.fillStyle = '#aa5020';
+                        ctx.fillStyle = '#aa5020';
+                    }
+                    
+                }else{
+                    
+                    ctx.fillStyle = '#000000';
+                    
                 }
                 
                 ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);

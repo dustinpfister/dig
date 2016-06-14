@@ -96,8 +96,10 @@ var land = (function(){
             api.cells.push({
                 amount: 0,
                 done:false,
+                canDig: z === 0 ? true : false ,
                 i:i,x:x,y:y,z:z
             });
+            
 
             i += 1;
 
