@@ -36,13 +36,10 @@
                         this.currentLayer = 0;
                         
                     }
-                    
-                    console.log(this.currentLayer);
-                    
+                            
                 }
                 
             };
-            
             
             return api;
             
@@ -55,23 +52,44 @@
         
         var draw = function(){
           
+            ctx.strokeStyle = '#000000';
+            ctx.textAlign = 'left';
+            
             ctx.clearRect(0,0,640,480);
             
-            ctx.fillText(land.d,10,10);
+            ctx.fillText('current layer: ' + state.currentLayer,10,10);
             
-            drawLayer(ctx,0);
+            drawLayer(ctx,state.currentLayer);
             
         },
             
         drawLayer = function(ctx, layer){
           
             var cellWidth = 400 / land.w,
-                cellHeight = 400 / land.h;
+                cellHeight = 400 / land.h,
+                
+            cells = land.getLayer(layer),x,y,i,len;
             
             
+            ctx.strokeStyle = '#000000';
+            ctx.textAlign = 'center';
+            i = 0, len = cells.length;
+            while(i < len){
+                
+                x = Math.floor(i / land.w);
+                y = i % land.h;
+                
+                //console.log(x+','+y);
+                
+                ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
+                ctx.fillText(cells[i].amount, 20 + (x * cellWidth) + (cellWidth / 2), 20 + (y * cellHeight) + (cellHeight / 2));
+                
+                i++;
+            }
+            
+            console.log(cells);
+            ctx.strokeStyle = '#ff0000';
             ctx.strokeRect(20,20,400,400);
-            
-            console.log(land.getLayer(layer));
             
             
         };
@@ -79,11 +97,11 @@
         draw();
         
         // events
-        
         canvas.addEventListener('mousedown', function(e){
             
             state.stepLayer();
             draw();
+            
         });
         
     </script>
