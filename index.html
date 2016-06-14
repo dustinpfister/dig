@@ -25,7 +25,7 @@
             var api = {
                 
                 currentLayer : 0,
-                pebbleWon : 0,
+                pebble : 0,
                 
                 // toggle the layer
                 stepLayer : function(){
@@ -43,7 +43,7 @@
                 // the user has preformed an action
                 userAction : function(x,y){
                     
-                    var cellX,cellY,cell;
+                    var cellX,cellY,cell,self=this;
                     
                     // player clieck on land
                     if(x >= 20 && x <= 420 && y >=20 && y <= 420){
@@ -59,6 +59,7 @@
                             
                             console.log(status);
                             
+                            self.pebble += status.amount;
                             
                         });
                         
@@ -89,7 +90,7 @@
             
             ctx.clearRect(0,0,640,480);
             
-            ctx.fillText('current layer: ' + state.currentLayer,10,10);
+            ctx.fillText('pebble: '+ state.pebble + '; current layer: ' + state.currentLayer + ';',10,10);
             
             drawLayer(ctx,state.currentLayer);
             
