@@ -6,8 +6,8 @@ var land = (function(){
         cells: [],
 
         // width height and depth of the land
-        w: 3
-        , h: 2
+        w: 4
+        , h: 4
         , d: 5,
 
         // the total amount of pebble in the land
@@ -155,6 +155,8 @@ var land = (function(){
     api.digAt = function(x,y,z,done){
         
         var cell = this.getCell(x,y,z),
+        self = this,
+        layer,
         status = {     
             amount : 0,
             dropDown : false
@@ -173,6 +175,25 @@ var land = (function(){
                     status.amount = cell.amount
                     cell.amount = 0;
                 }
+                
+                layer = this.getLayer(z);
+                
+                layer.forEach(function(otherCell){
+                    
+                    
+                    if(otherCell.x >= cell.x-1 && otherCell.x <= cell.x+1){
+                        
+                        if(otherCell.y >= cell.y-1 && otherCell.y <= cell.y+1){
+                            
+                            console.log(otherCell);
+                            
+                            self.getCell(otherCell.i).canDig = true;
+                            
+                        }
+                        
+                    }
+                    
+                });
         
                 cell.done = true;
         
