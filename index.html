@@ -99,10 +99,10 @@
             i = 0, len = cells.length;
             while(i < len){
                 
-                x = Math.floor(i / land.w);
+                x = Math.floor(i / land.h);
                 y = i % land.h;
                 
-                //console.log(x+','+y);
+                console.log(x+','+y);
                 
                 ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
                 ctx.fillText(cells[i].amount, 20 + (x * cellWidth) + (cellWidth / 2), 20 + (y * cellHeight) + (cellHeight / 2));
