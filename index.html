@@ -29,13 +29,15 @@
                 // toggle the layer
                 stepLayer : function(){
                     
-                    currentLayer += 1;
+                    this.currentLayer += 1;
                     
-                    if(currentLayer >= land.d){
+                    if(this.currentLayer >= land.d){
                         
-                        currentLayer = 0;
+                        this.currentLayer = 0;
                         
                     }
+                    
+                    console.log(this.currentLayer);
                     
                 }
                 
@@ -80,7 +82,7 @@
         
         canvas.addEventListener('mousedown', function(e){
             
-            state.toggleLayer();
+            state.stepLayer();
             draw();
         });
         
