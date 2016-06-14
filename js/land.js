@@ -6,7 +6,7 @@ var land = (function(){
         cells: [],
 
         // width height and depth of the land
-        w: 2
+        w: 3
         , h: 2
         , d: 5,
 

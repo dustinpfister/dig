@@ -45,6 +45,7 @@
                     
                     var cellX,cellY;
                     
+                    // player clieck on land
                     if(x >= 20 && x <= 420 && y >=20 && y <= 420){
                         
                         cellX = Math.floor( (x-20) / (400 / land.w) );
@@ -52,11 +53,13 @@
                     
                         console.log(cellX + ',' + cellY);
                         
+                    // player clicked elsewhere.
                     }else{
                         
                         console.log('land not clicked');
                         
                     }
+                    
                 }
                 
             };
