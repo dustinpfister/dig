@@ -40,14 +40,23 @@
                             
                 },
                 
+                // the user has preformed an action
                 userAction : function(x,y){
                     
-                    //console.log(x+','+y);
+                    var cellX,cellY;
                     
-                    var cellX = Math.floor( (x-20) / (400 / land.w) ),
+                    if(x >= 20 && x <= 420 && y >=20 && y <= 420){
+                        
+                        cellX = Math.floor( (x-20) / (400 / land.w) );
                         cellY = Math.floor( (y-20) / (400 / land.h) );
                     
-                    console.log(cellX + ',' + cellY);
+                        console.log(cellX + ',' + cellY);
+                        
+                    }else{
+                        
+                        console.log('land not clicked');
+                        
+                    }
                 }
                 
             };
