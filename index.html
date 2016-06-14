@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>pebble_dig prototype</title>
+    <meta charset="utf-8">
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+
+
+    <canvas id="thecanvas" width="640" height="480"></canvas>
+    
+    <script src="js/land.js"></script>
+    
+    <script>
+        
+        // game state
+        var state = (function(){
+            
+            var api = {
+                
+                currentLayer : 0,
+                
+                // toggle the layer
+                stepLayer : function(){
+                    
+                    currentLayer += 1;
+                    
+                    if(currentLayer >= land.d){
+                        
+                        currentLayer = 0;
+                        
+                    }
+                    
+                }
+                
+            };
+            
+            
+            return api;
+            
+        }());
+        
+        
+        // render, and event attachment
+        var canvas = document.getElementById('thecanvas'),
+            ctx = canvas.getContext('2d');
+        
+        var draw = function(){
+          
+            ctx.clearRect(0,0,640,480);
+            
+            ctx.fillText(land.d,10,10);
+            
+            drawLayer(ctx,0);
+            
+        },
+            
+        drawLayer = function(ctx, layer){
+          
+            var cellWidth = 400 / land.w,
+                cellHeight = 400 / land.h;
+            
+            
+            ctx.strokeRect(20,20,400,400);
+            
+            console.log(land.getLayer(layer));
+            
+            
+        };
+        
+        draw();
+        
+        // events
+        
+        canvas.addEventListener('mousedown', function(e){
+            
+            state.toggleLayer();
+            draw();
+        });
+        
+    </script>
+
+
+</body>
+
+</html>
