@@ -54,11 +54,11 @@
                 // the user has preformed an action
                 userAction: function (x, y) {
 
-                    var cellX, cellY, cell, self = this
-                        , now = new Date()
-                        , time = now - self.startTime;
+                    var cellX, cellY, cell, self = this;
+                        //, now = new Date()
+                        //, time = now - self.startTime;
 
-                    if (time < self.timeLimit) {
+                    if (self.elapsed < self.timeLimit) {
 
                         // player clieck on land
                         if (x >= 20 && x <= 420 && y >= 20 && y <= 420) {
