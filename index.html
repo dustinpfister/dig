@@ -49,6 +49,12 @@
                     
                     this.elapsed = now - this.startTime;
                     
+                    if(this.elapsed > this.timeLimit){
+                        
+                        this.elapsed = this.timeLimit;
+                        
+                    }
+                    
                 },
 
                 // the user has preformed an action
