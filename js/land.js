@@ -66,11 +66,13 @@ var land = (function(){
 
                 cell.amount += amount;
                 api.amount += amount;
+                cell.total = cell.amount;
                 hidePebble();
 
             } else {
 
                 cell.amount += remain;
+                cell.total = cell.amount;
                 api.amount += remain;
 
             }
@@ -95,6 +97,7 @@ var land = (function(){
             
             api.cells.push({
                 amount: 0,
+                total: 0,
                 done:false,
                 canDig: z === 0 ? true : false ,
                 i:i,x:x,y:y,z:z
