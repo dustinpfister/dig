@@ -6,12 +6,12 @@ var land = (function(){
         cells: [],
 
         // width height and depth of the land
-        w: 4
-        , h: 4
-        , d: 5,
+        w: 8
+        , h: 8
+        , d: 10,
 
         // the total amount of pebble in the land
-        totalPebble: 100
+        totalPebble: 1000
         , amount: 0
 
     },
@@ -167,6 +167,13 @@ var land = (function(){
             if(cell.done){
         
                 status.dropDown = true
+                
+                // set the canDig bool for the cell below to true
+                if(cell.z + 1 < self.d ){
+                    
+                    this.getCell(x,y,z + 1).canDig = true;
+                    
+                }
             
             }else{
             
