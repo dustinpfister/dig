@@ -14,168 +14,175 @@
 
 
     <canvas id="thecanvas" width="640" height="480"></canvas>
-    
+
     <script src="js/land.js"></script>
-    
+
     <script>
-        
         // game state
-        var state = (function(){
-            
+        var state = (function () {
+
             var api = {
-                
-                currentLayer : 0,
-                pebble : 0,
-                
+
+                currentLayer: 0
+                , pebble: 0
+                , startTime: new Date()
+                , timeLimit: 10000,
+
                 // toggle the layer
-                stepLayer : function(){
-                    
+                stepLayer: function () {
+
                     this.currentLayer += 1;
-                    
-                    if(this.currentLayer >= land.d){
-                        
+
+                    if (this.currentLayer >= land.d) {
+
                         this.currentLayer = 0;
-                        
+
                     }
-                            
+
                 },
-                
+
                 // the user has preformed an action
-                userAction : function(x,y){
-                    
-                    var cellX,cellY,cell,self=this;
-                    
-                    // player clieck on land
-                    if(x >= 20 && x <= 420 && y >=20 && y <= 420){
-                        
-                        cellX = Math.floor( (x-20) / (400 / land.w) );
-                        cellY = Math.floor( (y-20) / (400 / land.h) );
-                    
-                        //console.log(cellX + ',' + cellY);
-                        
-                        //cell = land.getCell(cellX, cellY, state.currentLayer);
-                        
-                        land.digAt(cellX, cellY, state.currentLayer, function(status){
-                            
-                            if(status.dropDown){
-                                
-                                if(self.currentLayer < land.d-1){
-                                    
-                                    self.currentLayer += 1;
-                                    
-                                    // you can dig the cell you drop down to
-                                    //land.getCell(cellX,cellY, state.currentLayer).canDig = true;
-                                    
+                userAction: function (x, y) {
+
+                    var cellX, cellY, cell, self = this
+                        , now = new Date()
+                        , time = now - self.startTime;
+
+                    if (time < self.timeLimit) {
+
+                        // player clieck on land
+                        if (x >= 20 && x <= 420 && y >= 20 && y <= 420) {
+
+                            cellX = Math.floor((x - 20) / (400 / land.w));
+                            cellY = Math.floor((y - 20) / (400 / land.h));
+
+                            //console.log(cellX + ',' + cellY);
+
+                            //cell = land.getCell(cellX, cellY, state.currentLayer);
+
+                            land.digAt(cellX, cellY, state.currentLayer, function (status) {
+
+                                if (status.dropDown) {
+
+                                    if (self.currentLayer < land.d - 1) {
+
+                                        self.currentLayer += 1;
+
+                                        // you can dig the cell you drop down to
+                                        //land.getCell(cellX,cellY, state.currentLayer).canDig = true;
+
+                                    }
+
+
+                                } else {
+
+                                    self.pebble += status.amount;
+
                                 }
-                                
-                                
-                            }else{
-                            
-                                self.pebble += status.amount;
-                            
-                            }
-                        });
-                        
-                    // player clicked elsewhere.
-                    }else{
-                        
-                        console.log('land not clicked');
-                        
+                            });
+
+                            // player clicked elsewhere.
+                        } else {
+
+                            console.log('land not clicked');
+
+                        }
+
                     }
-                    
+
                 }
-                
+
             };
-            
+
             return api;
-            
+
         }());
-        
-        
+
+
         // render, and event attachment
-        var canvas = document.getElementById('thecanvas'),
-            ctx = canvas.getContext('2d');
-        
-        var draw = function(){
-          
-            ctx.fillStyle = '#000000';
-            ctx.textAlign = 'left';
-            
-            ctx.clearRect(0,0,640,480);
-            
-            ctx.fillText('pebble: '+ state.pebble + '; current layer: ' + state.currentLayer + ';',10,10);
-            
-            drawLayer(ctx,state.currentLayer);
-            
-        },
-            
-        drawLayer = function(ctx, layer){
-          
-            var cellWidth = 400 / land.w,
-                cellHeight = 400 / land.h,
-                
-            cells = land.getLayer(layer),x,y,i,len;
-            
-            
-            ctx.strokeStyle = '#000000';
-            ctx.textAlign = 'center';
-            
-            i = 0, len = cells.length;
-            while(i < len){
-                
-                x = Math.floor(i / land.h);
-                y = i % land.h;
-                
-                //console.log(x+','+y);
-                
-                if(cells[i].canDig){
-                
-                    ctx.fillStyle = '#ffa050';
-                    if(cells[i].done){
-                    
-                        ctx.fillStyle = '#aa5020';
+        var canvas = document.getElementById('thecanvas')
+            , ctx = canvas.getContext('2d');
+
+        var draw = function () {
+
+                ctx.fillStyle = '#000000';
+                ctx.textAlign = 'left';
+
+                ctx.clearRect(0, 0, 640, 480);
+
+                ctx.fillText('pebble: ' + state.pebble + '; current layer: ' + state.currentLayer + ';', 10, 10);
+
+                drawLayer(ctx, state.currentLayer);
+
+            },
+
+            drawLayer = function (ctx, layer) {
+
+                var cellWidth = 400 / land.w
+                    , cellHeight = 400 / land.h,
+
+                    cells = land.getLayer(layer)
+                    , x, y, i, len;
+
+
+                ctx.strokeStyle = '#000000';
+                ctx.textAlign = 'center';
+
+                i = 0, len = cells.length;
+                while (i < len) {
+
+                    x = Math.floor(i / land.h);
+                    y = i % land.h;
+
+                    //console.log(x+','+y);
+
+                    if (cells[i].canDig) {
+
+                        ctx.fillStyle = '#ffa050';
+                        if (cells[i].done) {
+
+                            ctx.fillStyle = '#aa5020';
+                        }
+
+                    } else {
+
+                        ctx.fillStyle = '#000000';
+
                     }
-                    
-                }else{
-                    
-                    ctx.fillStyle = '#000000';
-                    
+
+                    ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
+                    ctx.fillRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
+
+                    ctx.save();
+                    ctx.fillStyle = '#ffff00';
+                    ctx.fillText(cells[i].amount, 20 + (x * cellWidth) + (cellWidth / 2), 20 + (y * cellHeight) + (cellHeight / 2));
+                    ctx.restore();
+
+                    i++;
                 }
-                
-                ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
-                ctx.fillRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
-                
-                ctx.save();
-                ctx.fillStyle = '#ffff00';
-                ctx.fillText(cells[i].amount, 20 + (x * cellWidth) + (cellWidth / 2), 20 + (y * cellHeight) + (cellHeight / 2));
-                ctx.restore();
-                
-                i++;
-            }
-            
-            //console.log(cells);
-            ctx.strokeStyle = '#ff0000';
-            ctx.strokeRect(20,20,400,400);
-            
-            
-        };
-        
+
+                //console.log(cells);
+                ctx.strokeStyle = '#ff0000';
+                ctx.strokeRect(20, 20, 400, 400);
+
+
+            };
+
         draw();
-        
+
         // events
-        canvas.addEventListener('mousedown', function(e){
-            
-            var box = e.target.getBoundingClientRect(),
-                x = e.clientX - box.left,
-                y = e.clientY - box.top;
-            
-            state.userAction(x,y);
-            
+        canvas.addEventListener('mousedown', function (e) {
+
+            var box = e.target.getBoundingClientRect()
+                , x = e.clientX - box.left
+                , y = e.clientY - box.top;
+
+            state.userAction(x, y);
+
             //state.stepLayer();
             draw();
-            
+
         });
-        
     </script>
 
 
