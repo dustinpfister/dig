@@ -26,10 +26,11 @@
                 currentLayer: 0
                 , pebble: 0
                 , startTime: new Date()
-                , timeLimit: 10000,
+                , timeLimit: 10000
+                , elapsed: 0
 
                 // toggle the layer
-                stepLayer: function () {
+                ,stepLayer: function () {
 
                     this.currentLayer += 1;
 
@@ -39,6 +40,15 @@
 
                     }
 
+                },
+                
+                // update things based on time
+                update : function(){
+                    
+                    var now = new Date(); 
+                    
+                    this.elapsed = now - this.startTime;
+                    
                 },
 
                 // the user has preformed an action
@@ -92,7 +102,20 @@
 
                 }
 
+            },
+                
+                
+            loop = function(){
+              
+                var t = setTimeout(loop, 33);
+                
+                api.update();
+                
             };
+        
+        
+            // run loop
+            loop();
 
             return api;
 
