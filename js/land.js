@@ -167,16 +167,16 @@ var land = (function(){
         
         if(cell.canDig){
         
+            // set the canDig bool for the cell below to true
+            if(cell.z + 1 < self.d ){
+                    
+                this.getCell(x,y,z + 1).canDig = true;
+                    
+            }
+            
             if(cell.done){
         
                 status.dropDown = true
-                
-                // set the canDig bool for the cell below to true
-                if(cell.z + 1 < self.d ){
-                    
-                    this.getCell(x,y,z + 1).canDig = true;
-                    
-                }
             
             }else{
             
