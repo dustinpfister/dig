@@ -11,7 +11,7 @@ var draw = function () {
 
     ctx.clearRect(0, 0, 640, 480);
 
-    ctx.fillText('digs: ' + obj.digs + '; pebble: ' + obj.pebble + '; current layer: ' + obj.layer + ';', 10, 10);
+    ctx.fillText('digs: ' + obj.digs + '; pebble: ' + obj.pebble + '; current layer: ' + (obj.layer + 1) + '/' + land.d + ';', 10, 10);
 
     drawLayer(ctx, obj.layer);
 
