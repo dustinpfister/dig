@@ -10,6 +10,24 @@ var state = (function () {
 
     },
 
+    save = function () {
+
+        localStorage.setItem('dig_gamesave', JSON.stringify(current));
+
+    },
+
+    load = function () {
+
+        if (!localStorage.getItem('dig_gamesave')) {
+
+            save();
+
+        }
+
+        current.pebble = JSON.parse(localStorage.getItem('dig_gamesave')).pebble;
+
+    },
+
     api = {
 
         current : current,
@@ -84,9 +102,13 @@ var state = (function () {
 
             }
 
+            save();
+
         }
 
     };
+
+    load();
 
     return api;
 
