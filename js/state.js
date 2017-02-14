@@ -3,13 +3,10 @@ var state = (function () {
 
     var api = {
 
-        currentLayer: 0
-        , pebble: 0
-        , startTime: new Date()
-        , timeLimit: 30000
-        , elapsed: 0
-
-        , stepLayer: function () {
+        currentLayer : 0,
+        pebble : 0,
+        digs : 10,
+        stepLayer : function () {
 
             this.currentLayer += 1;
 
@@ -21,27 +18,16 @@ var state = (function () {
 
         },
 
-        // update things based on time
-        update: function () {
-
-            var now = new Date();
-
-            this.elapsed = now - this.startTime;
-
-            if (this.elapsed > this.timeLimit) {
-
-                this.elapsed = this.timeLimit;
-
-            }
-
-        },
-
         // the user has preformed an action
-        userAction: function (x, y) {
+        userAction : function (x, y) {
 
-            var cellX, cellY, cell, self = this;
+            var cellX,
+            cellY,
+            cell,
+            self = this;
 
-            if (self.elapsed < self.timeLimit) {
+            // if you have digs left
+            if (self.digs > 0) {
 
                 // player clieck on land
                 if (x >= 20 && x <= 420 && y >= 20 && y <= 420) {
@@ -49,9 +35,10 @@ var state = (function () {
                     cellX = Math.floor((x - 20) / (400 / land.w));
                     cellY = Math.floor((y - 20) / (400 / land.h));
 
-                    land.digAt(cellX, cellY, state.currentLayer, function (status) {
+                    // dig at the land
+                    land.digAt(cellX, cellY, self.currentLayer, function (cell) {
 
-                        if (status.dropDown) {
+                        if (cell.dropDown) {
 
                             if (self.currentLayer < land.d - 1) {
 
@@ -61,13 +48,15 @@ var state = (function () {
 
                         } else {
 
-                            self.pebble += status.amount;
+                            self.pebble += cell.amount;
+                            self.digs -= 1;
 
                         }
                     });
 
-                // player clicked elsewhere.
                 } else {
+
+                    // player clicked elsewhere.
 
                     console.log('land not clicked');
 
@@ -81,4 +70,5 @@ var state = (function () {
 
     return api;
 
-}());
+}
+    ());
