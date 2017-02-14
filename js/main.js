@@ -4,14 +4,16 @@ var canvas = document.getElementById('thecanvas'), ctx = canvas.getContext('2d')
 
 var draw = function () {
 
+    var obj = state.current;
+
     ctx.fillStyle = '#000000';
     ctx.textAlign = 'left';
 
     ctx.clearRect(0, 0, 640, 480);
 
-    ctx.fillText('digs: ' + state.digs + '; pebble: ' + state.pebble + '; current layer: ' + state.currentLayer + ';', 10, 10);
+    ctx.fillText('digs: ' + obj.digs + '; pebble: ' + obj.pebble + '; current layer: ' + obj.layer + ';', 10, 10);
 
-    drawLayer(ctx, state.currentLayer);
+    drawLayer(ctx, obj.layer);
 
 },
 

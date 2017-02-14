@@ -1,18 +1,29 @@
 // game state
 var state = (function () {
 
-    var api = {
+    var current = {
 
-        currentLayer : 0,
+        layer : 0,
         pebble : 0,
         digs : 10,
+        maxDigs : 10
+
+    },
+
+    api = {
+
+	    current: current,
+	
+        //currentLayer : 0,
+        //pebble : 0,
+        //digs : 10,
         stepLayer : function () {
 
-            this.currentLayer += 1;
+            current.ayer += 1;
 
-            if (this.currentLayer >= land.d) {
+            if (current.layer >= land.d) {
 
-                this.currentLayer = 0;
+                current.layer = 0;
 
             }
 
@@ -27,7 +38,7 @@ var state = (function () {
             self = this;
 
             // if you have digs left
-            if (self.digs > 0) {
+            if (current.digs > 0) {
 
                 // player clieck on land
                 if (x >= 20 && x <= 420 && y >= 20 && y <= 420) {
@@ -36,20 +47,20 @@ var state = (function () {
                     cellY = Math.floor((y - 20) / (400 / land.h));
 
                     // dig at the land
-                    land.digAt(cellX, cellY, self.currentLayer, function (cell) {
+                    land.digAt(cellX, cellY, current.layer, function (cell) {
 
                         if (cell.dropDown) {
 
-                            if (self.currentLayer < land.d - 1) {
+                            if (current.layer < land.d - 1) {
 
-                                self.currentLayer += 1;
+                                current.layer += 1;
 
                             }
 
                         } else {
 
-                            self.pebble += cell.amount;
-                            self.digs -= 1;
+                            current.pebble += cell.amount;
+                            current.digs -= 1;
 
                         }
                     });
