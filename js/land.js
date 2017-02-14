@@ -1,21 +1,19 @@
-var land = (function(){
-            
-            
+var land = (function () {
+
     var api = {
 
-        cells: [],
+        cells : [],
 
         // width height and depth of the land
-        w: 8
-        , h: 8
-        , d: 10,
+        w : 8,
+        h : 8,
+        d : 10,
 
         // the total amount of pebble in the land
-        totalPebble: 1000
-        , amount: 0
+        totalPebble : 1000,
+        amount : 0
 
     },
-
 
     makeOptions = function () {
 
@@ -40,15 +38,20 @@ var land = (function(){
 
             var len = api.w * api.h * api.d,
 
-                amount
-                , remain, i,cell,z,y,z;
-            
+            amount,
+            remain,
+            i,
+            cell,
+            z,
+            y,
+            z;
+
             if (options.length === 0) {
 
                 options = makeOptions();
 
             }
-            
+
             // get a random cell from options array
             //i = Math.floor(Math.random() * len);
             i = options.splice(Math.floor(Math.random() * options.length), 1);
@@ -79,11 +82,16 @@ var land = (function(){
 
         };
 
-    }()),
+    }
+        ()),
 
     setupLand = function () {
 
-        var i, x,y,z, len = api.w * api.h * api.d;
+        var i,
+        x,
+        y,
+        z,
+        len = api.w * api.h * api.d;
 
         api.cells = [];
         api.amount = 0;
@@ -94,15 +102,17 @@ var land = (function(){
             z = i % api.d;
             x = Math.floor(i / (api.d * api.h));
             y = Math.floor((i - (x * (api.d * api.h))) / api.d);
-            
+
             api.cells.push({
-                amount: 0,
-                total: 0,
-                done:false,
-                canDig: z === 0 ? true : false ,
-                i:i,x:x,y:y,z:z
+                amount : 0,
+                total : 0,
+                done : false,
+                canDig : z === 0 ? true : false,
+                i : i,
+                x : x,
+                y : y,
+                z : z
             });
-            
 
             i += 1;
 
@@ -114,106 +124,111 @@ var land = (function(){
 
     setupLand();
 
-    
-    // get a cell by index, or x,y,z
-    api.getCell = function(ix,y,z){
-        
-        if(y !== undefined && z !== undefined){
-            
-            return api.cells[api.h * api.d * ix + y * api.d + z];
-            
-        }else{
-            
-            return api.cells[ix];
-            
-        }
-        
+    api.reset = function () {
+
+        setupLand();
+
     };
-    
+
+    // get a cell by index, or x,y,z
+    api.getCell = function (ix, y, z) {
+
+        if (y !== undefined && z !== undefined) {
+
+            return api.cells[api.h * api.d * ix + y * api.d + z];
+
+        } else {
+
+            return api.cells[ix];
+
+        }
+
+    };
+
     // get an 2d layer at the given z level that is a copy of the cells at that level
-    api.getLayer = function(z){
-        
+    api.getLayer = function (z) {
+
         var layer = [],
-            i = z, len = api.cells.length;
-        
-        while(i < len){
-            
+        i = z,
+        len = api.cells.length;
+        while (i < len) {
+
             layer.push(api.cells[i])
-            
+
             i += api.d;
         }
-        
+
         return layer;
-        
+
     };
-    
+
     // get an array that is a copy of a given depth at x,y in api.cells
-    api.getDepth = function(x,y){
-        
+    api.getDepth = function (x, y) {
+
         return api.cells.splice(y * api.d + api.d * api.w * x, api.d);
-        
+
     };
-    
+
     // dig at a location
-    api.digAt = function(x,y,z,done){
-        
-        var cell = this.getCell(x,y,z),
+    api.digAt = function (x, y, z, done) {
+
+        var cell = this.getCell(x, y, z),
         self = this,
         layer,
-        status = {     
+        status = {
             amount : 0,
             dropDown : false
         };
-        
-        if(cell.canDig){
-        
+
+        if (cell.canDig) {
+
             // set the canDig bool for the cell below to true
-            if(cell.z + 1 < self.d ){
-                    
-                this.getCell(x,y,z + 1).canDig = true;
-                    
+            if (cell.z + 1 < self.d) {
+
+                this.getCell(x, y, z + 1).canDig = true;
+
             }
-            
-            if(cell.done){
-        
+
+            if (cell.done) {
+
                 status.dropDown = true
-            
-            }else{
-            
-                if(cell.amount > 0){
-            
+
+            } else {
+
+                if (cell.amount > 0) {
+
                     status.amount = cell.amount
-                    cell.amount = 0;
+                        cell.amount = 0;
                 }
-                
+
                 layer = this.getLayer(z);
-                
-                layer.forEach(function(otherCell){
-                    
-                    
-                    if(otherCell.x >= cell.x-1 && otherCell.x <= cell.x+1){
-                        
-                        if(otherCell.y >= cell.y-1 && otherCell.y <= cell.y+1){
-                            
+
+                layer.forEach(function (otherCell) {
+
+                    if (otherCell.x >= cell.x - 1 && otherCell.x <= cell.x + 1) {
+
+                        if (otherCell.y >= cell.y - 1 && otherCell.y <= cell.y + 1) {
+
                             console.log(otherCell);
-                            
+
                             self.getCell(otherCell.i).canDig = true;
-                            
+
                         }
-                        
+
                     }
-                    
+
                 });
-        
+
                 cell.done = true;
-        
+
             }
         }
-        
+
         done(status);
-        
+
     };
-    
+
     return api;
 
-}());
+}
+    ());

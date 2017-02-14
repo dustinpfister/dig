@@ -6,17 +6,14 @@ var state = (function () {
         layer : 0,
         pebble : 0,
         digs : 10,
-        maxDigs : 10
+        maxDigs : 25
 
     },
 
     api = {
 
-	    current: current,
-	
-        //currentLayer : 0,
-        //pebble : 0,
-        //digs : 10,
+        current : current,
+
         stepLayer : function () {
 
             current.ayer += 1;
@@ -29,13 +26,19 @@ var state = (function () {
 
         },
 
+        reset : function () {
+
+            current.layer = 0;
+            current.digs = current.maxDigs;
+
+        },
+
         // the user has preformed an action
         userAction : function (x, y) {
 
             var cellX,
             cellY,
-            cell,
-            self = this;
+            cell;
 
             // if you have digs left
             if (current.digs > 0) {
@@ -72,6 +75,12 @@ var state = (function () {
                     console.log('land not clicked');
 
                 }
+
+            } else {
+
+                // out of digs
+                this.reset();
+                land.reset();
 
             }
 
