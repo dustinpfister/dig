@@ -1,88 +1,43 @@
+var app = (function () {
 
-// render, and event attachment
-var canvas = document.getElementById('thecanvas'), ctx = canvas.getContext('2d');
+    var background,
+    logo;
 
-var draw = function () {
+    return new Phaser.Game(
 
-    var obj = state.current;
+        640, 480,
+        Phaser.AUTO,
+        'gamearea', {
 
-    ctx.fillStyle = '#000000';
-    ctx.textAlign = 'left';
+        // preload
+        preload : function () {
 
-    ctx.clearRect(0, 0, 640, 480);
+            app.load.image('logo', 'img/logo.png');
+            app.load.image('background', 'img/background.png');
+            app.load.spritesheet('button', 'img/button.png', 160, 45);
 
-    ctx.fillText('digs: ' + obj.digs + '; pebble: ' + obj.pebble + '; current layer: ' + (obj.layer + 1) + '/' + land.d + ';', 10, 10);
+        },
 
-    drawLayer(ctx, obj.layer);
+        // create
+        create : function () {
 
-},
+            // add states
+            app.state.add('title', Title);
+            app.state.add('game', Game);
 
-drawLayer = function (ctx, layer) {
+            // start title
+            app.state.start('title');
 
-    var cellWidth = 400 / land.w,
-    cellHeight = 400 / land.h,
+        },
 
-    cells = land.getLayer(layer),
-    x,
-    y,
-    i,
-    len;
+        // update (ticks)
+        update : function () {}
 
-    ctx.strokeStyle = '#000000';
-    ctx.textAlign = 'center';
+    });
 
-    i = 0,
-    len = cells.length;
-    while (i < len) {
+    /*
+    var pointer = new Phaser.Pointer(app, 0, 'TOUCH')
+     */
 
-        x = Math.floor(i / land.h);
-        y = i % land.h;
-
-        //console.log(x+','+y);
-
-        if (cells[i].canDig) {
-
-            ctx.fillStyle = '#ffa050';
-            if (cells[i].done) {
-
-                ctx.fillStyle = '#aa5020';
-
-            }
-
-        } else {
-
-            ctx.fillStyle = '#000000';
-
-        }
-
-        ctx.strokeRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
-        ctx.fillRect(20 + x * cellWidth, 20 + y * cellHeight, cellWidth, cellHeight);
-
-        if (cells[i].done) {
-            ctx.fillStyle = '#ffff00';
-            ctx.fillText(cells[i].total, 20 + (x * cellWidth) + (cellWidth / 2), 20 + (y * cellHeight) + (cellHeight / 2));
-        };
-
-        i++;
-    }
-
-    //console.log(cells);
-    ctx.strokeStyle = '#ff0000';
-    ctx.strokeRect(20, 20, 400, 400);
-
-};
-
-// event driven
-canvas.addEventListener('mousedown', function (e) {
-
-    var box = e.target.getBoundingClientRect(),
-    x = e.clientX - box.left,
-    y = e.clientY - box.top;
-
-    state.userAction(x, y);
-    draw();
-
-});
-
-// starting draw
-draw();
+}
+    ());
