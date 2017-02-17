@@ -52,19 +52,37 @@ proto.render = function () {
 
 };
 
+var userAction = function (pointer) {
+
+    console.log(pointer);
+
+    logo.width = 200;
+    logo.height = 200;
+    logo.x = pointer.clientX - 100;
+    logo.y = pointer.clientY - 100;
+
+};
+
 proto.update = function () {
+
+    var pointer = app.input.pointer1.active;
 
     if (app.input.pointer1.active) {
 
-        console.log(app.input.pointer1.clientX + ',' + app.input.pointer1.clientY);
-
-        logo.width = 200;
-        logo.height = 200;
-        logo.x = app.input.pointer1.clientX - 100;
-        logo.y = app.input.pointer1.clientY - 100;
+        userAction(app.input.pointer1);
 
     }
 
-    doOnceIf(app.input.pointer1.active, function () {});
+    if (app.input.mousePointer.leftButton.isDown) {
+
+        userAction(app.input.mousePointer);
+
+    }
+
+    doOnceIf(app.input.mousePointer.active, function () {
+
+        console.log(app.input.mousePointer);
+
+    });
 
 };
