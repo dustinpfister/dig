@@ -25,6 +25,7 @@ proto.create = function () {
     logo.width = 200;
     logo.height = 200;
 
+
 };
 
 var doOnceIf = (function () {
