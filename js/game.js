@@ -60,6 +60,9 @@ var userAction = function (pointer) {
     logo.height = 200;
     logo.x = pointer.clientX - 100;
     logo.y = pointer.clientY - 100;
+	
+	// dig
+	state.userAction(pointer.clientX, pointer.clientY);
 
 };
 
@@ -86,3 +89,4 @@ proto.update = function () {
     });
 
 };
+

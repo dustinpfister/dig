@@ -28,6 +28,7 @@ var app = (function () {
             // start title
             app.state.start('title');
 
+
         },
 
         // update (ticks)
@@ -35,9 +36,13 @@ var app = (function () {
 
     });
 
+
+	
     /*
     var pointer = new Phaser.Pointer(app, 0, 'TOUCH')
      */
 
 }
     ());
+
+
