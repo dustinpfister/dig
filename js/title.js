@@ -43,7 +43,7 @@ genLayer = function () {
                 imagewidth : 64,
                 name : "diglayer1",
                 tileheight : 32,
-                tilewidth : 32
+                tilewidth : 32,
             }
         ],
     }, Phaser.Tilemap.TILED_JSON);
@@ -57,6 +57,10 @@ genLayer = function () {
     layer.fixedToCamera = false;
     layer.x = 32;
     layer.y = 32;
+    layer.scale = {
+        x : 640,
+        y : 3
+    }
 
     console.log(layer);
 
