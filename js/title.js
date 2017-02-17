@@ -1,5 +1,7 @@
 
-var genLayer = function () {
+var map,
+
+genLayer = function () {
 
     // generate tile map
 
@@ -7,7 +9,7 @@ var genLayer = function () {
     height = 4,
     i = 0,
     len,
-    data = [],//[Math.floor(Math.random() * 3) + 1, 0, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 0, 0, 4];
+    data = [], //[Math.floor(Math.random() * 3) + 1, 0, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 0, 0, 4];
 
     i = 0,
     len = width * height;
@@ -46,13 +48,21 @@ var genLayer = function () {
         ],
     }, Phaser.Tilemap.TILED_JSON);
 
-},
+    map = app.add.tilemap('diglayer');
+    map.addTilesetImage('diglayer1', 'tiles');
 
-layer;
+    var layer = map.createLayer('layer1', 320, 240);
+
+    // a layers fixed to camera is set to false by default
+    layer.fixedToCamera = false;
+    layer.x = 32;
+    layer.y = 32;
+
+    console.log(layer);
+
+};
 
 var Title = function () {},
-
-map,
 
 proto = Title.prototype;
 
@@ -71,21 +81,6 @@ proto.create = function () {
 
     genLayer();
 
-    map = app.add.tilemap('diglayer');
-    map.addTilesetImage('diglayer1', 'tiles');
-
-    //var tile = map.layers[0].data[0][0];
-    //tile.alpha = 0;
-
-    //console.log(map.layers[0].data[0][0]);
-
-    layer = map.createLayer('layer1');
-
-    console.log(map.layers);
-
-    //  This resizes the game world to match the layer dimensions
-    //layer.resizeWorld();
-
     app.add.button(app.world.centerX - 80, app.world.centerY + 30, 'button', function () {
 
         app.state.start('game');
@@ -97,9 +92,6 @@ proto.create = function () {
         console.log('re do the layer');
 
         genLayer();
-        map = app.add.tilemap('diglayer');
-        map.addTilesetImage('diglayer1', 'tiles');
-        map.createLayer('layer1');
 
     }, this, 0, 0, 1);
 
