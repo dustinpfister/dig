@@ -1,4 +1,40 @@
 
+/*
+
+ * preform user action by event handler, and not by checking status
+
+ */
+
+var genLayer = function () {
+
+    var width = 8,
+    height = 8,
+    i = 0,
+    x,
+    y,
+    len,
+    data = [],
+    len = width * height;
+
+    // use map.put to populate the layer
+    while (i < len) {
+
+        x = i % width;
+        y = Math.floor(i / width);
+
+        map.putTile(
+
+            Math.floor(Math.random() * 4),
+            x,
+            y,
+            'activeLayer');
+
+        i += 1;
+
+    }
+
+};
+
 var Game = function () {},
 
 map,
@@ -14,7 +50,7 @@ proto.create = function () {
     //  Add a Tileset image to the map
     map.addTilesetImage('tiles');
 
-    layer1 = map.create('level1', 8, 8, 32, 32);
+    layer1 = map.create('activeLayer', 8, 8, 32, 32);
 
     // tile size is a little weird for now
     // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
@@ -24,36 +60,6 @@ proto.create = function () {
     layer1.x = 0;
     layer1.y = 0;
     layer1.inputEnabled = true;
-
-    var genLayer = function () {
-
-        var width = 8,
-        height = 8,
-        i = 0,
-        x,
-        y,
-        len,
-        data = [],
-        len = width * height;
-
-        // use map.put to populate the layer
-        while (i < len) {
-
-            x = i % width;
-            y = Math.floor(i / width);
-
-            map.putTile(
-
-                Math.floor(Math.random() * 4),
-                x,
-                y,
-                'level1');
-
-            i += 1;
-
-        }
-
-    };
 
     genLayer();
 
@@ -117,13 +123,14 @@ var userAction = function (pointer) {
 
                 if (result.burst) {
                     // update the tile map
-                    map.putTile(null, result.tileX, result.tileY, 'level1');
+                    map.putTile(null, result.tileX, result.tileY, 'activeLayer');
 
                 }
 
                 if (result.dropEvent) {
 
                     console.log('drop!');
+                    genLayer();
 
                 }
 
