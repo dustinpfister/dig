@@ -14,7 +14,8 @@ var genLayer = function () {
     y,
     len,
     data = [],
-    len = width * height;
+    len = width * height,
+    landData;
 
     // use map.put to populate the layer
     while (i < len) {
@@ -24,7 +25,7 @@ var genLayer = function () {
 
         map.putTile(
 
-            Math.floor(Math.random() * 4),
+            land.getCell(x, y, state.current.layer).amount ? 2 : 1, //Math.floor(Math.random() * 4),
             x,
             y,
             'activeLayer');
