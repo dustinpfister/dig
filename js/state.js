@@ -58,14 +58,19 @@ var state = (function () {
             cellY,
             cell;
 
+            console.log('xy');
+            console.log(x + ',' + y);
+
             // if you have digs left
             if (current.digs > 0) {
 
-                // player clieck on land
-                if (x >= 20 && x <= 420 && y >= 20 && y <= 420) {
+                // player clicked on land
+                if (x >= 0 && x <= 384 && y >= 0 && y <= 384) {
 
-                    cellX = Math.floor((x - 20) / (400 / land.w));
-                    cellY = Math.floor((y - 20) / (400 / land.h));
+                    cellX = Math.floor((x - 0) / (384 / land.w));
+                    cellY = Math.floor((y - 0) / (384 / land.h));
+
+                    console.log(cellX + ',' + cellY);
 
                     // dig at the land
                     land.digAt(cellX, cellY, current.layer, function (cell) {

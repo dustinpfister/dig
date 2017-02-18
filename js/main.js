@@ -29,7 +29,7 @@ var app = (function () {
             app.state.add('game', Game);
 
             // start title
-            app.state.start('title');
+            app.state.start('game');
 
         },
 

@@ -1,13 +1,12 @@
 
 var Title = function () {},
-map,
 
 proto = Title.prototype;
 
 proto.create = function () {
 
     //  Creates a blank tilemap
-    map = app.add.tilemap();
+    var map = app.add.tilemap();
 
     //  Add a Tileset image to the map
     map.addTilesetImage('tiles');

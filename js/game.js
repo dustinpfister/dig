@@ -1,30 +1,69 @@
 
 var Game = function () {},
 
-logo,
+map,
+layer1,
 
 proto = Game.prototype;
 
 proto.create = function () {
 
-    console.log('game state created');
-    app.load.image('logo', 'assets/phaser.png');
+    //  Creates a blank tilemap
+    map = app.add.tilemap();
 
-    logo = app.add.sprite(app.world.centerX, app.world.centerY, 'logo');
+    //  Add a Tileset image to the map
+    map.addTilesetImage('tiles');
 
-    app.add.button(0, 0, 'button', function () {
+    layer1 = map.create('level1', 8, 8, 32, 32);
+
+    // tile size is a little weird for now
+    // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
+    layer1.setScale(1.5, 1.5);
+
+    layer1.fixedToCamera = false;
+    layer1.x = 0;
+    layer1.y = 0;
+    layer1.inputEnabled = true;
+
+    var genLayer = function () {
+
+        var width = 8,
+        height = 8,
+        i = 0,
+        x,
+        y,
+        len,
+        data = [],
+        len = width * height;
+
+        // use map.put to populate the layer
+        while (i < len) {
+
+            x = i % width;
+            y = Math.floor(i / width);
+
+            map.putTile(
+
+                Math.floor(Math.random() * 4),
+                x,
+                y,
+                'level1');
+
+            i += 1;
+
+        }
+
+    };
+
+    genLayer();
+
+    app.add.button(480, 0, 'button', function () {
 
         app.state.start('title');
 
     }, this, 0, 0, 1);
 
-    app.input.addPointer();
-
-    logo.x = 0;
-    logo.y = 0;
-    logo.width = 200;
-    logo.height = 200;
-
+    //app.input.addPointer();
 
 };
 
@@ -55,15 +94,17 @@ proto.render = function () {
 
 var userAction = function (pointer) {
 
-    console.log(pointer);
+    //  console.log(pointer);
 
-    logo.width = 200;
-    logo.height = 200;
-    logo.x = pointer.clientX - 100;
-    logo.y = pointer.clientY - 100;
+	// click or touch on the layer?
+	if(layer1.input.pointerDown()){
+		
+		console.log(layer1.input);
+		
+	}
 	
-	// dig
-	state.userAction(pointer.clientX, pointer.clientY);
+    // dig
+    //state.userAction(pointer.clientX, pointer.clientY);
 
 };
 
@@ -85,9 +126,8 @@ proto.update = function () {
 
     doOnceIf(app.input.mousePointer.active, function () {
 
-        console.log(app.input.mousePointer);
+        //console.log(app.input.mousePointer);
 
     });
 
 };
-
