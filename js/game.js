@@ -63,7 +63,17 @@ proto.create = function () {
 
     }, this, 0, 0, 1);
 
+    //app.input.addMoveCallback(move, this);
+
 };
+
+/*
+var move = function (pointer) {
+
+console.log(pointer);
+
+}
+ */
 
 var doOnceIf = (function () {
 
@@ -117,6 +127,9 @@ var userAction = function (pointer) {
 
                 }
 
+                console.log('tile:');
+                console.log(result.tile);
+
             }
 
         });
@@ -130,12 +143,10 @@ var userAction = function (pointer) {
 
 proto.update = (function () {
 
-    var delay = 1000,
+    var delay = 300,
     last = new Date();
 
     return function () {
-
-        var pointer = app.input.pointer1.active;
 
         if (app.input.pointer1.active) {
 
@@ -145,7 +156,13 @@ proto.update = (function () {
 
         if (app.input.mousePointer.leftButton.isDown) {
 
-            userAction(app.input.mousePointer);
+            if (new Date() - last >= delay) {
+
+                last = new Date();
+
+                userAction(app.input.mousePointer);
+
+            }
 
         }
 

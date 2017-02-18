@@ -112,7 +112,7 @@ var state = (function () {
                     // player clicked elsewhere.
 
                     console.log('land not clicked');
-                    done();
+                    done({});
 
                 }
 
@@ -121,7 +121,7 @@ var state = (function () {
                 // out of digs
                 this.reset();
                 land.reset();
-                done();
+                done({});
 
             }
 
