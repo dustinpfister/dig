@@ -63,8 +63,6 @@ proto.create = function () {
 
     }, this, 0, 0, 1);
 
-    //app.input.addPointer();
-
 };
 
 var doOnceIf = (function () {
@@ -94,15 +92,26 @@ proto.render = function () {
 
 var userAction = function (pointer) {
 
-    //  console.log(pointer);
+    var x,
+    y;
 
-	// click or touch on the layer?
-	if(layer1.input.pointerDown()){
-		
-		console.log(layer1.input);
-		
-	}
-	
+    // click or touch on the layer?
+    if (layer1.input.pointerDown()) {
+
+        // use pointer.x, and pointer.y for a position relative to the canvas, and not the window.
+
+        // dig
+        state.userAction(pointer.position.x, pointer.position.y);
+
+
+        //console.log('positionx: '+pointer.position.x);
+        //console.log(app.input);
+
+        //console.log('layer1:  width: ' + layer1.width);
+        //console.log(layer1);
+
+    }
+
     // dig
     //state.userAction(pointer.clientX, pointer.clientY);
 
