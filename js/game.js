@@ -101,14 +101,21 @@ var userAction = function (pointer) {
         // use pointer.x, and pointer.y for a position relative to the canvas, and not the window.
 
         // dig in state.js
-        state.userAction(pointer.position.x, pointer.position.y, function (cellX, cellY) {
+        state.userAction(pointer.position.x, pointer.position.y, function (result) {
 
-            if (typeof cellX === 'number') {
+            if (result.active) {
 
-			    console.log(state.current);
-			
-                // update the tile map
-                map.putTile(null, cellX, cellY, 'level1');
+                if (result.burst) {
+                    // update the tile map
+                    map.putTile(null, result.tileX, result.tileY, 'level1');
+
+                }
+
+                if (result.dropEvent) {
+
+                    console.log('drop!');
+
+                }
 
             }
 
@@ -121,26 +128,30 @@ var userAction = function (pointer) {
 
 };
 
-proto.update = function () {
+proto.update = (function () {
 
-    var pointer = app.input.pointer1.active;
+    var delay = 1000,
+    last = new Date();
 
-    if (app.input.pointer1.active) {
+    return function () {
 
-        userAction(app.input.pointer1);
+        var pointer = app.input.pointer1.active;
 
-    }
+        if (app.input.pointer1.active) {
 
-    if (app.input.mousePointer.leftButton.isDown) {
+            userAction(app.input.pointer1);
 
-        userAction(app.input.mousePointer);
+        }
 
-    }
+        if (app.input.mousePointer.leftButton.isDown) {
 
-    doOnceIf(app.input.mousePointer.active, function () {
+            userAction(app.input.mousePointer);
 
-        //console.log(app.input.mousePointer);
+        }
 
-    });
+        doOnceIf(app.input.mousePointer.active, function () {});
 
-};
+    };
+
+}
+    ());

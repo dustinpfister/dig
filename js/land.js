@@ -209,8 +209,6 @@ var land = (function () {
 
                         if (otherCell.y >= cell.y - 1 && otherCell.y <= cell.y + 1) {
 
-                            console.log(z);
-
                             self.getCell(otherCell.i).canDig = true;
 
                         }

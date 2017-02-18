@@ -60,9 +60,6 @@ var state = (function () {
 
             done = done || function () {};
 
-            console.log('xy');
-            console.log(x + ',' + y);
-
             // if you have digs left
             if (current.digs > 0) {
 
@@ -72,27 +69,41 @@ var state = (function () {
                     cellX = Math.floor((x - 0) / (384 / land.w));
                     cellY = Math.floor((y - 0) / (384 / land.h));
 
-                    console.log(cellX + ',' + cellY);
 
                     // dig at the land
                     land.digAt(cellX, cellY, current.layer, function (cell) {
+
+                        var dropEvent = false,
+                        burst = false;
 
                         if (cell.dropDown) {
 
                             if (current.layer < land.d - 1) {
 
+                                dropEvent = true;
                                 current.layer += 1;
 
                             }
 
                         } else {
 
+                            burst = true;
                             current.pebble += cell.amount;
                             current.digs -= 1;
 
                         }
 
-                        done(cellX, cellY);
+                        //done(cellX, cellY);
+                        done({
+
+                            active : true,
+                            tileX : cellX,
+                            tileY : cellY,
+                            dropEvent : dropEvent,
+                            burst : burst,
+                            tile : cell
+
+                        });
 
                     });
 
