@@ -100,15 +100,19 @@ var userAction = function (pointer) {
 
         // use pointer.x, and pointer.y for a position relative to the canvas, and not the window.
 
-        // dig
-        state.userAction(pointer.position.x, pointer.position.y);
+        // dig in state.js
+        state.userAction(pointer.position.x, pointer.position.y, function (cellX, cellY) {
 
+            if (typeof cellX === 'number') {
 
-        //console.log('positionx: '+pointer.position.x);
-        //console.log(app.input);
+			    console.log(state.current);
+			
+                // update the tile map
+                map.putTile(null, cellX, cellY, 'level1');
 
-        //console.log('layer1:  width: ' + layer1.width);
-        //console.log(layer1);
+            }
+
+        });
 
     }
 

@@ -52,11 +52,13 @@ var state = (function () {
         },
 
         // the user has preformed an action
-        userAction : function (x, y) {
+        userAction : function (x, y, done) {
 
             var cellX,
             cellY,
             cell;
+
+            done = done || function () {};
 
             console.log('xy');
             console.log(x + ',' + y);
@@ -89,6 +91,9 @@ var state = (function () {
                             current.digs -= 1;
 
                         }
+
+                        done(cellX, cellY);
+
                     });
 
                 } else {
@@ -96,6 +101,7 @@ var state = (function () {
                     // player clicked elsewhere.
 
                     console.log('land not clicked');
+                    done();
 
                 }
 
@@ -104,6 +110,7 @@ var state = (function () {
                 // out of digs
                 this.reset();
                 land.reset();
+                done();
 
             }
 
