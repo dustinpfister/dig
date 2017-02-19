@@ -131,11 +131,11 @@ var Game = (function () {
 
             genLayer();
 
-            app.add.button(480, 0, 'button', function () {
+            app.add.button(640-64, 16, 'icons', function () {
 
                 app.state.start('title');
 
-            }, this, 0, 0, 1);
+            }, this, 1, 1, 1);
 
             //app.input.addMoveCallback(move, this);
 
