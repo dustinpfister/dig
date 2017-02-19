@@ -173,6 +173,8 @@ var Game = (function () {
 
                 //text_disp.text = 'digs: ' + state.current.digs + '; layer: ' + state.current.layer;
 
+                // update display info
+                text_digs.text = state.current.digs;
                 //doOnceIf(app.input.mousePointer.active, function () {});
 
             };
