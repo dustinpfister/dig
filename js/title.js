@@ -3,14 +3,15 @@
 var Title = (function () {
 
     var map,
-    layer1;
+    layer1,
+    text_button_newgame;
 
     return {
 
         create : function () {
 
             //  Creates a blank tilemap
-            var map = app.add.tilemap();
+            map = app.add.tilemap();
 
             //  Add a Tileset image to the map
             map.addTilesetImage('tiles');
@@ -55,17 +56,19 @@ var Title = (function () {
 
             genLayer();
 
+            // new game button
             app.add.button(app.world.centerX - 80, app.world.centerY + 30, 'button', function () {
 
                 app.state.start('game');
 
             }, this, 0, 0, 1);
 
+
             app.add.button(app.world.centerX - 80, app.world.centerY + 100, 'button', function () {
 
                 genLayer();
 
-            }, this, 0, 0, 1);
+            }, this, 2, 2, 1);
 
             var logo = app.add.sprite(app.world.centerX, app.world.centerY, 'logo');
             logo.angle = 0;
