@@ -5,7 +5,18 @@
 
  */
 
-var genLayer = function () {
+var digmap = {
+
+    offset : {
+
+        x : 50,
+        y : 50
+
+    }
+
+},
+
+genLayer = function () {
 
     var width = 8,
     height = 8,
@@ -58,8 +69,8 @@ proto.create = function () {
     layer1.setScale(1.5, 1.5);
 
     layer1.fixedToCamera = false;
-    layer1.x = 0;
-    layer1.y = 0;
+    layer1.x = digmap.offset.x;
+    layer1.y = digmap.offset.x;
     layer1.inputEnabled = true;
 
     genLayer();
@@ -118,7 +129,7 @@ var userAction = function (pointer) {
         // use pointer.x, and pointer.y for a position relative to the canvas, and not the window.
 
         // dig in state.js
-        state.userAction(pointer.position.x, pointer.position.y, function (result) {
+        state.userAction(pointer.position.x - digmap.offset.x, pointer.position.y - digmap.offset.y, function (result) {
 
             if (result.active) {
 
