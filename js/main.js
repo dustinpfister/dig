@@ -17,8 +17,10 @@ var app = (function () {
             app.load.spritesheet('button', 'img/button.png', 160, 45);
             app.load.image('tiles', 'img/tiles.png');
 
+            //app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
 
-
+			    app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
+			
         },
 
         // create

@@ -11,6 +11,7 @@ var Game = (function () {
         }
 
     },
+    text_disp,
     map,
     layer1,
 
@@ -116,6 +117,8 @@ var Game = (function () {
             map.addTilesetImage('tiles');
 
             layer1 = map.create('activeLayer', 8, 8, 32, 32);
+
+            text_disp = app.add.bitmapText(50, 50, 'desyrel', 'a', 64);
 
             // tile size is a little weird for now
             // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
