@@ -19,8 +19,8 @@ var app = (function () {
 
             //app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
 
-			    app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
-			
+            app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
+
         },
 
         // create

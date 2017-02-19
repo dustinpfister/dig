@@ -118,7 +118,7 @@ var Game = (function () {
 
             layer1 = map.create('activeLayer', 8, 8, 32, 32);
 
-            text_disp = app.add.bitmapText(50, 50, 'desyrel', 'a', 64);
+            text_disp = app.add.bitmapText(5, 5, 'desyrel', 'a', 30);
 
             // tile size is a little weird for now
             // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
@@ -166,7 +166,9 @@ var Game = (function () {
 
                 }
 
-                doOnceIf(app.input.mousePointer.active, function () {});
+                text_disp.text = 'digs: ' + state.current.digs+'; layer: ' + state.current.layer;
+
+                //doOnceIf(app.input.mousePointer.active, function () {});
 
             };
 
