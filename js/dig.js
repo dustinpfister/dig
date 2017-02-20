@@ -214,9 +214,11 @@ var DIG = (function () {
                         if (state.current.digs <= 0) {
 
                             // reset state, land, and regen the tilemap
-                            state.reset();
-                            land.reset();
-                            genLayer();
+                            //state.reset();
+                            //land.reset();
+                            //genLayer();
+
+                            app.state.start('dig_over');
 
                         }
 
@@ -231,15 +233,30 @@ var DIG = (function () {
             ()),
 
         // DIG.Over state
-        Over : {
+        over : (function () {
 
-            create : function () {
+            userAction = function (pointer) {
 
-                text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', '0', 30);
+                var x,
+                y;
 
-            }
+            };
+
+            return {
+
+                create : function () {
+
+                    text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Dig is Over!', 30);
+
+                    state.reset();
+                    land.reset();
+
+                }
+
+            };
 
         }
+            ())
 
     };
 

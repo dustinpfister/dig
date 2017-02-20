@@ -30,6 +30,7 @@ var app = (function () {
             // add states
             app.state.add('title', Title);
             app.state.add('dig_run', DIG.run);
+            app.state.add('dig_over', DIG.over);
 
             // start title
             app.state.start('dig_run');
