@@ -251,6 +251,12 @@ var DIG = (function () {
                     state.reset();
                     land.reset();
 
+                    app.add.button(640 - 64, 16, 'icons', function () {
+
+                        app.state.start('title');
+
+                    }, this, 1, 1, 1);
+
                 }
 
             };
