@@ -165,10 +165,8 @@ var DIG = (function () {
                     text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', '0', 30);
                     text_layer = app.add.bitmapText(8 + 96, 8, 'desyrel', '0', 30);
                     text_pebble = app.add.bitmapText(8 + 160, 8, 'desyrel', '0', 30);
-					
-					log(land.getInfo());
-					
-                    text_totals = app.add.bitmapText(50, 440, 'desyrel', '0/0', 15);
+
+                    text_totals = app.add.bitmapText(50, 435, 'desyrel', land.getInfo().tabString, 15);
                     //text_disp = app.add.bitmapText(5, 5, 'desyrel', '', 30);
 
                     // tile size is a little weird for now
@@ -223,6 +221,7 @@ var DIG = (function () {
                         text_digs.text = state.current.digs;
                         text_layer.text = state.current.layer;
                         text_pebble.text = state.current.pebble;
+						text_totals.text = land.getInfo().tabString;
                         //doOnceIf(app.input.mousePointer.active, function () {});
 
 
