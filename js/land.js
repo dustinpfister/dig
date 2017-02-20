@@ -180,8 +180,6 @@ var land = (function () {
             dropDown : false
         };
 
-        console.log(cell);
-
         if (cell.canDig) {
 
             // set the canDig bool for the cell below to true

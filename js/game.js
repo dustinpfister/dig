@@ -89,8 +89,6 @@ var Game = (function () {
         // click or touch on the layer?
         if (layer1.input.pointerDown()) {
 
-            // use pointer.x, and pointer.y for a position relative to the canvas, and not the window.
-
             // dig in state.js
             state.userAction(
                 pointer.position.x - digmap.offset.x,
@@ -202,6 +200,17 @@ var Game = (function () {
                 text_layer.text = state.current.layer;
                 text_pebble.text = state.current.pebble;
                 //doOnceIf(app.input.mousePointer.active, function () {});
+
+
+                // out of digs?
+                if (state.current.digs <= 0) {
+
+                    // reset state, land, and regen the tilemap
+                    state.reset();
+                    land.reset();
+                    genLayer();
+
+                }
 
             };
 
