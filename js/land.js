@@ -107,7 +107,7 @@ var land = (function () {
                 amount : 0,
                 total : 0,
                 done : false,
-                hp : 5,
+                hp : Math.floor(Math.random()*5),
                 maxHp : 5,
                 canDig : false, //z === 0 ? true : false,
                 i : i,
@@ -188,7 +188,7 @@ var land = (function () {
 
         console.log(cell);
 
-        if (cell.canDig) {
+        if (cell.hp <=0) {
 
             console.log('can dig');
 

@@ -38,7 +38,7 @@ var Game = (function () {
         height = 8,
         i = 0,
         x,
-		tile,
+        tile,
         y,
         len,
         data = [],
@@ -50,8 +50,8 @@ var Game = (function () {
 
             x = i % width;
             y = Math.floor(i / width);
-			
-			tile = land.getCell(x, y, state.current.layer);
+
+            tile = land.getCell(x, y, state.current.layer);
 
             map.putTile(
 
@@ -118,8 +118,8 @@ var Game = (function () {
             });
 
         }
-		
-		                        genLayer();
+
+        genLayer();
 
         // dig
         //state.userAction(pointer.clientX, pointer.clientY);
