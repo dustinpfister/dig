@@ -105,6 +105,11 @@ var state = (function () {
 
                                 current.pebble += tileStatus.amount;
 
+                                console.log('current pebble:');
+                                console.log(current.pebble);
+                                console.log('tile status amount:');
+                                console.log(tileStatus.amount);
+
                             }
                             current.digs -= 1;
 

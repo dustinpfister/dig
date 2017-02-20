@@ -107,7 +107,7 @@ var land = (function () {
                 amount : 0,
                 total : 0,
                 done : false,
-                hp : Math.floor(Math.random()*4)+1,
+                hp : Math.floor(Math.random() * 4) + 1,
                 maxHp : 5,
                 canDig : false, //z === 0 ? true : false,
                 i : i,
@@ -184,34 +184,11 @@ var land = (function () {
             canDig : cell.canDig
         };
 
-        console.log(cell.i);
+        if (cell.hp <= 0) {
 
-        console.log(cell);
+            status.dropDown = true;
 
-        if (cell.hp <=0) {
-
-            console.log('can dig');
-
-            // set the canDig bool for the cell below to true
-            //if (cell.z + 1 < self.d) {
-
-            //this.getCell(x, y, z + 1).canDig = true;
-
-            //}
-
-            //if (cell.done) {
-
-            status.dropDown = true
-
-                //} else {
-
-                if (cell.amount > 0) {
-
-                    status.amount = cell.amount;
-                    cell.amount = 0;
-                }
-
-                layer = this.getLayer(z);
+            layer = this.getLayer(z);
 
             layer.forEach(function (otherCell) {
 
@@ -229,8 +206,6 @@ var land = (function () {
 
             cell.done = true;
 
-            //}
-
         } else {
 
             cell.hp -= 1;
@@ -239,8 +214,14 @@ var land = (function () {
             if (cell.hp <= 0) {
 
                 cell.canDig = true;
-
                 status.hp = 0;
+
+                if (cell.amount > 0) {
+
+                    status.amount = cell.amount;
+                    cell.amount = 0;
+
+                }
 
             }
 
