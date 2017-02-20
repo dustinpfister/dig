@@ -43,6 +43,7 @@ var Game = (function () {
         len,
         data = [],
         len = width * height,
+        zeroTile = state.current.layer === land.d-1 ? 1 : 0, // the tile sheet index for a tile with 0 hp
         landData;
 
         // use map.put to populate the layer
@@ -56,7 +57,7 @@ var Game = (function () {
             map.putTile(
 
                 //land.getCell(x, y, state.current.layer).amount ? 2 : 1,
-                tile.hp === 0 ? 0 : 10 + tile.hp,
+                tile.hp === 0 ? zeroTile : 10 + tile.hp,
                 x,
                 y,
                 'activeLayer');
