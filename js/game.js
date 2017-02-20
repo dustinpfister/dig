@@ -52,7 +52,8 @@ var Game = (function () {
 
             map.putTile(
 
-                land.getCell(x, y, state.current.layer).amount ? 2 : 1, //Math.floor(Math.random() * 4),
+                //land.getCell(x, y, state.current.layer).amount ? 2 : 1,
+                1,
                 x,
                 y,
                 'activeLayer');
@@ -97,8 +98,6 @@ var Game = (function () {
 
                 if (result.active) {
 
-                    //log('yes active');
-
                     if (result.burst) {
                         // update the tile map
                         map.putTile(0, result.tileX, result.tileY, 'activeLayer');
@@ -112,8 +111,6 @@ var Game = (function () {
                     }
 
                 }
-
-                log(result);
 
             });
 

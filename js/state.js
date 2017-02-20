@@ -84,11 +84,11 @@ var state = (function () {
                     cellY = Math.floor((y - 0) / (384 / land.h));
 
                     // dig at the land
-                    land.digAt(cellX, cellY, current.layer, function (cell) {
+                    land.digAt(cellX, cellY, current.layer, function (tileStatus) {
 
                         var dropEvent = false,
                         burst = false;
-                        if (cell.dropDown) {
+                        if (tileStatus.dropDown) {
 
                             if (current.layer < land.d - 1) {
 
@@ -99,8 +99,13 @@ var state = (function () {
 
                         } else {
 
-                            burst = true;
-                            current.pebble += cell.amount;
+                            if (tileStatus.hp === 0) {
+
+                                burst = true;
+
+                                current.pebble += tileStatus.amount;
+
+                            }
                             current.digs -= 1;
 
                         }
@@ -113,7 +118,7 @@ var state = (function () {
                             tileY : cellY,
                             dropEvent : dropEvent,
                             burst : burst,
-                            tile : cell
+                            tileStatus : tileStatus
 
                         });
 
