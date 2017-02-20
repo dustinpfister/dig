@@ -27,6 +27,7 @@ var DIG = (function () {
             text_digs,
             text_layer,
             text_pebble,
+            text_totals,
             map,
             layer1,
 
@@ -164,6 +165,10 @@ var DIG = (function () {
                     text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', '0', 30);
                     text_layer = app.add.bitmapText(8 + 96, 8, 'desyrel', '0', 30);
                     text_pebble = app.add.bitmapText(8 + 160, 8, 'desyrel', '0', 30);
+					
+					log(land.getInfo());
+					
+                    text_totals = app.add.bitmapText(50, 440, 'desyrel', '0/0', 15);
                     //text_disp = app.add.bitmapText(5, 5, 'desyrel', '', 30);
 
                     // tile size is a little weird for now

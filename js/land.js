@@ -154,6 +154,19 @@ var land = (function () {
 
     };
 
+    api.getInfo = function () {
+
+        var tab = tabulate();
+
+        return {
+
+            tab : tab,
+            tabString : tab.remaining + '/' + tab.total
+
+        };
+
+    },
+
     // get a cell by index, or x,y,z
     api.getCell = function (ix, y, z) {
 
