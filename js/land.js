@@ -29,6 +29,27 @@ var land = (function () {
 
     },
 
+    tabulate = function () {
+
+        var total = 0,
+        remaining = 0;
+
+        api.cells.forEach(function (cell) {
+
+            total += cell.total;
+            remaining += cell.amount;
+
+        });
+
+        return {
+
+            total : total,
+            remaining : remaining
+
+        };
+
+    },
+
     // hide the amount of pebble in the land
     hidePebble = (function () {
 
@@ -222,6 +243,8 @@ var land = (function () {
                     cell.amount = 0;
 
                 }
+
+                console.log(tabulate());
 
             }
 
