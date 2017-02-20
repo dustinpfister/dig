@@ -34,19 +34,38 @@ var land = (function () {
     tabulate = function () {
 
         var total = 0,
-        remaining = 0;
+        remaining = 0,
+        lootCells = {
+
+            total : 0,
+            remaining : 0
+
+        };
 
         api.cells.forEach(function (cell) {
 
             total += cell.total;
             remaining += cell.amount;
 
+            if (cell.total > 0) {
+
+                lootCells.total += 1;
+
+                if (cell.amount > 0) {
+
+                    lootCells.remaining += 1;
+
+                }
+
+            }
+
         });
 
         return {
 
             total : total,
-            remaining : remaining
+            remaining : remaining,
+            lootCells : lootCells
 
         };
 
@@ -161,6 +180,7 @@ var land = (function () {
 
     },
 
+    // get info about the land
     api.getInfo = function () {
 
         var tab = tabulate();
@@ -168,7 +188,8 @@ var land = (function () {
         return {
 
             tab : tab,
-            tabString : tab.remaining + '/' + tab.total
+            tabString : tab.remaining + '/' + tab.total,
+            layers : this.d
 
         };
 
