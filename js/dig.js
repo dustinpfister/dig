@@ -230,7 +230,7 @@ var DIG = (function () {
 
     return {
 
-	    // DIG.Over state
+        // DIG.Over state
         Over : {
 
             create : function () {
