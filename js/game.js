@@ -13,6 +13,8 @@ var Game = (function () {
     },
     text_disp,
     text_digs,
+    text_layer,
+    text_pebble,
     map,
     layer1,
 
@@ -119,11 +121,14 @@ var Game = (function () {
 
             layer1 = map.create('activeLayer', 8, 8, 32, 32);
 
-            // place the shovel icon
-            app.add.sprite(8, 8, 'icons', 0);
-            text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', '0', 30);
+            // place the icons
+            app.add.sprite(8, 8, 'icons', 0); // shovel
 
-            text_disp = app.add.bitmapText(5, 5, 'desyrel', '', 30);
+            // text
+            text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', '0', 30);
+            text_layer = app.add.bitmapText(8 + 96, 8, 'desyrel', '0', 30);
+            text_pebble = app.add.bitmapText(8 + 160, 8, 'desyrel', '0', 30);
+            //text_disp = app.add.bitmapText(5, 5, 'desyrel', '', 30);
 
             // tile size is a little weird for now
             // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
@@ -175,6 +180,8 @@ var Game = (function () {
 
                 // update display info
                 text_digs.text = state.current.digs;
+                text_layer.text = state.current.layer;
+                text_pebble.text = state.current.pebble;
                 //doOnceIf(app.input.mousePointer.active, function () {});
 
             };
