@@ -18,6 +18,20 @@ var Game = (function () {
     map,
     layer1,
 
+    log = function (mess) {
+
+        if (typeof mess === "string") {
+
+            console.log('game.js: ' + mess);
+
+        } else {
+
+            console.log(mess);
+
+        }
+
+    },
+
     genLayer = function () {
 
         var width = 8,
@@ -78,9 +92,14 @@ var Game = (function () {
             // use pointer.x, and pointer.y for a position relative to the canvas, and not the window.
 
             // dig in state.js
-            state.userAction(pointer.position.x - digmap.offset.x, pointer.position.y - digmap.offset.y, function (result) {
+            state.userAction(
+                pointer.position.x - digmap.offset.x,
+                pointer.position.y - digmap.offset.y,
+                function (result) {
 
                 if (result.active) {
+
+                    //log('yes active');
 
                     if (result.burst) {
                         // update the tile map
@@ -90,15 +109,13 @@ var Game = (function () {
 
                     if (result.dropEvent) {
 
-                        console.log('drop!');
                         genLayer();
 
                     }
 
-                    console.log('tile:');
-                    console.log(result.tile);
-
                 }
+
+                log(result);
 
             });
 

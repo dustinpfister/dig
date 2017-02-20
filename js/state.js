@@ -10,6 +10,20 @@ var state = (function () {
 
     },
 
+    log = function (mess) {
+
+        if (typeof mess === "string") {
+
+            console.log('state.js: ' + mess);
+
+        } else {
+
+            console.log(mess);
+
+        }
+
+    },
+
     save = function () {
 
         localStorage.setItem('dig_gamesave', JSON.stringify(current));
@@ -69,6 +83,8 @@ var state = (function () {
                     cellX = Math.floor((x - 0) / (384 / land.w));
                     cellY = Math.floor((y - 0) / (384 / land.h));
 
+                    //log('current layer' + current.layer);
+                    //log('cell pos : ' + cellX + ',' + cellY);
 
                     // dig at the land
                     land.digAt(cellX, cellY, current.layer, function (cell) {
@@ -76,6 +92,9 @@ var state = (function () {
                         var dropEvent = false,
                         burst = false;
 
+						log('state.js');
+						log(cell);
+						
                         if (cell.dropDown) {
 
                             if (current.layer < land.d - 1) {
@@ -111,7 +130,7 @@ var state = (function () {
 
                     // player clicked elsewhere.
 
-                    console.log('land not clicked');
+                    log('land not clicked');
                     done({});
 
                 }

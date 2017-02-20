@@ -107,7 +107,7 @@ var land = (function () {
                 amount : 0,
                 total : 0,
                 done : false,
-                canDig : z === 0 ? true : false,
+                canDig : true,//z === 0 ? true : false,
                 i : i,
                 x : x,
                 y : y,
@@ -180,6 +180,8 @@ var land = (function () {
             dropDown : false
         };
 
+        console.log(cell);
+
         if (cell.canDig) {
 
             // set the canDig bool for the cell below to true
@@ -197,8 +199,8 @@ var land = (function () {
 
                 if (cell.amount > 0) {
 
-                    status.amount = cell.amount
-                        cell.amount = 0;
+                    status.amount = cell.amount;
+                    cell.amount = 0;
                 }
 
                 layer = this.getLayer(z);
