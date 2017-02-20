@@ -1,7 +1,15 @@
 
 var DIG = (function () {
 
+    var showPebble = true;
+
     return {
+
+        cheat : function () {
+
+            showPebble = !showPebble;
+
+        },
 
         run : (function () {
 
@@ -61,8 +69,8 @@ var DIG = (function () {
 
                     map.putTile(
 
-                        //land.getCell(x, y, state.current.layer).amount ? 2 : 1,
-                        tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
+                        showPebble ? tile.amount > 0 ? 2 : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
+                        //tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
                         x,
                         y,
                         'activeLayer');
