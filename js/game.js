@@ -123,6 +123,8 @@ var Game = (function () {
 
             // place the icons
             app.add.sprite(8, 8, 'icons', 0); // shovel
+            app.add.sprite(8 + 32 * 2, 8, 'icons', 3); // layers
+            app.add.sprite(8 + 32 * 4, 8, 'icons', 2); // coin
 
             // text
             text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', '0', 30);
