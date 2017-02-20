@@ -101,7 +101,7 @@ var Game = (function () {
 
                     if (result.burst) {
                         // update the tile map
-                        map.putTile(null, result.tileX, result.tileY, 'activeLayer');
+                        map.putTile(0, result.tileX, result.tileY, 'activeLayer');
 
                     }
 
