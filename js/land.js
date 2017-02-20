@@ -7,7 +7,7 @@ var land = (function () {
         // width height and depth of the land
         w : 8,
         h : 8,
-        d : 10,
+        d : 5,
 
         // the total amount of pebble in the land
         totalPebble : 1000,
@@ -107,7 +107,7 @@ var land = (function () {
                 amount : 0,
                 total : 0,
                 done : false,
-                hp : Math.floor(Math.random()*5),
+                hp : Math.floor(Math.random()*4)+1,
                 maxHp : 5,
                 canDig : false, //z === 0 ? true : false,
                 i : i,
