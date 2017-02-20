@@ -189,21 +189,21 @@ var land = (function () {
         console.log(cell);
 
         if (cell.canDig) {
-			
-			console.log('can dig');
+
+            console.log('can dig');
 
             // set the canDig bool for the cell below to true
             //if (cell.z + 1 < self.d) {
 
-                //this.getCell(x, y, z + 1).canDig = true;
+            //this.getCell(x, y, z + 1).canDig = true;
 
             //}
 
             //if (cell.done) {
 
-                status.dropDown = true
+            status.dropDown = true
 
-            //} else {
+                //} else {
 
                 if (cell.amount > 0) {
 
@@ -213,21 +213,21 @@ var land = (function () {
 
                 layer = this.getLayer(z);
 
-                layer.forEach(function (otherCell) {
+            layer.forEach(function (otherCell) {
 
-                    if (otherCell.x >= cell.x - 1 && otherCell.x <= cell.x + 1) {
+                if (otherCell.x >= cell.x - 1 && otherCell.x <= cell.x + 1) {
 
-                        if (otherCell.y >= cell.y - 1 && otherCell.y <= cell.y + 1) {
+                    if (otherCell.y >= cell.y - 1 && otherCell.y <= cell.y + 1) {
 
-                            self.getCell(otherCell.i).canDig = true;
-
-                        }
+                        self.getCell(otherCell.i).canDig = true;
 
                     }
 
-                });
+                }
 
-                cell.done = true;
+            });
+
+            cell.done = true;
 
             //}
 

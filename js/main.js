@@ -16,7 +16,7 @@ var app = (function () {
             app.load.image('background', 'img/background.png');
             app.load.spritesheet('button', 'img/button.png', 160, 45);
             app.load.spritesheet('icons', 'img/icons.png', 32, 32);
-            app.load.image('tiles', 'img/tiles.png');
+            app.load.image('tiles', 'img/tiles2.png');
 
             //app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
 
