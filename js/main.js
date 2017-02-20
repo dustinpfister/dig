@@ -29,10 +29,10 @@ var app = (function () {
 
             // add states
             app.state.add('title', Title);
-            app.state.add('game', Game);
+            app.state.add('dig_run', DIG.run);
 
             // start title
-            app.state.start('game');
+            app.state.start('dig_run');
 
         },
 

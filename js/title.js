@@ -59,7 +59,7 @@ var Title = (function () {
             // new game button
             app.add.button(app.world.centerX - 80, app.world.centerY + 30, 'button', function () {
 
-                app.state.start('game');
+                app.state.start('dig_run');
 
             }, this, 0, 0, 1);
 
