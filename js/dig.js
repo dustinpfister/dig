@@ -168,7 +168,7 @@ var DIG = (function () {
 
                     app.add.button(640 - 64, 16, 'icons', function () {
 
-                        app.state.start('title');
+                        app.state.start('dig_options');
 
                     }, this, 1, 1, 1);
 
@@ -232,28 +232,50 @@ var DIG = (function () {
         }
             ()),
 
-        // DIG.Over state
-        over : (function () {
+        // the options state the game switches to when the gear icon is clicked
+        options : (function () {
 
-            userAction = function (pointer) {
-
-                var x,
-                y;
-
-            };
+            var text_label;
 
             return {
 
                 create : function () {
 
-                    text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Dig is Over!', 30);
+                    text_label = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Game Options:', 30);
+
+                    // new game button
+                    app.add.button(app.world.centerX - 80, app.world.centerY + 30, 'button', function () {
+
+                        state.reset();
+                        land.reset();
+
+                        app.state.start('dig_run');
+
+                    }, this, 0, 0, 1);
+
+                }
+
+            };
+        }
+            ()),
+
+        // DIG.Over state
+        over : (function () {
+
+            var test_label;
+
+            return {
+
+                create : function () {
+
+                    text_label = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Dig is Over!', 30);
 
                     state.reset();
                     land.reset();
 
                     app.add.button(640 - 64, 16, 'icons', function () {
 
-                        app.state.start('title');
+                        app.state.start('dig_options');
 
                     }, this, 1, 1, 1);
 
