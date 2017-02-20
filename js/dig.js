@@ -127,6 +127,9 @@ var DIG = (function () {
 
                             }
 
+                            log('result');
+                            log(result);
+
                         }
 
                     });

@@ -29,6 +29,7 @@ var land = (function () {
 
     },
 
+    // tabulate pebble
     tabulate = function () {
 
         var total = 0,
@@ -202,7 +203,8 @@ var land = (function () {
             amount : 0,
             dropDown : false,
             hp : cell.hp,
-            canDig : cell.canDig
+            canDig : cell.canDig,
+            tab : {}
         };
 
         if (cell.hp <= 0) {
@@ -250,6 +252,8 @@ var land = (function () {
 
         }
 
+        // tabulate current pebble counts.
+        status.tab = tabulate();
         done(status);
 
     };
