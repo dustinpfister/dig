@@ -6,7 +6,8 @@ var state = (function () {
         layer : 0,
         pebble : 0,
         digs : 100,
-        maxDigs : 100
+        maxDigs : 100,
+        landLevel : 5
 
     },
 
@@ -40,6 +41,9 @@ var state = (function () {
 
         current.pebble = JSON.parse(localStorage.getItem('dig_gamesave')).pebble;
 
+        // reset with current values
+        api.reset();
+
     },
 
     api = {
@@ -62,6 +66,8 @@ var state = (function () {
 
             current.layer = 0;
             current.digs = current.maxDigs;
+            land.setLevel(current.landLevel);
+            land.reset();
 
         },
 

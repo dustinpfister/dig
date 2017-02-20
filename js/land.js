@@ -8,6 +8,7 @@ var land = (function () {
         w : 8,
         h : 8,
         d : 5,
+        level : 1,
 
         // the total amount of pebble in the land
         totalPebble : 1000,
@@ -153,6 +154,12 @@ var land = (function () {
         setupLand();
 
     };
+
+    api.setLevel = function (level) {
+
+        this.totalPebble = 1000 * level;
+
+    },
 
     api.getInfo = function () {
 
