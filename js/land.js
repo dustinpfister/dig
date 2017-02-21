@@ -8,11 +8,18 @@ var land = (function () {
         w : 8,
         h : 8,
         d : 3,
-        level : 1,
+        //level : 1,
 
         // the total amount of pebble in the land
         totalPebble : 1000,
-        amount : 0
+        amount : 0,
+
+        hpRange : {
+
+            low : 1,
+            high : 1
+
+        }
 
     },
 
@@ -133,7 +140,8 @@ var land = (function () {
         x,
         y,
         z,
-        len = api.w * api.h * api.d;
+        len = api.w * api.h * api.d,
+        maxHp;
 
         api.cells = [];
         api.amount = 0;
@@ -145,12 +153,15 @@ var land = (function () {
             x = Math.floor(i / (api.d * api.h));
             y = Math.floor((i - (x * (api.d * api.h))) / api.d);
 
+            maxHp = Math.floor(Math.random() * (api.hpRange.high+1) ) + api.hpRange.low;
+			maxHp = api.hpRange.low === api.hpRange.high ? api.hpRange.high : maxHp;
+
             api.cells.push({
                 amount : 0,
                 total : 0,
                 done : false,
-                hp : Math.floor(Math.random() * 4) + 1,
-                maxHp : 5,
+                hp : maxHp,
+                maxHp : maxHp,
                 canDig : false, //z === 0 ? true : false,
                 i : i,
                 x : x,
