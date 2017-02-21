@@ -187,7 +187,7 @@ var land = (function () {
     api.setLevel = function (level) {
 
         // total stack pebble
-        this.totalPebble = 1000 * level;
+        this.totalPebble = 100 * level + Math.pow(2, level)-2;
 
         // layers
         this.d = 3 + Math.floor(level * .5);
