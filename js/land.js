@@ -7,7 +7,7 @@ var land = (function () {
         // width height and depth of the land
         w : 8,
         h : 8,
-        d : 5,
+        d : 3,
         level : 1,
 
         // the total amount of pebble in the land
@@ -162,11 +162,13 @@ var land = (function () {
 
         }
 
+        console.log('once');
+
         hidePebble();
 
     };
 
-    setupLand();
+    //setupLand();
 
     api.reset = function () {
 
@@ -177,6 +179,14 @@ var land = (function () {
     api.setLevel = function (level) {
 
         this.totalPebble = 1000 * level;
+        this.d = 3 + Math.floor(level * .5);
+
+        // set max layers to 20
+        if (this.d > 20) {
+
+            this.d = 20;
+
+        }
 
     },
 
