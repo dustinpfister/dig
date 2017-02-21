@@ -111,6 +111,13 @@ var land = (function () {
 
     hidePebble = (function () {
 
+        // splice out a random index from the given options array, and return that cell
+        var spliceFromOptions = function (options) {
+
+            return api.cells[options.splice(Math.floor(Math.random() * options.length), 1)[0]];
+
+        };
+
         var methods = {
 
             // a random flat amount per loot tile
@@ -141,9 +148,8 @@ var land = (function () {
                 i = 0;
                 while (i < tileCount) {
 
-                    stackIndex = options.splice(Math.floor(Math.random() * options.length), 1)[0];
+                    cell = spliceFromOptions(options);
 
-                    cell = api.cells[stackIndex];
                     api.amount += amount;
                     cell.total = amount;
                     cell.amount = cell.total;
@@ -154,10 +160,7 @@ var land = (function () {
 
                 if (remainAmount) {
 
-                    stackIndex = options.splice(Math.floor(Math.random() * options.length), 1)[0];
-                    console.log('yes one remainder tile.');
-
-                    cell = api.cells[stackIndex];
+                    cell = spliceFromOptions(options);
 
                     api.amount += remainAmount;
                     cell.total = remainAmount;
@@ -195,8 +198,7 @@ var land = (function () {
                 // hide in top layer
                 while (i < topCount) {
 
-                    stackIndex = options.splice(Math.floor(Math.random() * options.length), 1)[0];
-                    cell = api.cells[stackIndex];
+                    cell = spliceFromOptions(options);
 
                     amount = amount;
 
@@ -208,8 +210,7 @@ var land = (function () {
 
                 }
 
-                stackIndex = options.splice(Math.floor(Math.random() * options.length), 1)[0];
-                cell = api.cells[stackIndex];
+                cell = spliceFromOptions(options);
 
                 amount = api.totalPebble - amount * topCount;
 
@@ -233,65 +234,6 @@ var land = (function () {
 
     }
         ()),
-
-    // hide the amount of pebble in the land
-    /*
-    hidePebble = (function () {
-
-    options = [];
-
-    return function () {
-
-    var len = api.w * api.h * api.d,
-
-    amount,
-    remain,
-    i,
-    cell,
-    z,
-    y,
-    z;
-
-    if (options.length === 0) {
-
-    options = makeOptions();
-
-    }
-
-    // get a random cell from options array
-    //i = Math.floor(Math.random() * len);
-    i = options.splice(Math.floor(Math.random() * options.length), 1);
-    cell = api.cells[i];
-    z = i % api.d;
-    x = Math.floor(i / (api.d * api.h));
-    y = Math.floor((i - (x * (api.d * api.h))) / api.d);
-
-    remain = api.totalPebble - api.amount;
-
-    // up to 10% depending on depth
-    amount = Math.floor(api.totalPebble / 10 * ((z + 1) / api.d));
-
-    if (amount < remain) {
-
-    cell.amount += amount;
-    api.amount += amount;
-    cell.total = cell.amount;
-    hidePebble();
-
-    } else {
-
-    cell.amount += remain;
-    cell.total = cell.amount;
-    api.amount += remain;
-
-    }
-
-    };
-
-    }
-    ()),
-
-     */
 
     setupLand = function () {
 
@@ -331,7 +273,7 @@ var land = (function () {
 
         }
 
-        hidePebble('top_layer');
+        hidePebble('random_amount');
 
     };
 
