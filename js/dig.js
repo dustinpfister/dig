@@ -221,7 +221,7 @@ var DIG = (function () {
                         text_digs.text = state.current.digs;
                         text_layer.text = state.current.layer;
                         text_pebble.text = state.current.pebble;
-						text_totals.text = land.getInfo().tabString;
+                        text_totals.text = land.getInfo().tabString;
                         //doOnceIf(app.input.mousePointer.active, function () {});
 
 
