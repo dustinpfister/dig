@@ -153,8 +153,7 @@ var land = (function () {
             x = Math.floor(i / (api.d * api.h));
             y = Math.floor((i - (x * (api.d * api.h))) / api.d);
 
-            maxHp = Math.floor(Math.random() * (api.hpRange.high+1) ) + api.hpRange.low;
-			maxHp = api.hpRange.low === api.hpRange.high ? api.hpRange.high : maxHp;
+            maxHp = Math.floor(Math.random() * (api.hpRange.high - api.hpRange.low + 1)) + api.hpRange.low;
 
             api.cells.push({
                 amount : 0,
@@ -173,8 +172,6 @@ var land = (function () {
 
         }
 
-        console.log('once');
-
         hidePebble();
 
     };
@@ -189,7 +186,10 @@ var land = (function () {
 
     api.setLevel = function (level) {
 
+        // total stack pebble
         this.totalPebble = 1000 * level;
+
+        // layers
         this.d = 3 + Math.floor(level * .5);
 
         // set max layers to 20
@@ -198,6 +198,13 @@ var land = (function () {
             this.d = 20;
 
         }
+
+        // land tile hp range
+        this.hpRange.low = 1 + Math.floor(level / 20 * 1);
+        this.hpRange.high = 1 + Math.floor(level / 20 * 3);
+
+        this.hpRange.low = this.hpRange.low > 4 ? 4 : this.hpRange.low;
+        this.hpRange.high = this.hpRange.high > 4 ? 4 : this.hpRange.high;
 
     },
 
