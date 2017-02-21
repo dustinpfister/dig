@@ -116,9 +116,18 @@ var land = (function () {
 
             return api.cells[options.splice(Math.floor(Math.random() * options.length), 1)[0]];
 
-        };
+        },
 
-        var methods = {
+        // do what needs to get done when setting an amount for the given cell
+        setAmount = function (cell, amount) {
+
+            api.amount += amount;
+            cell.total = amount;
+            cell.amount = cell.total;
+
+        },
+
+        methods = {
 
             // a random flat amount per loot tile
             random_amount : function () {
@@ -150,9 +159,7 @@ var land = (function () {
 
                     cell = spliceFromOptions(options);
 
-                    api.amount += amount;
-                    cell.total = amount;
-                    cell.amount = cell.total;
+                    setAmount(cell,amount);
 
                     i += 1;
 
@@ -162,9 +169,7 @@ var land = (function () {
 
                     cell = spliceFromOptions(options);
 
-                    api.amount += remainAmount;
-                    cell.total = remainAmount;
-                    cell.amount = cell.total;
+                    setAmount(cell,remainAmount);
 
                 }
 
@@ -202,9 +207,7 @@ var land = (function () {
 
                     amount = amount;
 
-                    api.amount += amount;
-                    cell.total = amount;
-                    cell.amount = cell.total;
+                    setAmount(cell, amount);
 
                     i += 1;
 
@@ -214,9 +217,7 @@ var land = (function () {
 
                 amount = api.totalPebble - amount * topCount;
 
-                api.amount += amount;
-                cell.total = amount;
-                cell.amount = cell.total;
+                setAmount(cell, amount);
 
                 console.log('topCount: ' + topCount);
 
@@ -273,7 +274,7 @@ var land = (function () {
 
         }
 
-        hidePebble('random_amount');
+        hidePebble('top_layer');
 
     };
 
