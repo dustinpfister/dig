@@ -23,13 +23,44 @@ var land = (function () {
 
     },
 
-    makeOptions = function () {
+    // get an x,y,z pos from an index out of total number of land tiles
+    getPos = function (i) {
+
+        i = i === undefined ? 0 : i;
+
+        var z = i % api.d,
+        x = Math.floor(i / (api.d * api.h)),
+        y = Math.floor((i - (x * (api.d * api.h))) / api.d);
+
+        return {
+
+            x : x,
+            y : y,
+            z : z
+
+        };
+
+    },
+
+    makeOptions = function (z) {
 
         var options = [];
 
         api.cells.forEach(function (cell, index) {
 
-            options.push(index);
+            if (z === undefined) {
+
+                options.push(index);
+
+            } else {
+
+                if (cell.z === z) {
+
+                    options.push(index);
+
+                }
+
+            }
 
         });
 
@@ -113,12 +144,9 @@ var land = (function () {
                     stackIndex = options.splice(Math.floor(Math.random() * options.length), 1)[0];
 
                     cell = api.cells[stackIndex];
-                    console.log('loot at index: ' + stackIndex);
-
                     api.amount += amount;
                     cell.total = amount;
                     cell.amount = cell.total;
-                    console.log(cell);
 
                     i += 1;
 
@@ -130,24 +158,66 @@ var land = (function () {
                     console.log('yes one remainder tile.');
 
                     cell = api.cells[stackIndex];
-                    console.log('loot at index: ' + stackIndex);
 
                     api.amount += remainAmount;
                     cell.total = remainAmount;
                     cell.amount = cell.total;
-                    console.log(cell);
 
                 }
 
-                // debug info
-                console.log('stack pebble: ' + api.totalPebble);
-                console.log('percent: ' + per);
-                console.log('random amount : ' + amount);
-                console.log('tile count: ' + tileCount);
-                console.log('remain amount: ' + remainAmount);
-                var isTotal = amount * tileCount + remainAmount;
-                console.log('good?:' + isTotal + ': ' + (isTotal === api.totalPebble));
-                console.log('***');
+            },
+
+            // common but low value loot tiles on the top, rate but valuable loot at the bottom
+            common_to_rare : function () {
+
+                // the top layer will always have allot say 50%
+                var options = makeOptions(0),
+                topCount = Math.floor(api.w * api.h * .5);
+
+                console.log('topCount: ' + topCount);
+
+            },
+
+            // everything on the top layer
+            top_layer : function () {
+
+                // the top layer will always have allot of loot cells, say 50%
+                var options = makeOptions(0),
+                topCount = Math.floor(api.w * api.h * .5),
+                i = 0,
+                amount,
+                cell,
+                stackIndex;
+
+                api.amount = 0;
+                amount = Math.floor(api.totalPebble / topCount);
+
+                // hide in top layer
+                while (i < topCount) {
+
+                    stackIndex = options.splice(Math.floor(Math.random() * options.length), 1)[0];
+                    cell = api.cells[stackIndex];
+
+                    amount = amount;
+
+                    api.amount += amount;
+                    cell.total = amount;
+                    cell.amount = cell.total;
+
+                    i += 1;
+
+                }
+
+                stackIndex = options.splice(Math.floor(Math.random() * options.length), 1)[0];
+                cell = api.cells[stackIndex];
+
+                amount = api.totalPebble - amount * topCount;
+
+                api.amount += amount;
+                cell.total = amount;
+                cell.amount = cell.total;
+
+                console.log('topCount: ' + topCount);
 
             }
 
@@ -261,11 +331,13 @@ var land = (function () {
 
         }
 
-        hidePebble();
+        hidePebble('top_layer');
 
     };
 
     //setupLand();
+    console.log('pos');
+    console.log(getPos(3));
 
     api.reset = function () {
 
