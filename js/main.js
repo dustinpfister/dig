@@ -34,7 +34,8 @@ var app = (function () {
             app.state.add('dig_options', DIG.options);
 
             // start title
-            app.state.start('dig_run');
+            app.state.start('title');
+            //app.state.start('dig_run');
 
         },
 

@@ -43,7 +43,7 @@ var Title = (function () {
 
                     map.putTile(
 
-                        Math.floor(Math.random() * 4),
+                        Math.floor(Math.floor(Math.random() * 3 + 1) * 10 + Math.random() * 4),
                         x,
                         y,
                         'level1');
@@ -62,7 +62,6 @@ var Title = (function () {
                 app.state.start('dig_run');
 
             }, this, 0, 0, 1);
-
 
             app.add.button(app.world.centerX - 80, app.world.centerY + 100, 'button', function () {
 

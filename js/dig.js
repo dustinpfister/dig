@@ -1,7 +1,7 @@
 
 var DIG = (function () {
 
-    var showPebble = true;
+    var showPebble = false;
 
     return {
 
