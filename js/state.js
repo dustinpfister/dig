@@ -68,9 +68,22 @@ var state = (function () {
 
         levelUp : function () {
 
+            var rawLevel = Math.log(current.pebble) / Math.log(4),
+            newLevel = Math.floor(rawLevel);
+
             console.log('I am the level up method.');
-            console.log('current pebble: ' + current.pebble);
-            console.log(Math.log(current.pebble) / Math.log(4));
+            console.log('current level: ' + current.landLevel);
+            console.log('new level: ' + newLevel);
+
+            if (newLevel > current.landLevel) {
+
+                console.log('level up!');
+                current.landLevel = newLevel;
+
+            }
+
+            // auto save
+            save();
 
         },
 
