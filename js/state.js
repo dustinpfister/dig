@@ -5,9 +5,9 @@ var state = (function () {
 
         layer : 0,
         pebble : 0,
-        digs : 5,
-        maxDigs : 5,
-        landLevel :3
+        digs : 10,
+        maxDigs : 10,
+        landLevel : 3
 
     },
 
@@ -49,6 +49,22 @@ var state = (function () {
     api = {
 
         current : current,
+
+        // call this from the console if you want to start over
+        startOver : function () {
+
+            current = {
+
+                layer : 0,
+                pebble : 0,
+                digs : 5,
+                maxDigs : 5,
+                landLevel : 1
+
+            }
+            save();
+
+        },
 
         stepLayer : function () {
 
