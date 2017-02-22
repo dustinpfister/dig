@@ -28,6 +28,7 @@ var DIG = (function () {
             text_layer,
             text_pebble,
             text_totals,
+            text_landLevel,
             map,
             layer1,
 
@@ -209,11 +210,13 @@ var DIG = (function () {
                     app.add.sprite(450, 64, 'icons', 0); // shovel
                     app.add.sprite(450, 96 + 10, 'icons', 3); // layers
                     app.add.sprite(450, 128 + 20, 'icons', 2); // coin
+                    app.add.sprite(450, 160 + 30, 'icons', 4); // coin
 
                     // text
                     text_digs = app.add.bitmapText(450 + 32, 64, 'desyrel', '0', 30);
                     text_layer = app.add.bitmapText(450 + 32, 96 + 10, 'desyrel', '0', 30);
                     text_pebble = app.add.bitmapText(450 + 32, 128 + 20, 'desyrel', '0', 30);
+                    text_landLevel = app.add.bitmapText(450 + 32, 160 + 30, 'desyrel', '0', 30);
 
                     text_totals = app.add.bitmapText(50, 435, 'desyrel', land.getInfo().tabString, 15);
                     //text_disp = app.add.bitmapText(5, 5, 'desyrel', '', 30);
@@ -349,7 +352,7 @@ var DIG = (function () {
                     text_pebbleWon = app.add.bitmapText(96, 128 + 32, 'desyrel',
                             'Pebble Won : ' + pebbleWon, 24);
 
-					state.levelUp();
+                    state.levelUp();
                     state.reset();
                     land.reset();
 
