@@ -349,6 +349,7 @@ var DIG = (function () {
                     text_pebbleWon = app.add.bitmapText(96, 128 + 32, 'desyrel',
                             'Pebble Won : ' + pebbleWon, 24);
 
+					state.levelUp();
                     state.reset();
                     land.reset();
 

@@ -7,7 +7,7 @@ var state = (function () {
         pebble : 0,
         digs : 10,
         maxDigs : 10,
-        landLevel : 3
+        landLevel : 1
 
     },
 
@@ -63,6 +63,14 @@ var state = (function () {
 
             }
             save();
+
+        },
+
+        levelUp : function () {
+
+            console.log('I am the level up method.');
+            console.log('current pebble: ' + current.pebble);
+            console.log(Math.log(current.pebble) / Math.log(4));
 
         },
 
