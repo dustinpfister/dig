@@ -43,8 +43,6 @@ var state = (function () {
 
         // reset with current values
         api.reset();
-        log('land info:');
-        log(land.getInfo());
 
     },
 

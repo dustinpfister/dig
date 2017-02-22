@@ -182,8 +182,6 @@ var land = (function () {
                 var options = makeOptions(0),
                 topCount = Math.floor(api.w * api.h * .5);
 
-                console.log('topCount: ' + topCount);
-
             },
 
             top_down : function () {
@@ -278,9 +276,6 @@ var land = (function () {
                     var options,
                     remain;
 
-                    console.log('okay we have the data!');
-                    console.log(data);
-
                     api.amount = 0;
                     data.layerData.forEach(function (layerObj) {
 
@@ -288,7 +283,6 @@ var land = (function () {
                         amount = Math.floor(layerObj.pebble / layerObj.lootTiles),
                         i = 0;
 
-                        console.log('layer ' + layerObj.layerIndex + ' per tile amount : ' + amount);
                         while (i < layerObj.lootTiles) {
 
                             cell = spliceFromOptions(options);
@@ -348,8 +342,6 @@ var land = (function () {
 
                 setAmount(cell, amount);
 
-                console.log('topCount: ' + topCount);
-
             }
 
         };
@@ -408,8 +400,6 @@ var land = (function () {
     };
 
     //setupLand();
-    console.log('pos');
-    console.log(getPos(3));
 
     api.reset = function () {
 
@@ -547,8 +537,6 @@ var land = (function () {
                     cell.amount = 0;
 
                 }
-
-                console.log(tabulate());
 
             }
 
