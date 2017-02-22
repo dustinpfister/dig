@@ -63,11 +63,15 @@ var Title = (function () {
 
             }, this, 0, 0, 1);
 
+            /*
+            // continue button
             app.add.button(app.world.centerX - 80, app.world.centerY + 100, 'button', function () {
 
-                genLayer();
+            genLayer();
 
             }, this, 2, 2, 1);
+
+             */
 
             var logo = app.add.sprite(app.world.centerX, app.world.centerY, 'logo');
             logo.angle = 0;
