@@ -19,11 +19,23 @@ var Title = (function () {
             console.log('title state setup.');
 
             layer1 = map.create('level1', 4, 4, 32, 32);
-            layer1.setScale(3.5, 3.5);
+			
+			
+            //layer1.setScale(3.5, 3.5);
+            //layer1.fixedToCamera = false;
+            //layer1.x = app.world.centerX - (32 * 2) * 3.5;
+            //layer1.y = app.world.centerY - (32 * 2) * 3.5;
+			
+			
+			
+            //layer1.setScale(1, 1);
+			layer1.width = app.height;
+			layer1.height = app.height;
             layer1.fixedToCamera = false;
-            layer1.x = app.world.centerX - (32 * 2) * 3.5;
-            layer1.y = app.world.centerY - (32 * 2) * 3.5;
-
+            layer1.x = app.world.centerX - (layer1.width / 2);//app.world.centerX - (32 * 2) * 3.5;
+            layer1.y = 0;//app.world.centerY - (32 * 2) * 3.5;
+			
+			
             var genLayer = function () {
 
                 var width = 4,
