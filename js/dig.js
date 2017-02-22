@@ -256,7 +256,7 @@ var DIG = (function () {
                     text_label = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Game Options:', 30);
 
                     // new game button
-                    app.add.button(app.world.centerX - 80, app.world.centerY + 30, 'button', function () {
+                    app.add.button(app.world.centerX - 80, app.world.centerY + 70, 'button', function () {
 
                         state.reset();
                         land.reset();
@@ -264,6 +264,13 @@ var DIG = (function () {
                         app.state.start('dig_run');
 
                     }, this, 0, 0, 1);
+
+                    // new game button
+                    app.add.button(app.world.centerX - 80, app.world.centerY + 115, 'button', function () {
+
+                        app.state.start('title');
+
+                    }, this, 4, 4, 5);
 
                 }
 
