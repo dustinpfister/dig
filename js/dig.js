@@ -255,6 +255,13 @@ var DIG = (function () {
 
                     text_label = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Game Options:', 30);
 
+                    // resume button
+                    app.add.button(app.world.centerX - 80, app.world.centerY + 25, 'button', function () {
+
+                        app.state.resume('dig_run');
+
+                    }, this, 6, 6, 7);
+
                     // new game button
                     app.add.button(app.world.centerX - 80, app.world.centerY + 70, 'button', function () {
 
