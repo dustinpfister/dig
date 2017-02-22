@@ -277,6 +277,7 @@ var DIG = (function () {
                         text_layer.text = (state.current.layer + 1) + '/' + land.d;
                         text_pebble.text = state.current.pebble;
                         text_totals.text = land.getInfo().tabString;
+						text_landLevel.text = state.current.landLevel;
                         //doOnceIf(app.input.mousePointer.active, function () {});
 
 
