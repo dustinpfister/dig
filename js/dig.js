@@ -331,13 +331,23 @@ var DIG = (function () {
         // DIG.Over state
         over : (function () {
 
-            var test_label;
+            var test_label,
+            text_totalPebble,
+            text_pebbelWon;
 
             return {
 
                 create : function () {
 
+                    var landInfo = land.getInfo(),
+                    pebbleWon = landInfo.tab.total - landInfo.tab.remaining;
+
                     text_label = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Dig is Over!', 30);
+
+                    text_totalPebble = app.add.bitmapText(96, 128, 'desyrel',
+                            'Total Land Pebble : ' + landInfo.tab.total, 16);
+                    text_pebbleWon = app.add.bitmapText(96, 128 + 32, 'desyrel',
+                            'Pebble Won : ' + pebbleWon, 24);
 
                     state.reset();
                     land.reset();
