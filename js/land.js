@@ -159,7 +159,7 @@ var land = (function () {
 
                     cell = spliceFromOptions(options);
 
-                    setAmount(cell,amount);
+                    setAmount(cell, amount);
 
                     i += 1;
 
@@ -169,7 +169,7 @@ var land = (function () {
 
                     cell = spliceFromOptions(options);
 
-                    setAmount(cell,remainAmount);
+                    setAmount(cell, remainAmount);
 
                 }
 
@@ -183,6 +183,102 @@ var land = (function () {
                 topCount = Math.floor(api.w * api.h * .5);
 
                 console.log('topCount: ' + topCount);
+
+            },
+
+            top_down : function () {
+
+                // locals that may become arguments
+                var depth = api.d,
+                startPer = .1,
+                tilesPerLayer = api.w * api.h,
+                totalPebble = api.totalPebble,
+                basePer = .5, // base percentage of totalpebble / depth per layer
+
+                // other locals
+                layerIndex = 0,
+                per,
+                layerData = [],
+                totalTiles = 0,
+                perLayer,
+                totalUsed,
+                sanity = false;
+
+                // this will be called recursively
+                nextLayer = function (done) {
+
+                    var lootTiles;
+
+                    per = startPer / (depth) * (depth - layerIndex);
+
+                    lootTiles = Math.ceil(tilesPerLayer * per);
+
+                    totalTiles += lootTiles;
+
+                    layerData.push({
+
+                        layerIndex : layerIndex,
+                        lootTiles : lootTiles,
+                        per : per
+
+                    });
+
+                    if (layerIndex < depth - 1) {
+
+                        layerIndex += 1;
+
+                        nextLayer(done);
+
+                    } else {
+
+                        // we are done with all the layers
+                        perLayer = totalPebble / depth;
+                        totalUsed = 0;
+
+                        layerData.forEach(function (layerObj) {
+
+                            var log = Math.log(layerObj.layerIndex + 1) / Math.log(depth),
+                            baseAmount = Math.floor(perLayer * basePer)
+
+                                layerObj.pebble = Math.floor(baseAmount + perLayer * log * (1 - basePer));
+                            totalUsed += layerObj.pebble;
+
+                        });
+
+                        // stuff any remaining pebble into the last layer
+                        layerData[layerData.length - 1].pebble += totalPebble - totalUsed;
+
+                        // sanity check
+                        totalUsed = 0;
+                        layerData.forEach(function (layerObj) {
+
+                            totalUsed += layerObj.pebble
+
+                        });
+
+                        sanity = totalUsed === totalPebble;
+
+                        done({
+
+                            sanity : sanity,
+                            totalTiles : totalTiles,
+                            totalUsed : totalUsed,
+                            layerData : layerData
+
+                        });
+
+                    }
+
+                };
+
+                nextLayer(function (data) {
+
+                    //document.body.innerHTML = JSON.stringify(data);
+
+					console.log('okay we have the data!');
+					console.log(data)
+					
+                });
 
             },
 
@@ -274,7 +370,7 @@ var land = (function () {
 
         }
 
-        hidePebble('top_layer');
+        hidePebble('top_down');
 
     };
 
