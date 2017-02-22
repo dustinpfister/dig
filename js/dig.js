@@ -157,14 +157,14 @@ var DIG = (function () {
                     layer1 = map.create('activeLayer', 8, 8, 32, 32);
 
                     // place the icons
-                    app.add.sprite(8, 8, 'icons', 0); // shovel
-                    app.add.sprite(8 + 32 * 2, 8, 'icons', 3); // layers
-                    app.add.sprite(8 + 32 * 4, 8, 'icons', 2); // coin
+                    app.add.sprite(450, 64, 'icons', 0); // shovel
+                    app.add.sprite(450, 96 + 10, 'icons', 3); // layers
+                    app.add.sprite(450, 128 + 20, 'icons', 2); // coin
 
                     // text
-                    text_digs = app.add.bitmapText(8 + 32, 8, 'desyrel', '0', 30);
-                    text_layer = app.add.bitmapText(8 + 96, 8, 'desyrel', '0', 30);
-                    text_pebble = app.add.bitmapText(8 + 160, 8, 'desyrel', '0', 30);
+                    text_digs = app.add.bitmapText(450 + 32, 64, 'desyrel', '0', 30);
+                    text_layer = app.add.bitmapText(450 + 32, 96 + 10, 'desyrel', '0', 30);
+                    text_pebble = app.add.bitmapText(450 + 32, 128 + 20, 'desyrel', '0', 30);
 
                     text_totals = app.add.bitmapText(50, 435, 'desyrel', land.getInfo().tabString, 15);
                     //text_disp = app.add.bitmapText(5, 5, 'desyrel', '', 30);
@@ -219,7 +219,7 @@ var DIG = (function () {
 
                         // update display info
                         text_digs.text = state.current.digs;
-                        text_layer.text = state.current.layer;
+                        text_layer.text = (state.current.layer + 1) + '/' + land.d;
                         text_pebble.text = state.current.pebble;
                         text_totals.text = land.getInfo().tabString;
                         //doOnceIf(app.input.mousePointer.active, function () {});
