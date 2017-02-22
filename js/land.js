@@ -190,7 +190,7 @@ var land = (function () {
 
                 // locals that may become arguments
                 var depth = api.d,
-                startPer = .1,
+                startPer = .5,
                 tilesPerLayer = api.w * api.h,
                 totalPebble = api.totalPebble,
                 basePer = .5, // base percentage of totalpebble / depth per layer
@@ -238,9 +238,9 @@ var land = (function () {
                         layerData.forEach(function (layerObj) {
 
                             var log = Math.log(layerObj.layerIndex + 1) / Math.log(depth),
-                            baseAmount = Math.floor(perLayer * basePer)
+                            baseAmount = Math.floor(perLayer * basePer);
 
-                                layerObj.pebble = Math.floor(baseAmount + perLayer * log * (1 - basePer));
+                            layerObj.pebble = Math.floor(baseAmount + perLayer * log * (1 - basePer));
                             totalUsed += layerObj.pebble;
 
                         });
@@ -275,13 +275,16 @@ var land = (function () {
 
                     //document.body.innerHTML = JSON.stringify(data);
 
+                    var options,
+                    remain;
+
                     console.log('okay we have the data!');
                     console.log(data);
 
                     api.amount = 0;
                     data.layerData.forEach(function (layerObj) {
 
-                        var options = makeOptions(layerObj.layerIndex),
+                        options = makeOptions(layerObj.layerIndex),
                         amount = Math.floor(layerObj.pebble / layerObj.lootTiles),
                         i = 0;
 
@@ -298,6 +301,15 @@ var land = (function () {
                         }
 
                     });
+
+                    // place any remaining pebble in what should be the deepest layer
+                    remain = api.totalPebble - api.amount;
+                    if (remain > 0) {
+
+                        cell = spliceFromOptions(options);
+                        setAmount(cell, Math.floor(api.totalPebble - api.amount));
+
+                    }
 
                 });
 
