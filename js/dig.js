@@ -228,12 +228,38 @@ var DIG = (function () {
                         // out of digs?
                         if (state.current.digs <= 0) {
 
-                            // reset state, land, and regen the tilemap
-                            //state.reset();
-                            //land.reset();
-                            //genLayer();
-
                             app.state.start('dig_over');
+
+                        }
+
+                        // out of tiles on the bottom layer?
+                        if (state.current.layer === land.d - 1) {
+
+                            //console.log(land.getCell(0,0,land.d-1).done);
+
+                            (function () {
+
+                                var theBottom = land.getLayer(land.d - 1),
+                                count = theBottom.length;
+
+                                theBottom.forEach(function (cell) {
+
+                                    if (cell.done) {
+
+                                        count -= 1;
+
+                                    }
+
+                                });
+
+                                if (count <= 0) {
+
+                                    app.state.start('dig_over');
+
+                                }
+
+                            }
+                                ());
 
                         }
 

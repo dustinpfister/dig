@@ -282,7 +282,6 @@ var land = (function () {
                         options = makeOptions(layerObj.layerIndex),
                         amount = Math.floor(layerObj.pebble / layerObj.lootTiles),
                         i = 0;
-
                         while (i < layerObj.lootTiles) {
 
                             cell = spliceFromOptions(options);
@@ -519,8 +518,6 @@ var land = (function () {
 
             });
 
-            cell.done = true;
-
         } else {
 
             cell.hp -= 1;
@@ -537,6 +534,7 @@ var land = (function () {
                     cell.amount = 0;
 
                 }
+                cell.done = true;
 
             }
 
