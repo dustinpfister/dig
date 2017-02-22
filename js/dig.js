@@ -179,6 +179,9 @@ var DIG = (function () {
 
                     app.add.button(640 - 64, 16, 'icons', function () {
 
+                        //app.state;
+                        //app.state.start('dig_options');
+                        app.state.clearCurrentState();
                         app.state.start('dig_options');
 
                     }, this, 1, 1, 1);
@@ -258,7 +261,7 @@ var DIG = (function () {
                     // resume button
                     app.add.button(app.world.centerX - 80, app.world.centerY + 25, 'button', function () {
 
-                        app.state.resume('dig_run');
+                        app.state.start('dig_run');
 
                     }, this, 6, 6, 7);
 
