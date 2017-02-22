@@ -5,6 +5,7 @@ var app = (function () {
 
     return new Phaser.Game(
 
+	    //1280, 960,
         //640, 480,
         320, 240,
         Phaser.AUTO,
