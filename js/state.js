@@ -7,7 +7,7 @@ var state = (function () {
         pebble : 0,
         digs : 100,
         maxDigs : 100,
-        landLevel :10
+        landLevel :1
 
     },
 

@@ -275,9 +275,30 @@ var land = (function () {
 
                     //document.body.innerHTML = JSON.stringify(data);
 
-					console.log('okay we have the data!');
-					console.log(data)
-					
+                    console.log('okay we have the data!');
+                    console.log(data);
+
+                    api.amount = 0;
+                    data.layerData.forEach(function (layerObj) {
+
+                        var options = makeOptions(layerObj.layerIndex),
+                        amount = Math.floor(layerObj.pebble / layerObj.lootTiles),
+                        i = 0;
+
+                        console.log('layer ' + layerObj.layerIndex + ' per tile amount : ' + amount);
+                        while (i < layerObj.lootTiles) {
+
+                            cell = spliceFromOptions(options);
+
+                            amount = amount;
+
+                            setAmount(cell, amount);
+
+                            i += 1;
+                        }
+
+                    });
+
                 });
 
             },
