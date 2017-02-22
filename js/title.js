@@ -11,7 +11,9 @@ var Title = (function () {
         create : function () {
 
             var button,
-            scale;
+            scale,
+            genLayer,
+            logo;
 
             //  Creates a blank tilemap
             map = app.add.tilemap();
@@ -36,7 +38,7 @@ var Title = (function () {
             layer1.y = 0; //app.world.centerY - (32 * 2) * 3.5;
 
 
-            var genLayer = function () {
+            genLayer = function () {
 
                 var width = 4,
                 height = 4,
@@ -83,21 +85,20 @@ var Title = (function () {
             button.y = app.world.centerY + (app.height * 0.125);
 
             /*
-            // continue button
-            app.add.button(app.world.centerX - 80, app.world.centerY + 100, 'button', function () {
-
-            genLayer();
-
-            }, this, 2, 2, 1);
-
-             */
-
-            var logo = app.add.sprite(app.world.centerX, app.world.centerY, 'logo');
+            logo = app.add.sprite(app.world.centerX, app.world.centerY, 'logo');
             logo.angle = 0;
             logo.width = logo.width * 2;
             logo.height = logo.height * 2;
             logo.x = app.width / 2 - logo.width / 2;
             logo.y = app.world.centerY - 200;
+             */
+
+            logo = app.add.sprite(app.world.centerX, app.world.centerY, 'logo');
+            logo.angle = 0;
+            logo.width = 2 * (app.width / 3); //logo.width * 2;
+            logo.height = 1 * (app.width / 3);
+            logo.x = app.width / 2 - logo.width / 2;
+            logo.y = app.world.centerY - logo.height;
 
         }
     };
