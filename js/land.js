@@ -188,10 +188,10 @@ var land = (function () {
 
                 // locals that may become arguments
                 var depth = api.d,
-                startPer = .5,
+                startPer = .24,
                 tilesPerLayer = api.w * api.h,
                 totalPebble = api.totalPebble,
-                basePer = .5, // base percentage of totalpebble / depth per layer
+                basePer = .2, // base percentage of totalpebble / depth per layer
 
                 // other locals
                 layerIndex = 0,
@@ -274,13 +274,24 @@ var land = (function () {
                     //document.body.innerHTML = JSON.stringify(data);
 
                     var options,
+                    amount,
                     remain;
 
                     api.amount = 0;
+
+                    console.log(data);
+
                     data.layerData.forEach(function (layerObj) {
 
-                        options = makeOptions(layerObj.layerIndex),
-                        amount = Math.floor(layerObj.pebble / layerObj.lootTiles),
+                        // The loot tile count can not be greater than the amount of pebble for the layer
+                        if (layerObj.lootTiles > layerObj.pebble) {
+
+                            layerObj.lootTiles = layerObj.pebble;
+
+                        }
+
+                        options = makeOptions(layerObj.layerIndex);
+                        amount = Math.floor(layerObj.pebble / layerObj.lootTiles);
                         i = 0;
                         while (i < layerObj.lootTiles) {
 

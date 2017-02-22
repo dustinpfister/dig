@@ -179,8 +179,6 @@ var DIG = (function () {
 
                     var info = land.getInfo();
 
-                    console.log(info.tab.remaining);
-
                     if (info.tab.remaining <= 0) {
 
                         app.state.start('dig_over');
@@ -189,6 +187,7 @@ var DIG = (function () {
 
                 }
                     ());
+
                 // dig
                 //state.userAction(pointer.clientX, pointer.clientY);
 
