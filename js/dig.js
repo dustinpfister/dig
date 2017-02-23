@@ -220,23 +220,17 @@ var DIG = (function () {
                     // place the icons
                     iconIndexs.forEach(function (iconIndex, i) {
 
+                        // icons
                         sprite = app.add.sprite(iconSX, iconSY + iconStep * i, 'icons', iconIndex);
                         sprite.width = iconSize;
                         sprite.height = iconSize;
 
+                        // icon text
                         text[textNames[i]] = app.add.bitmapText(
                                 iconSX + iconSize,
                                 iconSY + iconStep * i, 'desyrel', '0', textSize);
 
                     });
-
-                    // text
-                    /*
-                    text_digs = app.add.bitmapText(iconSX + iconSize, iconSY, 'desyrel', '0', textSize);
-                    text_layer = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep, 'desyrel', '0', textSize);
-                    text_pebble = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 2, 'desyrel', '0', textSize);
-                    text_landLevel = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 3, 'desyrel', '0', textSize);
-                     */
 
                     // pebble totals
                     text_totals = app.add.bitmapText(
@@ -312,7 +306,12 @@ var DIG = (function () {
 
                 create : function () {
 
-                    text_label = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Game Options:', 30);
+                    var textSize = app.width * .1,
+
+                    text_label = app.add.bitmapText(0, 0, 'desyrel', 'Game Options:', textSize);
+
+                    text_label.x = app.world.centerX - text_label.width / 2;
+                    text_label.y = app.height * .05;
 
                     // resume button
                     app.add.button(app.world.centerX - 80, app.world.centerY + 25, 'button', function () {
