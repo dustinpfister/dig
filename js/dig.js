@@ -199,8 +199,9 @@ var DIG = (function () {
                     var iconSX = app.width * .72,
                     iconSY = app.height * .20,
                     iconStep = app.height * .15,
-                    iconSize = 32,
-                    textSize = 20;
+                    iconSize = app.width * .08,
+                    textSize = 20,
+                    sprite;
 
                     //  Creates a blank tilemap
                     map = app.add.tilemap();
@@ -240,12 +241,15 @@ var DIG = (function () {
 
                     genLayer();
 
-                    app.add.button(640 - 64, 16, 'icons', function () {
+                    sprite = app.add.button(app.width - iconSize, 0, 'icons', function () {
 
-                        app.state.clearCurrentState();
-                        app.state.start('dig_options');
+                            app.state.clearCurrentState();
+                            app.state.start('dig_options');
 
-                    }, this, 1, 1, 1);
+                        }, this, 1, 1, 1);
+
+                    sprite.width = iconSize;
+                    sprite.height = iconSize;
 
                 },
 
