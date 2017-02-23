@@ -103,14 +103,16 @@ var DIG = (function () {
 
             userAction = function (sprite, pointer) {
 
-                var x,
-                y;
+                var cellSize = Math.floor(sprite.width / land.w),
+                x = pointer.x - sprite.x,
+                y = pointer.y - sprite.y,
+                cellX = Math.floor(x / cellSize),
+                cellY = Math.floor(y / cellSize);
 
-
-                // dig in state.js
+                // dig at state.js
                 state.userAction(
-                    pointer.x - sprite.x,
-                    pointer.y - sprite.y,
+                    cellX,
+                    cellY,
                     function (result) {
 
                     if (result.active) {
@@ -216,11 +218,13 @@ var DIG = (function () {
 
                     // tile size is a little weird for now
                     // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
-                    layer1.setScale(1.5, 1.5);
+                    //layer1.setScale(1.5, 1.5);
+
+                    layer1.setScale(1, 1);
 
                     layer1.fixedToCamera = false;
-                    layer1.x = digmap.offset.x;
-                    layer1.y = digmap.offset.x;
+                    layer1.x = 0; //digmap.offset.x;
+                    layer1.y = 0; //digmap.offset.x;
                     layer1.inputEnabled = true;
 
                     console.log(layer1.events);

@@ -118,7 +118,8 @@ var state = (function () {
         },
 
         // the user has preformed an action
-        userAction : function (x, y, done) {
+        //userAction : function (x, y, done) {
+		userAction : function (cellX, cellY, done) {
 
             var cellX,
             cellY,
@@ -130,10 +131,10 @@ var state = (function () {
             if (current.digs > 0) {
 
                 // player clicked on land
-                if (x >= 0 && x <= 384 && y >= 0 && y <= 384) {
+                //if (x >= 0 && x <= 384 && y >= 0 && y <= 384) {
 
-                    cellX = Math.floor((x - 0) / (384 / land.w));
-                    cellY = Math.floor((y - 0) / (384 / land.h));
+                    //cellX = Math.floor((x - 0) / (384 / land.w));
+                    //cellY = Math.floor((y - 0) / (384 / land.h));
 
                     // dig at the land
                     land.digAt(cellX, cellY, current.layer, function (tileStatus) {
@@ -176,14 +177,14 @@ var state = (function () {
 
                     });
 
-                } else {
+                //} else {
 
                     // player clicked elsewhere.
 
-                    log('land not clicked');
-                    done({});
+                ////    log('land not clicked');
+                //    done({});
 
-                }
+               // }
 
             } else {
 
