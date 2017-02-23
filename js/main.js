@@ -6,8 +6,8 @@ var app = (function () {
     return new Phaser.Game(
 
         //1280, 960,
-        //640, 480,
-        320, 240,
+        640, 480,
+        //320, 240,
         Phaser.AUTO,
         'gamearea', {
 
@@ -22,6 +22,8 @@ var app = (function () {
 
             //app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
 
+			//app.input.addPointer();
+			
             app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
 
         },
@@ -36,8 +38,8 @@ var app = (function () {
             app.state.add('dig_options', DIG.options);
 
             // start title
-            app.state.start('title');
-            //app.state.start('dig_run');
+            //app.state.start('title');
+            app.state.start('dig_run');
 
         },
 

@@ -101,39 +101,35 @@ var DIG = (function () {
             }
                 ()),
 
-            userAction = function (pointer) {
+            userAction = function (sprite, pointer) {
 
                 var x,
                 y;
 
-                // click or touch on the layer?
-                if (layer1.input.pointerDown()) {
 
-                    // dig in state.js
-                    state.userAction(
-                        pointer.position.x - digmap.offset.x,
-                        pointer.position.y - digmap.offset.y,
-                        function (result) {
+                // dig in state.js
+                state.userAction(
+                    pointer.x - sprite.x,
+                    pointer.y - sprite.y,
+                    function (result) {
 
-                        if (result.active) {
+                    if (result.active) {
 
-                            if (result.burst) {
-                                // update the tile map
-                                map.putTile(0, result.tileX, result.tileY, 'activeLayer');
-
-                            }
-
-                            if (result.dropEvent) {
-
-                                //genLayer();
-
-                            }
+                        if (result.burst) {
+                            // update the tile map
+                            map.putTile(0, result.tileX, result.tileY, 'activeLayer');
 
                         }
 
-                    });
+                        if (result.dropEvent) {
 
-                }
+                            //genLayer();
+
+                        }
+
+                    }
+
+                });
 
                 genLayer();
 
@@ -189,9 +185,6 @@ var DIG = (function () {
                 }
                     ());
 
-                // dig
-                //state.userAction(pointer.clientX, pointer.clientY);
-
             };
 
             return {
@@ -230,6 +223,11 @@ var DIG = (function () {
                     layer1.y = digmap.offset.x;
                     layer1.inputEnabled = true;
 
+                    console.log(layer1.events);
+
+                    // touch mouse event handler on the tilemap
+                    layer1.events.onInputDown.add(userAction);
+
                     genLayer();
 
                     app.add.button(640 - 64, 16, 'icons', function () {
@@ -254,7 +252,7 @@ var DIG = (function () {
 
                         if (app.input.pointer1.active) {
 
-                            userAction(app.input.pointer1);
+                            //userAction(app.input.pointer1);
 
                         }
 
@@ -264,7 +262,7 @@ var DIG = (function () {
 
                                 last = new Date();
 
-                                userAction(app.input.mousePointer);
+                                //userAction(app.input.mousePointer);
 
                             }
 
