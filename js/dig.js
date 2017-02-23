@@ -109,6 +109,9 @@ var DIG = (function () {
                 cellX = Math.floor(x / cellSize),
                 cellY = Math.floor(y / cellSize);
 
+                log('cellSize: ' + cellSize);
+                log('cellPos: (' + cellX + ',' + cellY + ')');
+
                 // dig at state.js
                 state.userAction(
                     cellX,
@@ -195,11 +198,19 @@ var DIG = (function () {
 
                     //  Creates a blank tilemap
                     map = app.add.tilemap();
+					//map.tileHeight = 32;
+					//map.tileWidth = 32;
 
                     //  Add a Tileset image to the map
                     map.addTilesetImage('tiles');
 
                     layer1 = map.create('activeLayer', 8, 8, 32, 32);
+					layer1.updateCrop();
+					layer1.update();
+					//layer1.fixedToCamera = false;
+					//layer1.deltaX = 10;
+					//layer1.angle = 45;
+					//layer1.anchor = {x:.5,y:.5};
 
                     // place the icons
                     app.add.sprite(450, 64, 'icons', 0); // shovel
@@ -220,11 +231,15 @@ var DIG = (function () {
                     // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
                     //layer1.setScale(1.5, 1.5);
 
-                    layer1.setScale(1, 1);
+                    //layer1.setScale(.8, .8);
 
                     layer1.fixedToCamera = false;
-                    layer1.x = 0; //digmap.offset.x;
-                    layer1.y = 0; //digmap.offset.x;
+                    layer1.width = app.height * .8;
+                    layer1.height = app.height * .8;
+                    layer1.x = app.width * .05; //digmap.offset.x;
+                    layer1.y = app.height * .05; //digmap.offset.x;
+                    //layer1.x = 0;
+                    //layer1.y = 0;
                     layer1.inputEnabled = true;
 
                     console.log(layer1.events);

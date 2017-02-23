@@ -7,7 +7,8 @@ var app = (function () {
 
         //1280, 960,
         640, 480,
-        //320, 240,
+        //320, 260,
+        //320, 240, // weird problem with the tilemap
         Phaser.AUTO,
         'gamearea', {
 
@@ -22,8 +23,8 @@ var app = (function () {
 
             //app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
 
-			//app.input.addPointer();
-			
+            //app.input.addPointer();
+
             app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
 
         },
