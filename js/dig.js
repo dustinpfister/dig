@@ -6,6 +6,30 @@ var DIG = (function () {
     // current tile bursts
     bursts = [],
 
+    // bursts collection updater to be called in DIG.run's update method
+    burstsUpdater = function () {
+
+        var i = bursts.length;
+
+        if (i > 0) {
+
+            //console.log(bursts[0].sprites[0].alive);
+            while (i--) {
+
+                bursts[i].update();
+
+                if (!bursts[i].alive) {
+
+                    bursts.splice(i, 1);
+
+                }
+
+            }
+
+        }
+
+    },
+
     // the tile burst constructor
     Burst = function (map, stateResult) {
 
@@ -21,6 +45,7 @@ var DIG = (function () {
 
         this.sprites = [];
         this.birth = new Date();
+        this.alive = true;
 
         sprite = app.add.sprite(32, 32, 'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
 
@@ -38,13 +63,14 @@ var DIG = (function () {
         var age = new Date() - this.birth;
 
         // destroy old sprites
-        if (age > 500) {
+        if (age > 1500) {
 
             this.sprites.forEach(function (sprite) {
 
                 sprite.destroy();
 
             });
+            this.alive = false;
 
         }
 
@@ -359,13 +385,7 @@ var DIG = (function () {
 
                     return function () {
 
-                        if (bursts.length > 0) {
-
-                            //console.log(bursts[0].sprites[0].alive);
-
-                            bursts[0].update();
-
-                        }
+                        burstsUpdater();
 
                     };
 
