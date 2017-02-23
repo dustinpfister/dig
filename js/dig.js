@@ -103,6 +103,31 @@ var DIG = (function () {
             }
                 ()),
 
+            // update Display Info
+            updateInfo = function () {
+
+                // update display info
+                // what to display for each text
+                var what = [
+
+                    state.current.digs,
+                    (state.current.layer + 1) + '/' + land.d,
+                    state.current.pebble,
+                    state.current.landLevel
+
+                ];
+
+                // update text
+                textNames.forEach(function (textName, i) {
+
+                    text[textName].text = what[i];
+
+                });
+
+                text_totals.text = land.getInfo().tabString;
+
+            },
+
             userAction = function (sprite, pointer) {
 
                 var cellSize = Math.floor(sprite.width / land.w),
@@ -137,8 +162,6 @@ var DIG = (function () {
                     }
 
                 });
-
-                genLayer();
 
                 // out of digs?
                 if (state.current.digs <= 0) {
@@ -191,6 +214,10 @@ var DIG = (function () {
 
                 }
                     ());
+
+                // re gen the time map, and update info
+                genLayer();
+                updateInfo();
 
             };
 
@@ -260,34 +287,14 @@ var DIG = (function () {
                     sprite.width = iconSize;
                     sprite.height = iconSize;
 
+                    // call update info foe the first time
+                    updateInfo();
+
                 },
 
                 update : (function () {
 
-                    return function () {
-
-                        // update display info
-
-                        // what to display for each text
-                        var what = [
-
-                            state.current.digs,
-                            (state.current.layer + 1) + '/' + land.d,
-                            state.current.pebble,
-                            state.current.landLevel
-
-                        ];
-
-                        // update text
-                        textNames.forEach(function (textName, i) {
-
-                            text[textName].text = what[i];
-
-                        });
-
-                        text_totals.text = land.getInfo().tabString;
-
-                    };
+                    return function () {};
 
                 }
                     ())
