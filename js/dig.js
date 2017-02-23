@@ -307,35 +307,52 @@ var DIG = (function () {
                 create : function () {
 
                     var textSize = app.width * .1,
+                    sprite,
+                    buttonW = app.width * .6,
+                    buttonH = app.height * .2,
+                    buttonX = app.world.centerX - buttonW / 2,
+                    buttonStartY = app.height * .3,
+                    buttonStepY = app.height * .20,
 
                     text_label = app.add.bitmapText(0, 0, 'desyrel', 'Game Options:', textSize);
-
                     text_label.x = app.world.centerX - text_label.width / 2;
                     text_label.y = app.height * .05;
 
                     // resume button
-                    app.add.button(app.world.centerX - 80, app.world.centerY + 25, 'button', function () {
+                    sprite = app.add.button(0, 0, 'button', function () {
 
-                        app.state.start('dig_run');
+                            app.state.start('dig_run');
 
-                    }, this, 6, 6, 7);
-
-                    // new game button
-                    app.add.button(app.world.centerX - 80, app.world.centerY + 70, 'button', function () {
-
-                        state.reset();
-                        land.reset();
-
-                        app.state.start('dig_run');
-
-                    }, this, 0, 0, 1);
+                        }, this, 6, 6, 7);
+                    sprite.width = buttonW;
+                    sprite.height = buttonH;
+                    sprite.x = buttonX;
+                    sprite.y = buttonStartY;
 
                     // new game button
-                    app.add.button(app.world.centerX - 80, app.world.centerY + 115, 'button', function () {
+                    sprite = app.add.button(0, 0, 'button', function () {
 
-                        app.state.start('title');
+                            state.reset();
+                            land.reset();
 
-                    }, this, 4, 4, 5);
+                            app.state.start('dig_run');
+
+                        }, this, 0, 0, 1);
+                    sprite.width = buttonW;
+                    sprite.height = buttonH;
+                    sprite.x = buttonX;
+                    sprite.y = buttonStartY + buttonStepY;
+
+                    // new game button
+                    sprite = app.add.button(0, 0, 'button', function () {
+
+                            app.state.start('title');
+
+                        }, this, 4, 4, 5);
+                    sprite.width = buttonW;
+                    sprite.height = buttonH;
+                    sprite.x = buttonX;
+                    sprite.y = buttonStartY + buttonStepY * 2;
 
                 }
 
