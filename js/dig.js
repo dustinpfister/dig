@@ -29,6 +29,8 @@ var DIG = (function () {
             text_pebble,
             text_totals,
             text_landLevel,
+            textNames = ['digs', 'layer', 'pebble', 'landLevel'],
+            text = {},
             map,
             layer1,
 
@@ -204,6 +206,7 @@ var DIG = (function () {
 
                     // shovel, layers,coin,steps
                     iconIndexs = [0, 3, 2, 4],
+
                     sprite;
 
                     //  Creates a blank tilemap
@@ -221,13 +224,19 @@ var DIG = (function () {
                         sprite.width = iconSize;
                         sprite.height = iconSize;
 
+                        text[textNames[i]] = app.add.bitmapText(
+                                iconSX + iconSize,
+                                iconSY + iconStep * i, 'desyrel', '0', textSize);
+
                     });
 
                     // text
+                    /*
                     text_digs = app.add.bitmapText(iconSX + iconSize, iconSY, 'desyrel', '0', textSize);
                     text_layer = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep, 'desyrel', '0', textSize);
                     text_pebble = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 2, 'desyrel', '0', textSize);
                     text_landLevel = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 3, 'desyrel', '0', textSize);
+                     */
 
                     // pebble totals
                     text_totals = app.add.bitmapText(
@@ -264,11 +273,25 @@ var DIG = (function () {
                     return function () {
 
                         // update display info
-                        text_digs.text = state.current.digs;
-                        text_layer.text = (state.current.layer + 1) + '/' + land.d;
-                        text_pebble.text = state.current.pebble;
+
+                        // what to display for each text
+                        var what = [
+
+                            state.current.digs,
+                            (state.current.layer + 1) + '/' + land.d,
+                            state.current.pebble,
+                            state.current.landLevel
+
+                        ];
+
+                        // update text
+                        textNames.forEach(function (textName, i) {
+
+                            text[textName].text = what[i];
+
+                        });
+
                         text_totals.text = land.getInfo().tabString;
-                        text_landLevel.text = state.current.landLevel;
 
                     };
 
