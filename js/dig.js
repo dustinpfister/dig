@@ -198,7 +198,9 @@ var DIG = (function () {
 
                     var iconSX = app.width * .72,
                     iconSY = app.height * .20,
-                    iconStep = app.height * .15;
+                    iconStep = app.height * .15,
+                    iconSize = 32,
+                    textSize = 20;
 
                     //  Creates a blank tilemap
                     map = app.add.tilemap();
@@ -215,11 +217,11 @@ var DIG = (function () {
                     app.add.sprite(iconSX, iconSY + iconStep * 3, 'icons', 4); // coin
 
                     // text
-                    text_digs = app.add.bitmapText(450 + 32, 64, 'desyrel', '0', 30);
-                    text_layer = app.add.bitmapText(450 + 32, 96 + 10, 'desyrel', '0', 30);
-                    text_pebble = app.add.bitmapText(450 + 32, 128 + 20, 'desyrel', '0', 30);
-                    text_landLevel = app.add.bitmapText(450 + 32, 160 + 30, 'desyrel', '0', 30);
-                    text_totals = app.add.bitmapText(50, 435, 'desyrel', land.getInfo().tabString, 15);
+                    text_digs = app.add.bitmapText(iconSX + iconSize, iconSY, 'desyrel', '0', textSize);
+                    text_layer = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep, 'desyrel', '0', textSize);
+                    text_pebble = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 2, 'desyrel', '0', textSize);
+                    text_landLevel = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 3, 'desyrel', '0', textSize);
+                    text_totals = app.add.bitmapText(50, 435, 'desyrel', land.getInfo().tabString, textSize / 2);
 
                     // tile size is a little weird for now
                     layer1.fixedToCamera = false;
