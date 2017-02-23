@@ -375,20 +375,34 @@ var DIG = (function () {
                     landInfo = land.getInfo(),
                     pebbleWon = landInfo.tab.total - landInfo.tab.remaining,
 
+                    buttonW = app.width * .6,
+                    buttonH = app.height * .2,
+                    buttonX = app.world.centerX - buttonW / 2,
+                    buttonStartY = app.height * .3,
+                    buttonStepY = app.height * .20,
+					sprite,
+
                     text_label = app.add.bitmapText(0, 0, 'desyrel', 'Dig is Over!', textSize);
                     text_label.x = app.world.centerX - text_label.width / 2;
                     text_label.y = app.height * .05;
 
                     text_totalPebble = app.add.bitmapText(96, 128, 'desyrel',
-                            'Total Land Pebble : ' + landInfo.tab.total, 16);
+                            'Total Land Pebble : ' + landInfo.tab.total, textSize / 2);
+
+                    text_totalPebble.x = app.world.centerX - text_totalPebble.width * .5;
+                    text_totalPebble.y = app.height * .25;
+
                     text_pebbleWon = app.add.bitmapText(96, 128 + 32, 'desyrel',
-                            'Pebble Won : ' + pebbleWon, 24);
+                            'Pebble Won : ' + pebbleWon, textSize * .9);
+
+                    text_pebbleWon.x = app.world.centerX - text_pebbleWon.width / 2;
+                    text_pebbleWon.y = app.height * .3;
 
                     state.levelUp();
                     state.reset();
                     land.reset();
 
-                    app.add.button(640 - 64, 16, 'icons', function () {
+                    sprite = app.add.button(0, 0, 'icons', function () {
 
                         app.state.start('dig_options');
 
