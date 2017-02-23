@@ -196,53 +196,38 @@ var DIG = (function () {
 
                 create : function () {
 
+                    var iconSX = app.width * .72,
+                    iconSY = app.height * .20,
+                    iconStep = app.height * .15;
+
                     //  Creates a blank tilemap
                     map = app.add.tilemap();
-					//map.tileHeight = 32;
-					//map.tileWidth = 32;
 
                     //  Add a Tileset image to the map
                     map.addTilesetImage('tiles');
 
                     layer1 = map.create('activeLayer', 8, 8, 32, 32);
-					layer1.updateCrop();
-					layer1.update();
-					//layer1.fixedToCamera = false;
-					//layer1.deltaX = 10;
-					//layer1.angle = 45;
-					//layer1.anchor = {x:.5,y:.5};
 
                     // place the icons
-                    app.add.sprite(450, 64, 'icons', 0); // shovel
-                    app.add.sprite(450, 96 + 10, 'icons', 3); // layers
-                    app.add.sprite(450, 128 + 20, 'icons', 2); // coin
-                    app.add.sprite(450, 160 + 30, 'icons', 4); // coin
+                    app.add.sprite(iconSX, iconSY, 'icons', 0); // shovel
+                    app.add.sprite(iconSX, iconSY + iconStep, 'icons', 3); // layers
+                    app.add.sprite(iconSX, iconSY + iconStep * 2, 'icons', 2); // coin
+                    app.add.sprite(iconSX, iconSY + iconStep * 3, 'icons', 4); // coin
 
                     // text
                     text_digs = app.add.bitmapText(450 + 32, 64, 'desyrel', '0', 30);
                     text_layer = app.add.bitmapText(450 + 32, 96 + 10, 'desyrel', '0', 30);
                     text_pebble = app.add.bitmapText(450 + 32, 128 + 20, 'desyrel', '0', 30);
                     text_landLevel = app.add.bitmapText(450 + 32, 160 + 30, 'desyrel', '0', 30);
-
                     text_totals = app.add.bitmapText(50, 435, 'desyrel', land.getInfo().tabString, 15);
-                    //text_disp = app.add.bitmapText(5, 5, 'desyrel', '', 30);
 
                     // tile size is a little weird for now
-                    // 50 is (map size in state.js / land width in land.js) 400 / 8 = 50.
-                    //layer1.setScale(1.5, 1.5);
-
-                    //layer1.setScale(.8, .8);
-
                     layer1.fixedToCamera = false;
                     layer1.width = app.height * .8;
                     layer1.height = app.height * .8;
                     layer1.x = app.width * .05; //digmap.offset.x;
                     layer1.y = app.height * .05; //digmap.offset.x;
-                    //layer1.x = 0;
-                    //layer1.y = 0;
                     layer1.inputEnabled = true;
-
-                    console.log(layer1.events);
 
                     // touch mouse event handler on the tilemap
                     layer1.events.onInputDown.add(userAction);
@@ -251,43 +236,16 @@ var DIG = (function () {
 
                     app.add.button(640 - 64, 16, 'icons', function () {
 
-                        //app.state;
-                        //app.state.start('dig_options');
                         app.state.clearCurrentState();
                         app.state.start('dig_options');
 
                     }, this, 1, 1, 1);
 
-                    //app.input.addMoveCallback(move, this);
-
                 },
 
                 update : (function () {
 
-                    var delay = 300,
-                    last = new Date();
-
                     return function () {
-
-                        if (app.input.pointer1.active) {
-
-                            //userAction(app.input.pointer1);
-
-                        }
-
-                        if (app.input.mousePointer.leftButton.isDown) {
-
-                            if (new Date() - last >= delay) {
-
-                                last = new Date();
-
-                                //userAction(app.input.mousePointer);
-
-                            }
-
-                        }
-
-                        //text_disp.text = 'digs: ' + state.current.digs + '; layer: ' + state.current.layer;
 
                         // update display info
                         text_digs.text = state.current.digs;
@@ -295,8 +253,6 @@ var DIG = (function () {
                         text_pebble.text = state.current.pebble;
                         text_totals.text = land.getInfo().tabString;
                         text_landLevel.text = state.current.landLevel;
-                        //doOnceIf(app.input.mousePointer.active, function () {});
-
 
                     };
 
