@@ -45,8 +45,8 @@ var state = (function () {
 
         current.pebble = saveData.pebble;
         current.landLevel = saveData.landLevel;
-        current.maxDigs = 1;//saveData.maxDigs;
-        current.digs = 1;//current.maxDigs;
+        current.maxDigs = saveData.maxDigs;
+        current.digs = current.maxDigs;
 
         // reset with current values
         api.reset();

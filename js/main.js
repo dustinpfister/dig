@@ -6,7 +6,7 @@ var app = (function () {
     return new Phaser.Game(
 
         //1280, 960,
-       //640, 480,
+        //640, 480,
         320, 260,
         //320, 240, // weird problem with the tilemap
         Phaser.AUTO,
@@ -39,9 +39,9 @@ var app = (function () {
             app.state.add('dig_options', DIG.options);
 
             // start title
-            //app.state.start('title');
-            app.state.start('dig_run');
-			//app.state.start('dig_options');
+            app.state.start('title');
+            //app.state.start('dig_run');
+            //app.state.start('dig_options');
 
         },
 
