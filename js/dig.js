@@ -200,7 +200,10 @@ var DIG = (function () {
                     iconSY = app.height * .20,
                     iconStep = app.height * .15,
                     iconSize = app.width * .08,
-                    textSize = 20,
+                    textSize = app.width * .06,
+
+                    // shovel, layers,coin,steps
+                    iconIndexs = [0, 3, 2, 4],
                     sprite;
 
                     //  Creates a blank tilemap
@@ -212,10 +215,13 @@ var DIG = (function () {
                     layer1 = map.create('activeLayer', 8, 8, 32, 32);
 
                     // place the icons
-                    app.add.sprite(iconSX, iconSY, 'icons', 0); // shovel
-                    app.add.sprite(iconSX, iconSY + iconStep, 'icons', 3); // layers
-                    app.add.sprite(iconSX, iconSY + iconStep * 2, 'icons', 2); // coin
-                    app.add.sprite(iconSX, iconSY + iconStep * 3, 'icons', 4); // coin
+                    iconIndexs.forEach(function (iconIndex, i) {
+
+                        sprite = app.add.sprite(iconSX, iconSY + iconStep * i, 'icons', iconIndex);
+                        sprite.width = iconSize;
+                        sprite.height = iconSize;
+
+                    });
 
                     // text
                     text_digs = app.add.bitmapText(iconSX + iconSize, iconSY, 'desyrel', '0', textSize);
