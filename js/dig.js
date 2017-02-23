@@ -1,7 +1,34 @@
 
 var DIG = (function () {
 
-    var showPebble = false;
+    var showPebble = false,
+
+    // current tile bursts
+    bursts = [],
+
+    // the tile burst constructor
+    Burst = function (map, stateResult) {
+
+        var sprite,
+        tileIndex = 1, // the 32 x 32 relative sprite index
+
+        bottom = 1, // bottom part of the tile if 0 (0 or 1)
+        right = 0; // right part of the tile if 0 (0 or 1)
+        // this.sprites = [];
+        // this.sprites.push(
+        // app.add.sprite(0, 0));
+
+        console.log('BURST CONSTRUCTOR');
+        console.log(map);
+        console.log(map.layers);
+
+        this.sprites = [];
+
+        sprite = app.add.sprite(32, 32, 'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
+
+        this.sprites.push();
+
+    };
 
     return {
 
@@ -128,6 +155,7 @@ var DIG = (function () {
 
             },
 
+            // DIG.run userAction helper
             userAction = function (sprite, pointer) {
 
                 var cellSize = Math.floor(sprite.width / land.w),
@@ -148,14 +176,21 @@ var DIG = (function () {
                     if (result.active) {
 
                         if (result.burst) {
+
                             // update the tile map
                             map.putTile(0, result.tileX, result.tileY, 'activeLayer');
+
+                            // start the new burst animation
+                            bursts.push(new Burst(map, result));
+
+                            log('bursts:');
+                            log(bursts);
 
                         }
 
                         if (result.dropEvent) {
 
-                            //genLayer();
+                            // do we use or delete this?
 
                         }
 
@@ -221,8 +256,10 @@ var DIG = (function () {
 
             };
 
+            // what will get returned to DIG.run
             return {
 
+                // DIG.run's create method
                 create : function () {
 
                     var iconSX = app.width * .72,
@@ -292,6 +329,7 @@ var DIG = (function () {
 
                 },
 
+                // DIG.run's update method
                 update : (function () {
 
                     return function () {};

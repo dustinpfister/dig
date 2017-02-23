@@ -20,6 +20,7 @@ var app = (function () {
             app.load.spritesheet('button', 'img/button.png', 160, 45);
             app.load.spritesheet('icons', 'img/icons.png', 32, 32);
             app.load.image('tiles', 'img/tiles2.png');
+            app.load.spritesheet('tiles_split', 'img/tiles2.png', 16, 16);
 
             //app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
 
@@ -39,8 +40,8 @@ var app = (function () {
             app.state.add('dig_options', DIG.options);
 
             // start title
-            app.state.start('title');
-            //app.state.start('dig_run');
+            //app.state.start('title');
+            app.state.start('dig_run');
             //app.state.start('dig_options');
 
         },
