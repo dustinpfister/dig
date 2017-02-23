@@ -14,19 +14,39 @@ var DIG = (function () {
 
         bottom = 1, // bottom part of the tile if 0 (0 or 1)
         right = 0; // right part of the tile if 0 (0 or 1)
+
         // this.sprites = [];
         // this.sprites.push(
         // app.add.sprite(0, 0));
 
-        console.log('BURST CONSTRUCTOR');
-        console.log(map);
-        console.log(map.layers);
-
         this.sprites = [];
+        this.birth = new Date();
 
         sprite = app.add.sprite(32, 32, 'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
 
-        this.sprites.push();
+        app.physics.enable([sprite], Phaser.Physics.ARCADE);
+
+        sprite.body.bounce.y = 0.8;
+        sprite.lifeSpan = 100;
+
+        this.sprites.push(sprite);
+
+    };
+
+    Burst.prototype.update = function () {
+
+        var age = new Date() - this.birth;
+
+        // destroy old sprites
+        if (age > 500) {
+
+            this.sprites.forEach(function (sprite) {
+
+                sprite.destroy();
+
+            });
+
+        }
 
     };
 
@@ -327,12 +347,27 @@ var DIG = (function () {
                     // call update info foe the first time
                     updateInfo();
 
+                    // start ARCADE Physics
+                    app.physics.startSystem(Phaser.Physics.ARCADE);
+                    //  Set the world (global) gravity
+                    app.physics.arcade.gravity.y = 100;
+
                 },
 
                 // DIG.run's update method
                 update : (function () {
 
-                    return function () {};
+                    return function () {
+
+                        if (bursts.length > 0) {
+
+                            //console.log(bursts[0].sprites[0].alive);
+
+                            bursts[0].update();
+
+                        }
+
+                    };
 
                 }
                     ())

@@ -38,6 +38,8 @@ var app = (function () {
             app.state.add('dig_run', DIG.run);
             app.state.add('dig_over', DIG.over);
             app.state.add('dig_options', DIG.options);
+			
+
 
             // start title
             //app.state.start('title');
