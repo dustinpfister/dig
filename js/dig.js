@@ -221,7 +221,11 @@ var DIG = (function () {
                     text_layer = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep, 'desyrel', '0', textSize);
                     text_pebble = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 2, 'desyrel', '0', textSize);
                     text_landLevel = app.add.bitmapText(iconSX + iconSize, iconSY + iconStep * 3, 'desyrel', '0', textSize);
-                    text_totals = app.add.bitmapText(50, 435, 'desyrel', land.getInfo().tabString, textSize / 2);
+
+                    // pebble totals
+                    text_totals = app.add.bitmapText(
+                            app.width * 0.05,
+                            app.height * .86, 'desyrel', land.getInfo().tabString, textSize);
 
                     // tile size is a little weird for now
                     layer1.fixedToCamera = false;
