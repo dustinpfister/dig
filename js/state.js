@@ -45,8 +45,8 @@ var state = (function () {
 
         current.pebble = saveData.pebble;
         current.landLevel = saveData.landLevel;
-        current.maxDigs = saveData.maxDigs;
-        current.digs = current.maxDigs;
+        current.maxDigs = 1;//saveData.maxDigs;
+        current.digs = 1;//current.maxDigs;
 
         // reset with current values
         api.reset();
@@ -119,7 +119,7 @@ var state = (function () {
 
         // the user has preformed an action
         //userAction : function (x, y, done) {
-		userAction : function (cellX, cellY, done) {
+        userAction : function (cellX, cellY, done) {
 
             var cellX,
             cellY,
@@ -133,58 +133,58 @@ var state = (function () {
                 // player clicked on land
                 //if (x >= 0 && x <= 384 && y >= 0 && y <= 384) {
 
-                    //cellX = Math.floor((x - 0) / (384 / land.w));
-                    //cellY = Math.floor((y - 0) / (384 / land.h));
+                //cellX = Math.floor((x - 0) / (384 / land.w));
+                //cellY = Math.floor((y - 0) / (384 / land.h));
 
-                    // dig at the land
-                    land.digAt(cellX, cellY, current.layer, function (tileStatus) {
+                // dig at the land
+                land.digAt(cellX, cellY, current.layer, function (tileStatus) {
 
-                        var dropEvent = false,
-                        burst = false;
-                        if (tileStatus.dropDown) {
+                    var dropEvent = false,
+                    burst = false;
+                    if (tileStatus.dropDown) {
 
-                            if (current.layer < land.d - 1) {
+                        if (current.layer < land.d - 1) {
 
-                                dropEvent = true;
-                                current.layer += 1;
-
-                            }
-
-                        } else {
-
-                            if (tileStatus.hp === 0) {
-
-                                burst = true;
-
-                                current.pebble += tileStatus.amount;
-
-                            }
-                            current.digs -= 1;
+                            dropEvent = true;
+                            current.layer += 1;
 
                         }
 
-                        //done(cellX, cellY);
-                        done({
+                    } else {
 
-                            active : true,
-                            tileX : cellX,
-                            tileY : cellY,
-                            dropEvent : dropEvent,
-                            burst : burst,
-                            tileStatus : tileStatus
+                        if (tileStatus.hp === 0) {
 
-                        });
+                            burst = true;
+
+                            current.pebble += tileStatus.amount;
+
+                        }
+                        current.digs -= 1;
+
+                    }
+
+                    //done(cellX, cellY);
+                    done({
+
+                        active : true,
+                        tileX : cellX,
+                        tileY : cellY,
+                        dropEvent : dropEvent,
+                        burst : burst,
+                        tileStatus : tileStatus
 
                     });
 
+                });
+
                 //} else {
 
-                    // player clicked elsewhere.
+                // player clicked elsewhere.
 
                 ////    log('land not clicked');
                 //    done({});
 
-               // }
+                // }
 
             } else {
 

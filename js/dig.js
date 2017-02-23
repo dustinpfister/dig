@@ -371,10 +371,13 @@ var DIG = (function () {
 
                 create : function () {
 
-                    var landInfo = land.getInfo(),
-                    pebbleWon = landInfo.tab.total - landInfo.tab.remaining;
+                    var textSize = app.width * .1,
+                    landInfo = land.getInfo(),
+                    pebbleWon = landInfo.tab.total - landInfo.tab.remaining,
 
-                    text_label = app.add.bitmapText(8 + 32, 8, 'desyrel', 'Dig is Over!', 30);
+                    text_label = app.add.bitmapText(0, 0, 'desyrel', 'Dig is Over!', textSize);
+                    text_label.x = app.world.centerX - text_label.width / 2;
+                    text_label.y = app.height * .05;
 
                     text_totalPebble = app.add.bitmapText(96, 128, 'desyrel',
                             'Total Land Pebble : ' + landInfo.tab.total, 16);

@@ -40,8 +40,8 @@ var app = (function () {
 
             // start title
             //app.state.start('title');
-            //app.state.start('dig_run');
-			app.state.start('dig_options');
+            app.state.start('dig_run');
+			//app.state.start('dig_options');
 
         },
 
