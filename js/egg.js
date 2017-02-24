@@ -1,7 +1,20 @@
 
 var egg = (function () {
 
-    var api = {};
+    var api = function (command) {
+
+        switch (command) {
+
+        default:
+
+            console.log('Take a look at egg.js at the repo, here:');
+            console.log('https://raw.githubusercontent.com/dustinpfister/dig/master/js/egg.js');
+
+            break
+
+        }
+
+    };
 
     // If an error happens, This should be at least attached to window
     // for whatever the reason this does not always seem to fire, but it is here for what its worth
