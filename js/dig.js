@@ -14,8 +14,6 @@ var DIG = (function () {
         var i = bursts.length;
 
         if (i > 0) {
-
-            //console.log(bursts[0].sprites[0].alive);
             while (i--) {
 
                 bursts[i].update();
@@ -48,8 +46,6 @@ var DIG = (function () {
         y = h * stateResult.tileY + layer1.top,
         tile = layer1.getTiles(x, y, 1, 1)[0],
         tileIndex = tile.index; // the 32 x 32 relative sprite index
-
-        console.log(tile.index);
 
         this.sprites = [];
         this.birth = new Date();
@@ -101,6 +97,12 @@ var DIG = (function () {
             this.alive = false;
 
         }
+
+        this.sprites.forEach(function (sprite) {
+
+            sprite.alpha = 1 - age / 1500;
+
+        });
 
     };
 
@@ -237,9 +239,6 @@ var DIG = (function () {
                 cellX = Math.floor(x / cellSize),
                 cellY = Math.floor(y / cellSize);
 
-                log('cellSize: ' + cellSize);
-                log('cellPos: (' + cellX + ',' + cellY + ')');
-
                 // dig at state.js
                 state.userAction(
                     cellX,
@@ -255,9 +254,6 @@ var DIG = (function () {
 
                             // update the tile map
                             map.putTile(0, result.tileX, result.tileY, 'activeLayer');
-
-                            log('bursts:');
-                            log(bursts);
 
                         }
 
@@ -280,8 +276,6 @@ var DIG = (function () {
 
                 // out of tiles on the bottom layer?
                 if (state.current.layer === land.d - 1) {
-
-                    //console.log(land.getCell(0,0,land.d-1).done);
 
                     (function () {
 
