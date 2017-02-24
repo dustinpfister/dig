@@ -38,7 +38,7 @@ var DIG = (function () {
         var sprite,
         tileIndex = 1, // the 32 x 32 relative sprite index
 
-        bottom = 1, // bottom part of the tile if 0 (0 or 1)
+        bottom = 0, // bottom part of the tile if 0 (0 or 1)
         right = 0, // right part of the tile if 0 (0 or 1)
         w = layer1.width / map.width,
         h = layer1.height / map.height,
@@ -53,18 +53,33 @@ var DIG = (function () {
         this.birth = new Date();
         this.alive = true;
 
-        sprite = app.add.sprite(
-                x,
-                y,
-                'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
+        var si = 0;
+        while (si < 4) {
 
-        sprite.width = w / 2;
-        sprite.height = h / 2;
+            sprite = app.add.sprite(
+                    x + w / 2 * right,
+                    y + h / 2 * bottom,
+                    'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
+            sprite.width = w / 2;
+            sprite.height = h / 2;
+            app.physics.enable([sprite], Phaser.Physics.ARCADE);
 
-        app.physics.enable([sprite], Phaser.Physics.ARCADE);
+            //sprite.body.bounce.y = -0.8;
+            sprite.body.velocity.x = -32 - 64 * Math.random();
+            sprite.body.velocity.y = -32;
+            sprite.lifeSpan = 100;
 
-        sprite.body.bounce.y = 0.8;
-        sprite.lifeSpan = 100;
+            right += 1;
+            if (right === 2) {
+
+                right = 0;
+                bottom += 1;
+
+            }
+
+            si += 1;
+
+        }
 
         this.sprites.push(sprite);
 
