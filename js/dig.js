@@ -58,6 +58,9 @@ var DIG = (function () {
                 y,
                 'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
 
+        sprite.width = w / 2;
+        sprite.height = h / 2;
+
         app.physics.enable([sprite], Phaser.Physics.ARCADE);
 
         sprite.body.bounce.y = 0.8;
