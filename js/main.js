@@ -6,8 +6,8 @@ var app = (function () {
     return new Phaser.Game(
 
         //1280, 960,
-        //640, 480,
-        320, 260,
+        640, 480,
+        //320, 260,
         //320, 240, // weird problem with the tilemap
         Phaser.AUTO,
         'gamearea', {

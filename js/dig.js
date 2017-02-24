@@ -65,8 +65,8 @@ var DIG = (function () {
             app.physics.enable([sprite], Phaser.Physics.ARCADE);
 
             //sprite.body.bounce.y = -0.8;
-            sprite.body.velocity.x = -32 - 64 * Math.random();
-            sprite.body.velocity.y = -32;
+            sprite.body.velocity.x = (-32 - 64 * Math.random()) * (1 - 2 * right);
+            sprite.body.velocity.y = -32* (1 - 2 * bottom);
             sprite.lifeSpan = 100;
 
             right += 1;
