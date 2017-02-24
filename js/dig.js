@@ -50,7 +50,7 @@ var DIG = (function () {
         this.sprites = [];
         this.birth = new Date();
         this.alive = true;
-
+		
         si = 0;
         while (si < 4) {
 
@@ -81,6 +81,7 @@ var DIG = (function () {
         }
 
     };
+
 
     Burst.prototype.update = function () {
 
@@ -176,7 +177,6 @@ var DIG = (function () {
                     map.putTile(
 
                         showPebble ? tile.amount > 0 ? 2 : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
-                        //tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
                         x,
                         y,
                         'activeLayer');
@@ -398,6 +398,7 @@ var DIG = (function () {
                     app.physics.startSystem(Phaser.Physics.ARCADE);
                     //  Set the world (global) gravity
                     app.physics.arcade.gravity.y = 100;
+
 
                 },
 

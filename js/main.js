@@ -1,7 +1,25 @@
+
+
+// the main Phaser game instance
 var app = (function () {
 
     var background,
-    logo;
+    logo,
+
+    // If an error happens, This should be at least attached to window
+    // for whatever the reason this does not always seem to fire, but it is here for what its worth
+    // to help debug problems.
+    myErrorMethod = function (e) {
+
+        var errorDisp = document.getElementById('errorlog');
+        errorDisp.style.display = 'block';
+
+        errorDisp.innerHTML += 'error message: ' + e.message + ' ; stack : ' + e.error.stack;
+
+    };
+
+    // attach it to window
+    window.addEventListener('error', myErrorMethod);
 
     return new Phaser.Game(
 
@@ -22,10 +40,6 @@ var app = (function () {
             app.load.image('tiles', 'img/tiles2.png');
             app.load.spritesheet('tiles_split', 'img/tiles2.png', 16, 16);
 
-            //app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/desyrel.xml');
-
-            //app.input.addPointer();
-
             app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
 
         },
@@ -38,13 +52,12 @@ var app = (function () {
             app.state.add('dig_run', DIG.run);
             app.state.add('dig_over', DIG.over);
             app.state.add('dig_options', DIG.options);
-			
-
 
             // start title
             app.state.start('title');
             //app.state.start('dig_run');
             //app.state.start('dig_options');
+
 
         },
 
@@ -59,3 +72,7 @@ var app = (function () {
 
 }
     ());
+
+//app.canvas.addEventListener('error', myErrorMethod);
+
+//console.log(app);
