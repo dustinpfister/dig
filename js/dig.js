@@ -239,8 +239,6 @@ var DIG = (function () {
                 cellX = Math.floor(x / cellSize),
                 cellY = Math.floor(y / cellSize);
 
-				throw new Error('test error');
-				
                 // dig at state.js
                 state.userAction(
                     cellX,
