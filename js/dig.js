@@ -36,14 +36,20 @@ var DIG = (function () {
     Burst = function (map, stateResult) {
 
         var sprite,
-        tileIndex = 1, // the 32 x 32 relative sprite index
+
         si,
         bottom = 0, // bottom part of the tile if 0 (0 or 1)
         right = 0, // right part of the tile if 0 (0 or 1)
+
+
         w = layer1.width / map.width,
         h = layer1.height / map.height,
         x = w * stateResult.tileX + layer1.left,
-        y = h * stateResult.tileY + layer1.top;
+        y = h * stateResult.tileY + layer1.top,
+        tile = layer1.getTiles(x, y, 1, 1)[0],
+        tileIndex = tile.index; // the 32 x 32 relative sprite index
+
+        console.log(tile.index);
 
         this.sprites = [];
         this.birth = new Date();
@@ -55,7 +61,7 @@ var DIG = (function () {
             sprite = app.add.sprite(
                     x + w / 2 * right,
                     y + h / 2 * bottom,
-                    'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
+                    'tiles_split', tileIndex * 2 + 20 * bottom + right + 20 * Math.floor(tileIndex / 10));
             sprite.width = w / 2;
             sprite.height = h / 2;
             app.physics.enable([sprite], Phaser.Physics.ARCADE);
@@ -244,11 +250,11 @@ var DIG = (function () {
 
                         if (result.burst) {
 
-                            // update the tile map
-                            map.putTile(0, result.tileX, result.tileY, 'activeLayer');
-
                             // start the new burst animation
                             bursts.push(new Burst(map, result));
+
+                            // update the tile map
+                            map.putTile(0, result.tileX, result.tileY, 'activeLayer');
 
                             log('bursts:');
                             log(bursts);
