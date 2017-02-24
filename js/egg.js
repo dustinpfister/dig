@@ -3,6 +3,8 @@ var egg = (function () {
 
     var api = function (command) {
 
+        console.log('********** egg.js for DIG **********');
+
         switch (command) {
 
         default:
@@ -13,6 +15,8 @@ var egg = (function () {
             break
 
         }
+
+        return '********************';
 
     };
 
