@@ -43,10 +43,7 @@ var state = (function () {
 
         try {
 
-            //saveData = JSON.parse(localStorage.getItem('dig_gamesave'));
-
-            //saveData = JSON.parse("{");
-
+            saveData = JSON.parse(localStorage.getItem('dig_gamesave'));
 
             current.pebble = saveData.pebble;
             current.landLevel = saveData.landLevel;

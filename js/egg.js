@@ -7,6 +7,15 @@ var egg = (function () {
 
         switch (command) {
 
+        case 'show':
+
+            console.log('Show pebble toggled');
+
+            DIG.showPebble();
+            DIG.reGen();
+
+            break;
+
         default:
 
             console.log('Take a look at egg.js at the repo, here:');

@@ -4,6 +4,43 @@ var DIG = (function () {
     var showPebble = false,
 
     layer1,
+    map,
+
+    genLayer = function () {
+
+        var width = 8,
+        height = 8,
+        i = 0,
+        x,
+        tile,
+        y,
+        len,
+        data = [],
+        len = width * height,
+        tileSet = state.current.layer === 0 ? 3 : 1,
+        zeroTile = state.current.layer === land.d - 1 ? 1 : 0, // the tile sheet index for a tile with 0 hp
+        landData;
+
+        // use map.put to populate the layer
+        while (i < len) {
+
+            x = i % width;
+            y = Math.floor(i / width);
+
+            tile = land.getCell(x, y, state.current.layer);
+
+            map.putTile(
+
+                showPebble ? tile.amount > 0 ? 2 : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
+                x,
+                y,
+                'activeLayer');
+
+            i += 1;
+
+        }
+
+    },
 
     // current tile bursts
     bursts = [],
@@ -50,7 +87,7 @@ var DIG = (function () {
         this.sprites = [];
         this.birth = new Date();
         this.alive = true;
-		
+
         si = 0;
         while (si < 4) {
 
@@ -82,7 +119,6 @@ var DIG = (function () {
 
     };
 
-
     Burst.prototype.update = function () {
 
         var age = new Date() - this.birth;
@@ -109,9 +145,15 @@ var DIG = (function () {
 
     return {
 
-        cheat : function () {
+        showPebble : function () {
 
             showPebble = !showPebble;
+
+        },
+
+        reGen : function () {
+
+            genLayer();
 
         },
 
@@ -135,7 +177,7 @@ var DIG = (function () {
             text_landLevel,
             textNames = ['digs', 'layer', 'pebble', 'landLevel'],
             text = {},
-            map,
+            //map,
 
             log = function (mess) {
 
@@ -146,42 +188,6 @@ var DIG = (function () {
                 } else {
 
                     console.log(mess);
-
-                }
-
-            },
-
-            genLayer = function () {
-
-                var width = 8,
-                height = 8,
-                i = 0,
-                x,
-                tile,
-                y,
-                len,
-                data = [],
-                len = width * height,
-                tileSet = state.current.layer === 0 ? 3 : 1,
-                zeroTile = state.current.layer === land.d - 1 ? 1 : 0, // the tile sheet index for a tile with 0 hp
-                landData;
-
-                // use map.put to populate the layer
-                while (i < len) {
-
-                    x = i % width;
-                    y = Math.floor(i / width);
-
-                    tile = land.getCell(x, y, state.current.layer);
-
-                    map.putTile(
-
-                        showPebble ? tile.amount > 0 ? 2 : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
-                        x,
-                        y,
-                        'activeLayer');
-
-                    i += 1;
 
                 }
 
@@ -398,7 +404,6 @@ var DIG = (function () {
                     app.physics.startSystem(Phaser.Physics.ARCADE);
                     //  Set the world (global) gravity
                     app.physics.arcade.gravity.y = 100;
-
 
                 },
 
