@@ -3,6 +3,8 @@ var DIG = (function () {
 
     var showPebble = false,
 
+    layer1,
+
     // current tile bursts
     bursts = [],
 
@@ -37,7 +39,11 @@ var DIG = (function () {
         tileIndex = 1, // the 32 x 32 relative sprite index
 
         bottom = 1, // bottom part of the tile if 0 (0 or 1)
-        right = 0; // right part of the tile if 0 (0 or 1)
+        right = 0, // right part of the tile if 0 (0 or 1)
+        w = layer1.width / map.width,
+        h = layer1.height / map.height,
+        x = w * stateResult.tileX + layer1.left,
+        y = h * stateResult.tileY + layer1.top;
 
         // this.sprites = [];
         // this.sprites.push(
@@ -47,7 +53,10 @@ var DIG = (function () {
         this.birth = new Date();
         this.alive = true;
 
-        sprite = app.add.sprite(32, 32, 'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
+        sprite = app.add.sprite(
+                x,
+                y,
+                'tiles_split', (tileIndex * 2) + (20 * bottom) + right);
 
         app.physics.enable([sprite], Phaser.Physics.ARCADE);
 
@@ -105,7 +114,6 @@ var DIG = (function () {
             textNames = ['digs', 'layer', 'pebble', 'landLevel'],
             text = {},
             map,
-            layer1,
 
             log = function (mess) {
 
