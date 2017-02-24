@@ -1,30 +1,12 @@
 
-
 // the main Phaser game instance
 var app = (function () {
 
     var background,
-    logo,
-
-    // If an error happens, This should be at least attached to window
-    // for whatever the reason this does not always seem to fire, but it is here for what its worth
-    // to help debug problems.
-    myErrorMethod = function (e) {
-
-        var errorDisp = document.getElementById('errorlog');
-        errorDisp.style.display = 'block';
-
-        errorDisp.innerHTML += 'error message: ' + e.message + ' ; stack : ' + e.error.stack;
-
-    };
-
-    // attach it to window
-    window.addEventListener('error', myErrorMethod);
+    logo;
 
     return new Phaser.Game(
 
-        //1280, 960,
-        //640, 480,
         320, 260,
         //320, 240, // weird problem with the tilemap
         Phaser.AUTO,
@@ -66,13 +48,5 @@ var app = (function () {
 
     });
 
-    /*
-    var pointer = new Phaser.Pointer(app, 0, 'TOUCH')
-     */
-
 }
     ());
-
-//app.canvas.addEventListener('error', myErrorMethod);
-
-//console.log(app);

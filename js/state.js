@@ -41,12 +41,23 @@ var state = (function () {
 
         }
 
-        saveData = JSON.parse(localStorage.getItem('dig_gamesave'));
+        try {
 
-        current.pebble = saveData.pebble;
-        current.landLevel = saveData.landLevel;
-        current.maxDigs = saveData.maxDigs;
-        current.digs = current.maxDigs;
+            //saveData = JSON.parse(localStorage.getItem('dig_gamesave'));
+
+            //saveData = JSON.parse("{");
+
+
+            current.pebble = saveData.pebble;
+            current.landLevel = saveData.landLevel;
+            current.maxDigs = saveData.maxDigs;
+            current.digs = current.maxDigs;
+
+        } catch (e) {
+
+            egg.myErrorMethod(new Error('error loading JSON data'));
+
+        }
 
         // reset with current values
         api.reset();
