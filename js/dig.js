@@ -37,7 +37,7 @@ var DIG = (function () {
 
         var sprite,
         tileIndex = 1, // the 32 x 32 relative sprite index
-
+        si,
         bottom = 0, // bottom part of the tile if 0 (0 or 1)
         right = 0, // right part of the tile if 0 (0 or 1)
         w = layer1.width / map.width,
@@ -45,15 +45,11 @@ var DIG = (function () {
         x = w * stateResult.tileX + layer1.left,
         y = h * stateResult.tileY + layer1.top;
 
-        // this.sprites = [];
-        // this.sprites.push(
-        // app.add.sprite(0, 0));
-
         this.sprites = [];
         this.birth = new Date();
         this.alive = true;
 
-        var si = 0;
+        si = 0;
         while (si < 4) {
 
             sprite = app.add.sprite(
@@ -64,9 +60,8 @@ var DIG = (function () {
             sprite.height = h / 2;
             app.physics.enable([sprite], Phaser.Physics.ARCADE);
 
-            //sprite.body.bounce.y = -0.8;
-            sprite.body.velocity.x = (-32 - 64 * Math.random()) * (1 - 2 * right);
-            sprite.body.velocity.y = -32* (1 - 2 * bottom);
+            sprite.body.velocity.x = -32 * (1 - 2 * right);
+            sprite.body.velocity.y = -32 * (1 - 2 * bottom);
             sprite.lifeSpan = 100;
 
             right += 1;
@@ -79,9 +74,9 @@ var DIG = (function () {
 
             si += 1;
 
-        }
+            this.sprites.push(sprite);
 
-        this.sprites.push(sprite);
+        }
 
     };
 
