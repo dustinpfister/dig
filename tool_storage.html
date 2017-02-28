@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>pebble_dig local storage tool</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=320, initial-scale=1">
+
+</head>
+
+<body>
+
+
+
+<div id="desc"></div>
+<input id="button_load" type="button" value="load">
+<input id="button_delete" type="button" value="delete">
+
+<script>
+
+var save = {},
+mess = [];
+
+var load = function () {
+	
+	save = {};
+	mess = [];
+	
+    if (localStorage) {
+
+        save = localStorage;
+
+        mess.push('localStorage supported');
+
+    } else {
+
+        mess.push('no localStorage object found!');
+
+    }
+
+},
+
+get = function(id){
+	
+	return document.getElementById(id);
+	
+},
+
+draw = function () {
+
+    get('desc').innerHTML = 'save state : ' + JSON.stringify(save) + '<br>' + mess;
+
+};
+
+get('button_load').addEventListener('click', function(e){
+	
+	load();
+	draw();
+	
+});
+
+get('button_delete').addEventListener('click', function(e){
+	localStorage.clear();
+	load();
+	
+});
+
+
+</script>
+
+
+
+
+</body>
+
+</html>
