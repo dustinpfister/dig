@@ -1,16 +1,12 @@
-2.11.x - loading state
+2.12.x -
 
-* setting resolution based on window.innerWidth
-* added a load.js file that contains a loading state
-* added a progress bar image, that for now is just a blank while image.
-* new logo, and tile sheet.
+
 
 
 IDEAS:
 
     MISC:
 
-        * add a animated logo state
         * add a logo state that displays my animated logo.
         * DIG.over state triggered if you collect all pebble in the bottom layer.
         * DIG.over state displays the reason why the game ended. 
@@ -18,6 +14,8 @@ IDEAS:
 
     ANIMATIONS: 
 
+        * add a animated logo state
+        * have an animated title screen.
         * Drop down transition animation
         * state change animations
 

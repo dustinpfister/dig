@@ -1,5 +1,7 @@
-
-
+/*
+ *    main.js
+ *    contains the main 'boot' phaser state
+ */
 
 // the main Phaser game instance
 var app = (function () {
@@ -37,24 +39,7 @@ var app = (function () {
             app.state.add('load', Load);
             app.state.start('load');
 
-            //app.load.start();
-
-            // add states
-            //app.state.add('title', Title);
-            //app.state.add('dig_run', DIG.run);
-            //app.state.add('dig_over', DIG.over);
-            //app.state.add('dig_options', DIG.options);
-
-            // start title
-            //app.state.start('title');
-            //app.state.start('dig_run');
-            //app.state.start('dig_options');
-
-
-        },
-
-        // update (ticks)
-        update : function () {}
+        }
 
     });
 

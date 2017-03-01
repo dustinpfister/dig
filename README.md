@@ -1,3 +1,9 @@
 # dig
 
-dig is a game about digging in a lot of land for pebbles. As of this writing dig may just be yet another unpersued prototype, or it may lead to a fork of my platform "pebble".
+dig is a game about digging in a lot of land for pebbles. It started out as a simple vanilla js game prototype (1.x), and is now my first game that makes use of the [phaser](https://phaser.io/) game framework (2.x) .
+
+## dig 2.x
+
+<div align="center">
+<img src="./screenshots/title_2_11_7.png">
+</div>
