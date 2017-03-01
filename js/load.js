@@ -6,6 +6,7 @@ var Load = (function () {
         preload : function () {
 
             var loadSprite = app.add.sprite(0, 0, 'loadingbar');
+            loadSprite.width = 0;
             loadSprite.x = app.world.centerX - loadSprite.width / 2;
             loadSprite.y = app.world.centerY - 16;
 
@@ -13,7 +14,6 @@ var Load = (function () {
                 console.log('start')
             }, this);
             app.load.onFileComplete.add(function (progress) {
-                console.log('file');
 
                 loadSprite.width = app.width * (progress / 100);
                 loadSprite.x = app.world.centerX - loadSprite.width / 2;
