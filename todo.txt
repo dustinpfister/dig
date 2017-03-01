@@ -1,0 +1,84 @@
+2.11.x - 
+
+
+
+
+
+
+
+
+
+IDEAS:
+
+    MISC:
+
+        * add a animated logo state
+        * add a loading state
+        * A added a logo state that displays my animated logo.
+        * New player values added relevant to game advancement.
+        * pebble   - the amount of game money the player has
+        * digLevel - The current level of the dig site.
+        * exp      - exp points for advancement of digLevel
+        * go to new "digdone" state when the player runs out of digs
+        * from dig done state the player can dig again, or go to the title state.
+        * fixed an isshue with states where the create method is being called each time a state is changed.
+        * get touch events working.
+        * DIG.over state triggered if you collect all pebble in the bottom layer.
+        * DIG.over state displays the reason why the game ended. 
+
+
+    ANIMATIONS: 
+
+        * Drop down transition animation
+        * state change animations
+
+    Upgrades Menu:
+
+        * Increase max digs
+        * Increase damage per dig
+
+    Land Menu:
+
+        * Added a land Menu that can be used to choose where to dig, as well as buy new places to dig.
+        * Unlocks higher level dig sites which have:
+        * More Pebble (money)
+        * More layers (You Can go deeper)
+        * Harder rocks to break thew to go deeper
+
+    Push.js
+
+    * it would be nice to have a "push.js" tool
+
+node push.js -s
+
+// push.js will just do a
+
+git status
+
+node push.js -p "new commit"
+
+// push.js push changes:
+
+read file : push.json
+bump push.appVersion
+bump push.commitCount
+write file > push.json
+git add *
+git commit -m "new commit"
+git push
+
+
+    JSON LEVEL DESIGN?
+{
+
+   layers : 1,
+   totalPebble:1000,
+   lootTiles : [
+   
+       {z:0,x:0,y:0,points : 5},
+       {z:0,x:6,y:8,points : 10}
+   
+   ]
+
+
+}

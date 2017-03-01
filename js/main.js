@@ -3,11 +3,15 @@
 var app = (function () {
 
     var background,
-    logo;
+    logo,
+
+    // set res
+    w = window.innerWidth < 640 ? window.innerWidth : 640,
+    h = w < 640 ? 260 : 480;
 
     return new Phaser.Game(
 
-        320, 260,
+        w, h,
         //320, 240, // weird problem with the tilemap
         Phaser.AUTO,
         'gamearea', {
