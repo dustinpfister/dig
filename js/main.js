@@ -1,56 +1,61 @@
 
+var Load = (function () {
+
+    return {
+
+        preload : function () {
+
+            var loadSprite = app.add.sprite(0, 0, 'background');
+
+            app.load.onLoadStart.add(function () {
+                console.log('start')
+            }, this);
+            app.load.onFileComplete.add(function (progress) {
+                console.log('file');
+
+                loadSprite.width = app.width * (progress / 100);
+
+            }, this);
+            app.load.onLoadComplete.add(function () {
+                console.log('done')
+            }, this);
+
+            app.load.spritesheet('button', 'img/button.png', 160, 45);
+            app.load.spritesheet('icons', 'img/icons.png', 32, 32);
+            app.load.image('tiles', 'img/tiles2.png');
+            app.load.spritesheet('tiles_split', 'img/tiles2.png', 16, 16);
+            app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
+            app.load.image('logo', 'img/logo.png');
+
+        },
+
+        create : function () {
+
+            app.state.add('title', Title);
+            app.state.add('dig_run', DIG.run);
+            app.state.add('dig_over', DIG.over);
+            app.state.add('dig_options', DIG.options);
+
+            app.state.start('title');
+
+        }
+
+    }
+
+}
+    ());
+
 // the main Phaser game instance
 var app = (function () {
 
     var background,
     logo,
 
-    // load state
-    Load = (function () {
+    start = function () {
 
-        return {
-            create : function () {
+        //app.load.start();
 
-                app.load.spritesheet('button', 'img/button.png', 160, 45);
-                app.load.spritesheet('icons', 'img/icons.png', 32, 32);
-                app.load.image('tiles', 'img/tiles2.png');
-                app.load.spritesheet('tiles_split', 'img/tiles2.png', 16, 16);
-                app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
-                app.load.image('logo', 'img/logo.png');
-
-                // load start
-                app.load.onLoadStart.add(function () {
-
-                    console.log('load start');
-
-                }, this);
-
-                // on file complete
-                app.load.onFileComplete.add(function (progress) {
-
-                    console.log(progress);
-
-                }, this);
-
-                // loading done
-                app.load.onLoadComplete.add(function () {
-
-                    console.log('compleate');
-
-                    app.state.add('title', Title);
-                    app.state.add('dig_run', DIG.run);
-                    app.state.add('dig_over', DIG.over);
-                    app.state.add('dig_options', DIG.options);
-
-                    app.state.start('title');
-
-                }, this);
-
-            }
-        };
-
-    }
-        ()),
+    },
 
     // set res
     w = window.innerWidth < 640 ? window.innerWidth : 640,
@@ -68,19 +73,21 @@ var app = (function () {
 
             app.load.image('background', 'img/background.png');
 
-            app.state.add('load', Load);
-            app.state.start('load');
-
         },
 
         // create
         create : function () {
 
+            app.state.add('load', Load);
+            app.state.start('load');
+
+            //app.load.start();
+
             // add states
-            app.state.add('title', Title);
-            app.state.add('dig_run', DIG.run);
-            app.state.add('dig_over', DIG.over);
-            app.state.add('dig_options', DIG.options);
+            //app.state.add('title', Title);
+            //app.state.add('dig_run', DIG.run);
+            //app.state.add('dig_over', DIG.over);
+            //app.state.add('dig_options', DIG.options);
 
             // start title
             //app.state.start('title');
