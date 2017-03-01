@@ -1,6 +1,6 @@
 2.11.x - 
 
-
+* setting resolution based on window.innerWidth
 
 
 
@@ -14,7 +14,7 @@ IDEAS:
 
         * add a animated logo state
         * add a loading state
-        * A added a logo state that displays my animated logo.
+        * add a logo state that displays my animated logo.
         * New player values added relevant to game advancement.
         * pebble   - the amount of game money the player has
         * digLevel - The current level of the dig site.
