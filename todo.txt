@@ -1,11 +1,8 @@
-2.11.x - 
+2.11.x - loading state
 
 * setting resolution based on window.innerWidth
-
-
-
-
-
+* added a load.js file that contains a loading state
+* added a progress bar image, that for now is just a blank while image.
 
 
 IDEAS:
@@ -13,16 +10,7 @@ IDEAS:
     MISC:
 
         * add a animated logo state
-        * add a loading state
         * add a logo state that displays my animated logo.
-        * New player values added relevant to game advancement.
-        * pebble   - the amount of game money the player has
-        * digLevel - The current level of the dig site.
-        * exp      - exp points for advancement of digLevel
-        * go to new "digdone" state when the player runs out of digs
-        * from dig done state the player can dig again, or go to the title state.
-        * fixed an isshue with states where the create method is being called each time a state is changed.
-        * get touch events working.
         * DIG.over state triggered if you collect all pebble in the bottom layer.
         * DIG.over state displays the reason why the game ended. 
 
