@@ -3,6 +3,7 @@
 * setting resolution based on window.innerWidth
 * added a load.js file that contains a loading state
 * added a progress bar image, that for now is just a blank while image.
+* new logo, and tile sheet.
 
 
 IDEAS:
