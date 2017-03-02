@@ -7,6 +7,91 @@ var DIG = (function () {
     layer2,
     map,
 
+    Layers = {
+
+        dropAnimation : false,
+        dropFrame : 0,
+        dropMaxFrames : 30,
+
+        // the current drop down tile
+        dropTile : {
+
+            setActive : true,
+            x : 0,
+            y : 0
+
+        },
+
+        // set the drop down tile
+        setDropTile : function (x, y) {
+
+            // if set active it true
+            if (this.dropTile.setActive) {
+
+                this.dropTile.x = x;
+                this.dropTile.y = y;
+
+            } else {
+
+                // else default to 0,0
+
+                this.dropTile.x = 0;
+                this.dropTile.y = 0;
+
+            }
+
+        },
+
+        dropStart : function () {
+
+            this.dropFrame = 0;
+            this.dropAnimation = true;
+
+            // set the active, and zoom layer
+            genLayer('activeLayer', state.current.layer);
+            genLayer('zoomLayer', state.current.layer - 1);
+            layer2.width = app.height * .8;
+            layer2.height = app.height * .8;
+            layer2.alpha = 1;
+
+        },
+
+        droping : function () {
+
+            if (this.dropAnimation) {
+
+                var delta = app.width * 2 / this.dropMaxFrames,
+                home = app.width * .05,
+                tileSize,
+                i = this.dropFrame / this.dropMaxFrames;
+                this.dropFrame += 1;
+                layer2.width += delta * 2;
+                layer2.height += delta * 2;
+                layer2.alpha = 1 - i;
+                tileSize = layer2.width / 8;
+                layer2.x = home - delta * this.dropFrame + (tileSize * this.dropTile.x * i - tileSize / 2);
+                layer2.y = home - delta * this.dropFrame + (tileSize * this.dropTile.y * i - tileSize / 2);
+
+                if (this.dropFrame === this.dropMaxFrames) {
+
+                    layer2.x = -32;
+                    layer2.y = -32;
+                    layer2.width = 32;
+                    layer2.height = 32;
+                    this.dropFrame = 0;
+                    this.dropAnimation = false;
+
+                    //genLayer();
+                    //genLayer('activeLayer', state.current.layer);
+
+                }
+
+            }
+
+        }
+
+    },
+
     // setup the map (this is called in DIG.run)
     setupMap = function () {
 
@@ -316,17 +401,11 @@ var DIG = (function () {
 
                             if (result.dropEvent) {
 
-                                // set the active, and zoom layer
-                                genLayer('activeLayer', state.current.layer);
-                                genLayer('zoomLayer', state.current.layer - 1);
+                                Layers.setDropTile(
+                                    cellX < 4 ? 4 - cellX : 0 - (cellX - 4),
+                                    cellY < 4 ? 4 - cellY : 0 - (cellY - 4));
 
-                                layer2.width = app.height * .8;
-                                layer2.height = app.height * .8;
-                                layer2.alpha = 1;
-
-                                dropTile.x = cellX < 4 ? 4 - cellX : 0 - (cellX - 4);
-                                dropTile.y = cellY < 4 ? 4 - cellY : 0 - (cellY - 4);
-                                dropAnimation = true;
+                                Layers.dropStart();
 
                             }
 
@@ -486,40 +565,39 @@ var DIG = (function () {
 
                         burstsUpdater();
 
+                        Layers.droping();
+
+                        /*
                         if (dropAnimation) {
 
-                            var delta = app.width * 2 / dropMaxFrames,
-                            home = app.width * .05,
-                            tileSize,
-                            i = dropFrame / dropMaxFrames;
+                        var delta = app.width * 2 / dropMaxFrames,
+                        home = app.width * .05,
+                        tileSize,
+                        i = dropFrame / dropMaxFrames;
+                        dropFrame += 1;
+                        layer2.width += delta * 2;
+                        layer2.height += delta * 2;
+                        layer2.alpha = 1 - i;
+                        tileSize = layer2.width / 8;
+                        layer2.x = home - delta * dropFrame + (tileSize * dropTile.x * i - tileSize / 2);
+                        layer2.y = home - delta * dropFrame + (tileSize * dropTile.y * i - tileSize / 2);
 
-                            dropFrame += 1;
+                        if (dropFrame === dropMaxFrames) {
 
-                            layer2.width += delta * 2;
-                            layer2.height += delta * 2;
+                        layer2.x = -32;
+                        layer2.y = -32;
+                        layer2.width = 32;
+                        layer2.height = 32;
+                        dropFrame = 0;
+                        dropAnimation = false;
 
-                            layer2.alpha = 1 - i;
-
-                            tileSize = layer2.width / 8;
-
-                            layer2.x = home - delta * dropFrame + (tileSize * dropTile.x * i - tileSize / 2);
-                            layer2.y = home - delta * dropFrame + (tileSize * dropTile.y * i - tileSize / 2);
-
-                            if (dropFrame === dropMaxFrames) {
-
-                                layer2.x = -32;
-                                layer2.y = -32;
-                                layer2.width = 32;
-                                layer2.height = 32;
-                                dropFrame = 0;
-                                dropAnimation = false;
-
-                                //genLayer();
-                                //genLayer('activeLayer', state.current.layer);
-
-                            }
+                        //genLayer();
+                        //genLayer('activeLayer', state.current.layer);
 
                         }
+
+                        }
+                         */
 
                     };
 

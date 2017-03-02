@@ -3,12 +3,16 @@
     * added a drop down animation when dropping down to a lower layer.
     * added a pebble gain icon animation when the player bursts a tile that has pebble
     * pebble amount gained next to pebble icon when pebble gain animation happens.
+    * drop down animation zooms in to the tile that the player dropped down into rather than the center each time
+    * a zoom layer is used to zoom out the previous layer.
+
 
     todo:
-    * drop down animation zooms in to the tile that the player dropped down into rather than the center each time
-    * new tile map appears below the one that is zooming out.
     * new tile map zooms in as the old one zooms out
     * alpha effect with old tile map zooming out and new one zooming in.
+
+
+
 
     maybes:
     * more than one effect
