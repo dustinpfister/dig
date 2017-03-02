@@ -4,6 +4,7 @@ var DIG = (function () {
     var showPebble = false,
 
     layer1,
+    layer2,
     map,
 
     // setup the map (this is called in DIG.run)
@@ -16,11 +17,12 @@ var DIG = (function () {
         map.addTilesetImage('tiles');
 
         layer1 = map.create('activeLayer', 8, 8, 32, 32);
+        layer2 = map.createBlankLayer('zoomLayer', 8, 8, 32, 32);
 
     },
 
     // generate, or regenerate the tilemap to the current layer
-    genLayer = function () {
+    genLayer = function (layerName, stackLayerNumber) {
 
         var width = 8,
         height = 8,
@@ -31,9 +33,18 @@ var DIG = (function () {
         len,
         data = [],
         len = width * height,
-        tileSet = state.current.layer === 0 ? 3 : 1,
-        zeroTile = state.current.layer === land.d - 1 ? 1 : 0, // the tile sheet index for a tile with 0 hp
-        landData;
+        landData,
+        tileSet,
+        zeroTile;
+
+        layerName = layerName || 'activeLayer';
+
+        //stackLayerNumber = stackLayerNumber || state.current.layer;
+
+        stackLayerNumber === undefined ? state.current.layer : stackLayerNumber;
+
+        tileSet = stackLayerNumber === 0 ? 3 : 1;
+        zeroTile = stackLayerNumber === land.d - 1 ? 1 : 0; // the tile sheet index for a tile with 0 hp
 
         // use map.put to populate the layer
         while (i < len) {
@@ -41,14 +52,14 @@ var DIG = (function () {
             x = i % width;
             y = Math.floor(i / width);
 
-            tile = land.getCell(x, y, state.current.layer);
+            tile = land.getCell(x, y, stackLayerNumber);
 
             map.putTile(
 
                 showPebble ? tile.amount > 0 ? 2 : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
                 x,
                 y,
-                'activeLayer');
+                layerName);
 
             i += 1;
 
@@ -305,9 +316,8 @@ var DIG = (function () {
 
                             if (result.dropEvent) {
 
-                                // do we use or delete this?
-                                console.log('drop');
-                                console.log();
+                                console.log('current layer: ' + state.current.layer);
+
                                 dropTile.x = cellX < 4 ? 4 - cellX : 0 - (cellX - 4);
                                 dropTile.y = cellY < 4 ? 4 - cellY : 0 - (cellY - 4);
                                 dropAnimation = true;
@@ -354,7 +364,7 @@ var DIG = (function () {
 
                         if (!dropAnimation) {
 
-                            genLayer();
+                            genLayer('activeLayer', state.current.layer);
 
                         }
                     }
@@ -373,8 +383,6 @@ var DIG = (function () {
                     }
                         ());
 
-                    // re gen the time map, and update info
-                    //genLayer();
                     updateInfo();
 
                 } else {
@@ -435,7 +443,7 @@ var DIG = (function () {
                     // touch mouse event handler on the tilemap
                     layer1.events.onInputDown.add(userAction);
 
-                    genLayer();
+                    genLayer('activeLayer', state.current.layer);
 
                     sprite = app.add.button(app.width - iconSize, 0, 'icons', function () {
 
@@ -492,7 +500,8 @@ var DIG = (function () {
                                 dropFrame = 0;
                                 dropAnimation = false;
 
-                                genLayer();
+                                //genLayer();
+                                genLayer('activeLayer', state.current.layer);
 
                             }
 
