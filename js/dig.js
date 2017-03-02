@@ -76,7 +76,6 @@ var DIG = (function () {
         bottom = 0, // bottom part of the tile if 0 (0 or 1)
         right = 0, // right part of the tile if 0 (0 or 1)
 
-
         w = layer1.width / map.width,
         h = layer1.height / map.height,
         x = w * stateResult.tileX + layer1.left,
@@ -88,17 +87,23 @@ var DIG = (function () {
         this.birth = new Date();
         this.alive = true;
 
-        //console.log('BURST');
-        //console.log(stateResult);
-
         // if pebble start pebble sprite
         if (stateResult.tileStatus.amount) {
 
-            console.log('pebble!');
+            // pebble icon sprite
             sprite = app.add.sprite(x, y, 'icons', 2);
+            sprite.width = w / 2;
+            sprite.height = h / 2;
             app.physics.enable([sprite], Phaser.Physics.ARCADE);
-            sprite.body.velocity.y = -64;
-            //sprite.lifeSpan = 10;
+            sprite.body.velocity.y = -96;
+
+            // push the pebble icon
+            this.sprites.push(sprite);
+
+            // amount text
+            sprite = app.add.bitmapText(x + sprite.width, y, 'desyrel', '+' + stateResult.tileStatus.amount, 30);
+            app.physics.enable([sprite], Phaser.Physics.ARCADE);
+            sprite.body.velocity.y = -96;
             this.sprites.push(sprite);
 
         }
@@ -140,7 +145,7 @@ var DIG = (function () {
         var age = new Date() - this.birth;
 
         // destroy old sprites
-        if (age > 1500) {
+        if (age > 2500) {
 
             this.sprites.forEach(function (sprite) {
 
@@ -153,7 +158,7 @@ var DIG = (function () {
 
         this.sprites.forEach(function (sprite) {
 
-            sprite.alpha = 1 - age / 1500;
+            sprite.alpha = 1 - age / 2500;
 
         });
 
