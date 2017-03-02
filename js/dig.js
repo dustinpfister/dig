@@ -318,6 +318,9 @@ var DIG = (function () {
 
                                 console.log('current layer: ' + state.current.layer);
 
+                                // set the zoom layer
+                                genLayer('zoomLayer', state.current.layer - 1);
+
                                 dropTile.x = cellX < 4 ? 4 - cellX : 0 - (cellX - 4);
                                 dropTile.y = cellY < 4 ? 4 - cellY : 0 - (cellY - 4);
                                 dropAnimation = true;
@@ -440,10 +443,17 @@ var DIG = (function () {
                     layer1.y = app.height * .05;
                     layer1.inputEnabled = true;
 
+                    // zoom layer
+                    layer2.fixedToCamera = false;
+                    layer2.x = app.width - app.width * .2;
+                    layer2.width = app.width * .2;
+                    layer2.height = app.width * .2;
+
                     // touch mouse event handler on the tilemap
                     layer1.events.onInputDown.add(userAction);
 
                     genLayer('activeLayer', state.current.layer);
+                    genLayer('zoomLayer', state.current.layer);
 
                     sprite = app.add.button(app.width - iconSize, 0, 'icons', function () {
 
