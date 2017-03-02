@@ -190,6 +190,12 @@ var DIG = (function () {
             dropAnimation = false, // are we doing a drop animation now?
             dropFrame = 0,
             dropMaxFrames = 30,
+            dropTile = {
+
+                x : -1,
+                y : 0
+
+            },
             text = {},
             //map,
 
@@ -284,6 +290,9 @@ var DIG = (function () {
 
                                 // do we use or delete this?
                                 console.log('drop');
+                                console.log();
+                                dropTile.x = cellX < 4 ? 4 - cellX : 0 - (cellX - 4);
+                                dropTile.y = cellY < 4 ? 4 - cellY : 0 - (cellY - 4);
                                 dropAnimation = true;
 
                             }
@@ -460,8 +469,8 @@ var DIG = (function () {
 
                             tileSize = layer1.width / 8;
 
-                            layer1.x = home - delta * dropFrame + (tileSize * 4 * i - tileSize / 2);
-                            layer1.y = home - delta * dropFrame;
+                            layer1.x = home - delta * dropFrame + (tileSize * dropTile.x * i - tileSize / 2);
+                            layer1.y = home - delta * dropFrame + (tileSize * dropTile.y * i - tileSize / 2);
 
                             if (dropFrame === dropMaxFrames) {
 
