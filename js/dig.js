@@ -42,6 +42,38 @@ var DIG = (function () {
 
         },
 
+        // setup the map (this is called in DIG.run)
+        setupMap : function () {
+
+            //  Creates a blank tilemap
+            map = app.add.tilemap();
+
+            //  Add a Tileset image to the map
+            map.addTilesetImage('tiles');
+
+            layer1 = map.create('activeLayer', 8, 8, 32, 32);
+            layer2 = map.createBlankLayer('zoomLayer', 8, 8, 32, 32);
+
+            // tile size is a little weird for now
+            layer1.fixedToCamera = false;
+            layer1.width = app.height * .8;
+            layer1.height = app.height * .8;
+            layer1.x = app.width * .05;
+            layer1.y = app.height * .05;
+            layer1.inputEnabled = true;
+
+            // zoom layer
+            layer2.fixedToCamera = false;
+            layer2.x = -32;
+            layer2.y = -32;
+            layer2.width = 32;
+            layer2.height = 32;
+
+            genLayer('activeLayer', state.current.layer);
+            genLayer('zoomLayer', state.current.layer);
+
+        },
+
         dropStart : function () {
 
             this.dropFrame = 0;
@@ -89,20 +121,6 @@ var DIG = (function () {
             }
 
         }
-
-    },
-
-    // setup the map (this is called in DIG.run)
-    setupMap = function () {
-
-        //  Creates a blank tilemap
-        map = app.add.tilemap();
-
-        //  Add a Tileset image to the map
-        map.addTilesetImage('tiles');
-
-        layer1 = map.create('activeLayer', 8, 8, 32, 32);
-        layer2 = map.createBlankLayer('zoomLayer', 8, 8, 32, 32);
 
     },
 
@@ -495,7 +513,10 @@ var DIG = (function () {
 
                     sprite;
 
-                    setupMap();
+                    Layers.setupMap();
+
+                    // touch mouse event handler on the tilemap
+                    layer1.events.onInputDown.add(userAction);
 
                     // place the icons
                     iconIndexs.forEach(function (iconIndex, i) {
@@ -516,27 +537,6 @@ var DIG = (function () {
                     text_totals = app.add.bitmapText(
                             app.width * 0.05,
                             app.height * .86, 'desyrel', land.getInfo().tabString, textSize);
-
-                    // tile size is a little weird for now
-                    layer1.fixedToCamera = false;
-                    layer1.width = app.height * .8;
-                    layer1.height = app.height * .8;
-                    layer1.x = app.width * .05;
-                    layer1.y = app.height * .05;
-                    layer1.inputEnabled = true;
-
-                    // zoom layer
-                    layer2.fixedToCamera = false;
-                    layer2.x = -32;
-                    layer2.y = -32;
-                    layer2.width = 32;
-                    layer2.height = 32;
-
-                    // touch mouse event handler on the tilemap
-                    layer1.events.onInputDown.add(userAction);
-
-                    genLayer('activeLayer', state.current.layer);
-                    genLayer('zoomLayer', state.current.layer);
 
                     sprite = app.add.button(app.width - iconSize, 0, 'icons', function () {
 
@@ -566,38 +566,6 @@ var DIG = (function () {
                         burstsUpdater();
 
                         Layers.droping();
-
-                        /*
-                        if (dropAnimation) {
-
-                        var delta = app.width * 2 / dropMaxFrames,
-                        home = app.width * .05,
-                        tileSize,
-                        i = dropFrame / dropMaxFrames;
-                        dropFrame += 1;
-                        layer2.width += delta * 2;
-                        layer2.height += delta * 2;
-                        layer2.alpha = 1 - i;
-                        tileSize = layer2.width / 8;
-                        layer2.x = home - delta * dropFrame + (tileSize * dropTile.x * i - tileSize / 2);
-                        layer2.y = home - delta * dropFrame + (tileSize * dropTile.y * i - tileSize / 2);
-
-                        if (dropFrame === dropMaxFrames) {
-
-                        layer2.x = -32;
-                        layer2.y = -32;
-                        layer2.width = 32;
-                        layer2.height = 32;
-                        dropFrame = 0;
-                        dropAnimation = false;
-
-                        //genLayer();
-                        //genLayer('activeLayer', state.current.layer);
-
-                        }
-
-                        }
-                         */
 
                     };
 
