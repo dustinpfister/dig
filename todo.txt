@@ -16,6 +16,7 @@ IDEAS:
 
         * add a animated logo state
         * have an animated title screen.
+        * pebble collect animation.
         * Drop down transition animation
         * state change animations
 

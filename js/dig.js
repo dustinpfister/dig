@@ -88,6 +88,22 @@ var DIG = (function () {
         this.birth = new Date();
         this.alive = true;
 
+        //console.log('BURST');
+        //console.log(stateResult);
+
+        // if pebble start pebble sprite
+        if (stateResult.tileStatus.amount) {
+
+            console.log('pebble!');
+            sprite = app.add.sprite(x, y, 'icons', 2);
+            app.physics.enable([sprite], Phaser.Physics.ARCADE);
+            sprite.body.velocity.y = -64;
+            //sprite.lifeSpan = 10;
+            this.sprites.push(sprite);
+
+        }
+
+        // make burst sprites
         si = 0;
         while (si < 4) {
 
@@ -101,7 +117,7 @@ var DIG = (function () {
 
             sprite.body.velocity.x = -32 * (1 - 2 * right);
             sprite.body.velocity.y = -32 * (1 - 2 * bottom);
-            sprite.lifeSpan = 100;
+            //sprite.lifeSpan = 100;
 
             right += 1;
             if (right === 2) {

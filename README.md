@@ -5,5 +5,6 @@ dig is a game about digging in a lot of land for pebbles. It started out as a si
 ## dig 2.x
 
 <div align="center">
-<img src="./screenshots/title_2_11_7.png">
+<img width="320" height="240" src="./screenshots/title_2_11_7.png">
 </div>
+
