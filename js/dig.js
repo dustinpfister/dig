@@ -69,8 +69,8 @@ var DIG = (function () {
             layer2.width = 32;
             layer2.height = 32;
 
-            genLayer('activeLayer', state.current.layer);
-            genLayer('zoomLayer', state.current.layer);
+            this.genLayer('activeLayer', state.current.layer);
+            this.genLayer('zoomLayer', state.current.layer);
 
         },
 
@@ -80,8 +80,8 @@ var DIG = (function () {
             this.dropAnimation = true;
 
             // set the active, and zoom layer
-            genLayer('activeLayer', state.current.layer);
-            genLayer('zoomLayer', state.current.layer - 1);
+            this.genLayer('activeLayer', state.current.layer);
+            this.genLayer('zoomLayer', state.current.layer - 1);
             layer2.width = app.height * .8;
             layer2.height = app.height * .8;
             layer2.alpha = 1;
@@ -120,53 +120,53 @@ var DIG = (function () {
 
             }
 
-        }
+        },
 
-    },
+        // generate, or regenerate the tilemap to the current layer
+        genLayer : function (layerName, stackLayerNumber) {
 
-    // generate, or regenerate the tilemap to the current layer
-    genLayer = function (layerName, stackLayerNumber) {
+            var width = 8,
+            height = 8,
+            i = 0,
+            x,
+            tile,
+            y,
+            len,
+            data = [],
+            len = width * height,
+            landData,
+            tileSet,
+            zeroTile;
 
-        var width = 8,
-        height = 8,
-        i = 0,
-        x,
-        tile,
-        y,
-        len,
-        data = [],
-        len = width * height,
-        landData,
-        tileSet,
-        zeroTile;
+            layerName = layerName || 'activeLayer';
 
-        layerName = layerName || 'activeLayer';
+            //stackLayerNumber = stackLayerNumber || state.current.layer;
 
-        //stackLayerNumber = stackLayerNumber || state.current.layer;
+            stackLayerNumber === undefined ? state.current.layer : stackLayerNumber;
 
-        stackLayerNumber === undefined ? state.current.layer : stackLayerNumber;
+            tileSet = stackLayerNumber === 0 ? 3 : 1;
+            zeroTile = stackLayerNumber === land.d - 1 ? 1 : 0; // the tile sheet index for a tile with 0 hp
 
-        tileSet = stackLayerNumber === 0 ? 3 : 1;
-        zeroTile = stackLayerNumber === land.d - 1 ? 1 : 0; // the tile sheet index for a tile with 0 hp
+            // use map.put to populate the layer
+            while (i < len) {
 
-        // use map.put to populate the layer
-        while (i < len) {
+                x = i % width;
+                y = Math.floor(i / width);
 
-            x = i % width;
-            y = Math.floor(i / width);
+                tile = land.getCell(x, y, stackLayerNumber);
 
-            tile = land.getCell(x, y, stackLayerNumber);
+                map.putTile(
 
-            map.putTile(
+                    showPebble ? tile.amount > 0 ? 2 : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
+                    x,
+                    y,
+                    layerName);
 
-                showPebble ? tile.amount > 0 ? 2 : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp : tile.hp === 0 ? zeroTile : tileSet * 10 + tile.hp,
-                x,
-                y,
-                layerName);
+                i += 1;
 
-            i += 1;
+            }
 
-        }
+        },
 
     },
 
@@ -298,15 +298,18 @@ var DIG = (function () {
         showPebble : function () {
 
             showPebble = !showPebble;
+            Layers.genLayer('activeLayer', state.current.layer);
 
         },
 
         // external reGen method is used by egg.js
+        /*
         reGen : function () {
 
-            genLayer();
+        //Layers.genLayer();
 
         },
+         */
 
         // DIG.run Phaser state (the actual main game state, running at the current layer)
         run : (function () {
@@ -467,7 +470,7 @@ var DIG = (function () {
 
                         if (!dropAnimation) {
 
-                            genLayer('activeLayer', state.current.layer);
+                            Layers.genLayer('activeLayer', state.current.layer);
 
                         }
                     }

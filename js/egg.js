@@ -14,13 +14,6 @@ var egg = (function () {
             // toggle show pebble cheat
             DIG.showPebble();
 
-            // re gen tile map if the dig_run state is current
-            if (app.state.current === 'dig_run') {
-
-                DIG.reGen();
-
-            }
-
             break;
 
         default:
