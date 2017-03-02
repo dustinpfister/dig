@@ -187,6 +187,9 @@ var DIG = (function () {
             text_totals,
             text_landLevel,
             textNames = ['digs', 'layer', 'pebble', 'landLevel'],
+            dropAnimation = false, // are we doing a drop animation now?
+            dropFrame = 0,
+            dropMaxFrames = 20,
             text = {},
             //map,
 
@@ -277,7 +280,8 @@ var DIG = (function () {
                         if (result.dropEvent) {
 
                             // do we use or delete this?
-							console.log('drop');
+                            console.log('drop');
+                            dropAnimation = true;
 
                         }
 
@@ -425,6 +429,26 @@ var DIG = (function () {
                     return function () {
 
                         burstsUpdater();
+
+                        if (dropAnimation) {
+
+                            var layer1HomeX = app.width * .05;
+
+                            console.log('droping down');
+
+                            dropFrame += 1;
+
+                            layer1.x -= app.width / dropMaxFrames;
+
+                            if (dropFrame === dropMaxFrames) {
+
+                                layer1.x = layer1HomeX;
+                                dropFrame = 0;
+                                dropAnimation = false;
+
+                            }
+
+                        }
 
                     };
 
