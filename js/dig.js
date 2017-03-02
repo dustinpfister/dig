@@ -122,6 +122,16 @@ var DIG = (function () {
 
         },
 
+        update : function () {
+
+            if (!this.dropAnimation) {
+
+                Layers.genLayer('activeLayer', state.current.layer);
+
+            }
+
+        },
+
         // generate, or regenerate the tilemap to the current layer
         genLayer : function (layerName, stackLayerNumber) {
 
@@ -468,11 +478,8 @@ var DIG = (function () {
                         }
                             ());
 
-                        if (!dropAnimation) {
+                        Layers.update();
 
-                            Layers.genLayer('activeLayer', state.current.layer);
-
-                        }
                     }
 
                     // all the pebble? wow!
