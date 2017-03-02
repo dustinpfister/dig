@@ -421,7 +421,7 @@ var DIG = (function () {
                 cellY = Math.floor(y / cellSize);
 
                 // if a dropdown animation is not goinf on
-                if (!dropAnimation) {
+                if (!Layers.dropAnimation) {
 
                     // dig at state.js
                     state.userAction(
