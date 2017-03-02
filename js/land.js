@@ -279,8 +279,6 @@ var land = (function () {
 
                     api.amount = 0;
 
-                    console.log(data);
-
                     data.layerData.forEach(function (layerObj) {
 
                         // The loot tile count can not be greater than the amount of pebble for the layer

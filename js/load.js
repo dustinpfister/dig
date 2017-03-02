@@ -10,18 +10,14 @@ var Load = (function () {
             loadSprite.x = app.world.centerX - loadSprite.width / 2;
             loadSprite.y = app.world.centerY - 16;
 
-            app.load.onLoadStart.add(function () {
-                console.log('start')
-            }, this);
+            app.load.onLoadStart.add(function () {}, this);
             app.load.onFileComplete.add(function (progress) {
 
                 loadSprite.width = app.width * (progress / 100);
                 loadSprite.x = app.world.centerX - loadSprite.width / 2;
 
             }, this);
-            app.load.onLoadComplete.add(function () {
-                console.log('done')
-            }, this);
+            app.load.onLoadComplete.add(function () {}, this);
 
             //app.load.image('background', 'img/background.png');
             app.load.spritesheet('button', 'img/button.png', 160, 45);
@@ -39,8 +35,6 @@ var Load = (function () {
             app.state.add('dig_run', DIG.run);
             app.state.add('dig_over', DIG.over);
             app.state.add('dig_options', DIG.options);
-
-            console.log('app width: ' + app.world.centerX);
 
             app.state.start('title');
 
