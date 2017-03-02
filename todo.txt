@@ -1,5 +1,6 @@
 2.12.x - Drop down, and pebble gain Animations.
 
+    * added a drop down animation when dropping down to a lower layer.
     * added a pebble gain icon animation when the player bursts a tile that has pebble
     * pebble amount gained next to pebble icon when pebble gain animation happens.
 

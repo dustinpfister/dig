@@ -189,7 +189,7 @@ var DIG = (function () {
             textNames = ['digs', 'layer', 'pebble', 'landLevel'],
             dropAnimation = false, // are we doing a drop animation now?
             dropFrame = 0,
-            dropMaxFrames = 20,
+            dropMaxFrames = 30,
             text = {},
             //map,
 
@@ -259,62 +259,81 @@ var DIG = (function () {
                 cellX = Math.floor(x / cellSize),
                 cellY = Math.floor(y / cellSize);
 
-                // dig at state.js
-                state.userAction(
-                    cellX,
-                    cellY,
-                    function (result) {
+                // if a dropdown animation is not goinf on
+                if (!dropAnimation) {
 
-                    if (result.active) {
+                    // dig at state.js
+                    state.userAction(
+                        cellX,
+                        cellY,
+                        function (result) {
 
-                        if (result.burst) {
+                        if (result.active) {
 
-                            // start the new burst animation
-                            bursts.push(new Burst(map, result));
+                            if (result.burst) {
 
-                            // update the tile map
-                            map.putTile(0, result.tileX, result.tileY, 'activeLayer');
+                                // start the new burst animation
+                                bursts.push(new Burst(map, result));
 
-                        }
-
-                        if (result.dropEvent) {
-
-                            // do we use or delete this?
-                            console.log('drop');
-                            dropAnimation = true;
-
-                        }
-
-                    }
-
-                });
-
-                // out of digs?
-                if (state.current.digs <= 0) {
-
-                    app.state.start('dig_over');
-
-                }
-
-                // out of tiles on the bottom layer?
-                if (state.current.layer === land.d - 1) {
-
-                    (function () {
-
-                        var theBottom = land.getLayer(land.d - 1),
-                        count = theBottom.length;
-
-                        theBottom.forEach(function (cell) {
-
-                            if (cell.done) {
-
-                                count -= 1;
+                                // update the tile map
+                                map.putTile(0, result.tileX, result.tileY, 'activeLayer');
 
                             }
 
-                        });
+                            if (result.dropEvent) {
 
-                        if (count <= 0) {
+                                // do we use or delete this?
+                                console.log('drop');
+                                dropAnimation = true;
+
+                            }
+
+                        }
+
+                    });
+
+                    // out of digs?
+                    if (state.current.digs <= 0) {
+
+                        app.state.start('dig_over');
+
+                    }
+
+                    // out of tiles on the bottom layer?
+                    if (state.current.layer === land.d - 1) {
+
+                        (function () {
+
+                            var theBottom = land.getLayer(land.d - 1),
+                            count = theBottom.length;
+
+                            theBottom.forEach(function (cell) {
+
+                                if (cell.done) {
+
+                                    count -= 1;
+
+                                }
+
+                            });
+
+                            if (count <= 0) {
+
+                                app.state.start('dig_over');
+
+                            }
+
+                        }
+                            ());
+
+                    }
+
+                    // all the pebble? wow!
+                    (function () {
+
+                        var info = land.getInfo();
+
+                        if (info.tab.remaining <= 0) {
 
                             app.state.start('dig_over');
 
@@ -323,25 +342,15 @@ var DIG = (function () {
                     }
                         ());
 
-                }
+                    // re gen the time map, and update info
+                    genLayer();
+                    updateInfo();
 
-                // all the pebble? wow!
-                (function () {
+                } else {
 
-                    var info = land.getInfo();
-
-                    if (info.tab.remaining <= 0) {
-
-                        app.state.start('dig_over');
-
-                    }
+                    log('cant do that now, droping down...');
 
                 }
-                    ());
-
-                // re gen the time map, and update info
-                genLayer();
-                updateInfo();
 
             };
 
