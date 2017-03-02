@@ -172,12 +172,6 @@ var DIG = (function () {
 
         },
 
-        reGen : function () {
-
-            genLayer();
-
-        },
-
         run : (function () {
 
             var text_disp,
