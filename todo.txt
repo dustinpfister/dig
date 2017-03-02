@@ -5,6 +5,7 @@
     * pebble amount gained next to pebble icon when pebble gain animation happens.
 
     todo:
+	* fix problem with regen of tilemap to bottom layer before drop down animation completes.
     * drop down animation zooms in to the tile that the player dropped down into rather than the center each time
     * new tile map appears below the one that is zooming out.
     * new tile map zooms in as the old one zooms out

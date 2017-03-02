@@ -326,8 +326,11 @@ var DIG = (function () {
                         }
                             ());
 
-							
-						genLayer();
+                        if (!dropAnimation) {
+
+                            genLayer();
+
+                        }
                     }
 
                     // all the pebble? wow!
