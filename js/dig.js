@@ -318,8 +318,12 @@ var DIG = (function () {
 
                                 console.log('current layer: ' + state.current.layer);
 
-                                // set the zoom layer
+                                // set the active, and zoom layer
+                                genLayer('activeLayer', state.current.layer);
                                 genLayer('zoomLayer', state.current.layer - 1);
+
+                                layer2.width = app.height * .8;
+                                layer2.height = app.height * .8;
 
                                 dropTile.x = cellX < 4 ? 4 - cellX : 0 - (cellX - 4);
                                 dropTile.y = cellY < 4 ? 4 - cellY : 0 - (cellY - 4);
@@ -445,9 +449,10 @@ var DIG = (function () {
 
                     // zoom layer
                     layer2.fixedToCamera = false;
-                    layer2.x = app.width - app.width * .2;
-                    layer2.width = app.width * .2;
-                    layer2.height = app.width * .2;
+                    layer2.x = -32;
+                    layer2.y = -32
+                        layer2.width = 32;
+                    layer2.height = 32;
 
                     // touch mouse event handler on the tilemap
                     layer1.events.onInputDown.add(userAction);
@@ -493,25 +498,25 @@ var DIG = (function () {
 
                             dropFrame += 1;
 
-                            layer1.width += delta * 2;
-                            layer1.height += delta * 2;
+                            layer2.width += delta * 2;
+                            layer2.height += delta * 2;
 
-                            tileSize = layer1.width / 8;
+                            tileSize = layer2.width / 8;
 
-                            layer1.x = home - delta * dropFrame + (tileSize * dropTile.x * i - tileSize / 2);
-                            layer1.y = home - delta * dropFrame + (tileSize * dropTile.y * i - tileSize / 2);
+                            layer2.x = home - delta * dropFrame + (tileSize * dropTile.x * i - tileSize / 2);
+                            layer2.y = home - delta * dropFrame + (tileSize * dropTile.y * i - tileSize / 2);
 
                             if (dropFrame === dropMaxFrames) {
 
-                                layer1.x = home;
-                                layer1.y = home;
-                                layer1.width = app.height * .8;
-                                layer1.height = app.height * .8;
+                                layer2.x = -32;
+                                layer2.y = -32;
+                                layer2.width = 32;
+                                layer2.height = 32;
                                 dropFrame = 0;
                                 dropAnimation = false;
 
                                 //genLayer();
-                                genLayer('activeLayer', state.current.layer);
+                                //genLayer('activeLayer', state.current.layer);
 
                             }
 
