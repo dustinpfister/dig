@@ -1,5 +1,7 @@
-2.12.x -
+2.12.x - Drop down, and pebble gain Animations.
 
+    * added a pebble gain icon animation when the player bursts a tile that has pebble
+    * pebble amount gained next to pebble icon when pebble gain animation happens.
 
 
 

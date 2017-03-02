@@ -180,17 +180,7 @@ var DIG = (function () {
 
         run : (function () {
 
-            var digmap = {
-
-                offset : {
-
-                    x : 50,
-                    y : 50
-
-                }
-
-            },
-            text_disp,
+            var text_disp,
             text_digs,
             text_layer,
             text_pebble,
@@ -287,6 +277,7 @@ var DIG = (function () {
                         if (result.dropEvent) {
 
                             // do we use or delete this?
+							console.log('drop');
 
                         }
 
@@ -399,8 +390,8 @@ var DIG = (function () {
                     layer1.fixedToCamera = false;
                     layer1.width = app.height * .8;
                     layer1.height = app.height * .8;
-                    layer1.x = app.width * .05; //digmap.offset.x;
-                    layer1.y = app.height * .05; //digmap.offset.x;
+                    layer1.x = app.width * .05;
+                    layer1.y = app.height * .05;
                     layer1.inputEnabled = true;
 
                     // touch mouse event handler on the tilemap
