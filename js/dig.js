@@ -11,7 +11,7 @@ var DIG = (function () {
 
         dropAnimation : false,
         dropFrame : 0,
-        dropMaxFrames : 30,
+        dropMaxFrames : 100,
 
         // the current drop down tile
         dropTile : {
@@ -86,6 +86,9 @@ var DIG = (function () {
             layer2.height = app.height * .8;
             layer2.alpha = 1;
 
+            layer1.width = 0;
+            layer1.height = 0;
+
         },
 
         droping : function () {
@@ -96,13 +99,21 @@ var DIG = (function () {
                 home = app.width * .05,
                 tileSize,
                 i = this.dropFrame / this.dropMaxFrames;
+
                 this.dropFrame += 1;
+
                 layer2.width += delta * 2;
                 layer2.height += delta * 2;
                 layer2.alpha = 1 - i;
                 tileSize = layer2.width / 8;
                 layer2.x = home - delta * this.dropFrame + (tileSize * this.dropTile.x * i - tileSize / 2);
                 layer2.y = home - delta * this.dropFrame + (tileSize * this.dropTile.y * i - tileSize / 2);
+
+                layer1.width = app.height * .8 * i;
+                layer1.height = app.height * .8 * i;
+                layer1.x = home + (app.height * .4 - layer1.width / 2);
+                layer1.y = home + (app.height * .4 - layer1.width / 2);
+                layer1.alpha = i;
 
                 if (this.dropFrame === this.dropMaxFrames) {
 
