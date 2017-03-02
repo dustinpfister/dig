@@ -432,17 +432,24 @@ var DIG = (function () {
 
                         if (dropAnimation) {
 
-                            var layer1HomeX = app.width * .05;
+                            var layer1HomeX = app.width * .05,
+                            delta = app.width * 2 / dropMaxFrames;
 
                             console.log('droping down');
 
                             dropFrame += 1;
 
-                            layer1.x -= app.width / dropMaxFrames;
+                            layer1.x -= delta;
+                            layer1.y -= delta;
+                            layer1.width += delta * 2;
+                            layer1.height += delta * 2;
 
                             if (dropFrame === dropMaxFrames) {
 
                                 layer1.x = layer1HomeX;
+                                layer1.y = app.height * .05;
+                                layer1.width = app.height * .8;
+                                layer1.height = app.height * .8;
                                 dropFrame = 0;
                                 dropAnimation = false;
 
