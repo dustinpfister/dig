@@ -6,6 +6,20 @@ var DIG = (function () {
     layer1,
     map,
 
+    // setup the map (this is called in DIG.run)
+    setupMap = function () {
+
+        //  Creates a blank tilemap
+        map = app.add.tilemap();
+
+        //  Add a Tileset image to the map
+        map.addTilesetImage('tiles');
+
+        layer1 = map.create('activeLayer', 8, 8, 32, 32);
+
+    },
+
+    // generate, or regenerate the tilemap to the current layer
     genLayer = function () {
 
         var width = 8,
@@ -166,12 +180,21 @@ var DIG = (function () {
 
     return {
 
+        // show pebble method is used by egg.js
         showPebble : function () {
 
             showPebble = !showPebble;
 
         },
 
+        // external reGen method is used by egg.js
+        reGen : function () {
+
+            genLayer();
+
+        },
+
+        // DIG.run Phaser state (the actual main game state, running at the current layer)
         run : (function () {
 
             var text_disp,
@@ -379,13 +402,7 @@ var DIG = (function () {
 
                     sprite;
 
-                    //  Creates a blank tilemap
-                    map = app.add.tilemap();
-
-                    //  Add a Tileset image to the map
-                    map.addTilesetImage('tiles');
-
-                    layer1 = map.create('activeLayer', 8, 8, 32, 32);
+                    setupMap();
 
                     // place the icons
                     iconIndexs.forEach(function (iconIndex, i) {
@@ -491,7 +508,7 @@ var DIG = (function () {
         }
             ()),
 
-        // the options state the game switches to when the gear icon is clicked
+        // DIG.options Phaser state ( switches to when the gear icon is clicked )
         options : (function () {
 
             var text_label;
@@ -554,7 +571,7 @@ var DIG = (function () {
         }
             ()),
 
-        // DIG.Over state
+        // DIG.over Phaser state (game will switch to this when the run state comes to an end)
         over : (function () {
 
             var test_label,
