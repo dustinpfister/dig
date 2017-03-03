@@ -4,10 +4,12 @@
  */
 
 // the main Phaser game instance
+
 var app = (function () {
 
     var background,
     logo,
+    baseURL = './', // also set in load.js
 
     start = function () {
 
@@ -29,7 +31,7 @@ var app = (function () {
         // preload
         preload : function () {
 
-            app.load.image('loadingbar', 'img/loadingbar.png');
+            app.load.image('loadingbar', baseURL + 'img/loadingbar.png');
 
         },
 

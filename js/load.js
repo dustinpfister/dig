@@ -1,6 +1,8 @@
 
 var Load = (function () {
 
+    var baseURL = './'
+
     return {
 
         preload : function () {
@@ -20,12 +22,12 @@ var Load = (function () {
             app.load.onLoadComplete.add(function () {}, this);
 
             //app.load.image('background', 'img/background.png');
-            app.load.spritesheet('button', 'img/button.png', 160, 45);
-            app.load.spritesheet('icons', 'img/icons.png', 32, 32);
-            app.load.image('tiles', 'img/tiles2.png');
-            app.load.spritesheet('tiles_split', 'img/tiles2.png', 16, 16);
-            app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
-            app.load.image('logo', 'img/logo.png');
+            app.load.spritesheet('button', baseURL + 'img/button.png', 160, 45);
+            app.load.spritesheet('icons', baseURL + 'img/icons.png', 32, 32);
+            app.load.image('tiles', baseURL + 'img/tiles2.png');
+            app.load.spritesheet('tiles_split', baseURL + 'img/tiles2.png', 16, 16);
+            app.load.bitmapFont('desyrel', baseURL + 'img/desyrel.png', baseURL + 'img/font1.xml');
+            app.load.image('logo', baseURL + 'img/logo.png');
 
         },
 
