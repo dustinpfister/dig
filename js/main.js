@@ -9,7 +9,9 @@ var app = (function () {
 
     var background,
     logo,
-    baseURL = './', // also set in load.js
+    // also set in load.js
+    baseURL = 'https://cdn.rawgit.com/dustinpfister/dig/44ed7956593901a57980341f616e5c5ded3eb6c0/', 
+
 
     start = function () {
 
