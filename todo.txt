@@ -1,4 +1,4 @@
-2.12.x - 
+2.13.x - 
 
 
 
@@ -7,6 +7,20 @@
     maybes:
     * more than one effect
     * can set which effect, as well as disable the effect in egg.js.
+
+GAME MODES:
+
+    * stack 64
+
+        This is a mode where you play with a fixed 64 count of layers. You also have a fixed count of digs as well which as you might have guessed is also 64. This gives you just enough digs to completely clear the first layer, or dig all the way to the bottom to only dig one out of 64 land tiles. 
+
+        The amount of pebble in the stack however is not fixed, as you level up the amount of pebble in the stack will go up.
+
+        * At the top layer all the tiles have pebble, but contain only 1 pebble amounts
+        * The number of loot tiles drops by one for every layer you drop down
+        * At the bottom layer there is just one tile with pebble.
+        * the single loot tile at the bottom is the most valuable.
+
 
 IDEAS:
 
@@ -21,8 +35,6 @@ IDEAS:
 
         * add a animated logo state
         * have an animated title screen.
-        * pebble collect animation.
-        * Drop down transition animation
         * state change animations
 
     Upgrades Menu:
