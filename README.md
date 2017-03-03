@@ -19,7 +19,7 @@ click the link, it should go to cdn.rawgit.com, but goes to raw.githubuserconten
 
 ### getting blocked from cdn.rawgit.com 
 
-Apparently you can [get blocked]([twitter](https://twitter.com/rawgit/status/836744103190638592)) from cdn.rawgit.com if you swarm to many get requests for unique images, like this user did.
+Apparently you can [get blocked](https://twitter.com/rawgit/status/836744103190638592) from cdn.rawgit.com if you swarm to many get requests for unique images, like this user did.
 
 rawgit link:
 [https://cdn.rawgit.com/shadowfox87/YGOSeries9CardPics/master/100000000.png](https://cdn.rawgit.com/shadowfox87/YGOSeries9CardPics/master/100000000.png)
