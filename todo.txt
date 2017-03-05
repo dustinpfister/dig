@@ -1,7 +1,9 @@
 2.13.x - Hide methods revisited
 
-    * add a method that allows for importing an external hide method into land.js
+    * added land.addHideMethod() method that allows for importing an external hide method into land.js
 
+    * pull top_down into a land.addHidMethod call that will come with land.js
+    * make it so that setting amounts of all cells is just part of the process
 
 
 

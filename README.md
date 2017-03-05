@@ -5,6 +5,7 @@ Dig is a game about digging in a lot of land to gain an in game currency I call 
 <div align="center">
 <a href="https://dustinpfister.github.io/game_dig">
 <img width="320" height="240" src="./screenshots/title_2_11_7.png">
+</a>
 <p>play at: <a href="https://dustinpfister.github.io/game_dig">dustinpfister.github.io</a></p>
 </div>
 
@@ -44,7 +45,7 @@ You have a number of digs, this repentants the total number of tile hit points y
 
 
 
-# Writing a hide method
+## Writing a hide method
 
 Writing a "pebble hide" method as I seem to be calling it for the moment is fairly straight forward
 
