@@ -20,6 +20,8 @@ The word lateral in it's adjective form, means to be of, at, toward, or from the
 
 Linear is a word that means that something is arranged in or extending along a straight or nearly straight line. One way of thinking about it is picking a direction, and staying true to that single course. In many cases this way of thinking may be silly, however in some cases it makes sense, and is actually a better course of action compared to a more lateral approach. For example is it better to be a master of a single trade, or to become a jack of everything? I think most people would agree that it is preferable to become highly proficient at a single thing, than to just have superficial knowledge of a wide range of disciplines. However be it as it may, I would not jump the gun and say that this way of thinking is superior also.
 
+
+
 ## Getting started
 
 As of this writing I am deploying the latest release of the game to the gh-pages branch of this repository as such it should be playable at [https://dustinpfister.github.io/game_dig](https://dustinpfister.github.io/game_dig). Once you go there just press "new game", and then you should be bale to jump right into it:
@@ -39,6 +41,34 @@ When a tile bursts you have the option to drop down to the layer below, or conti
 ### Digs
 
 You have a number of digs, this repentants the total number of tile hit points you can reduce. Once you run out of digs the current game will be over. You will than have the option to play again.
+
+
+
+# Writing a hide method
+
+Writing a "pebble hide" method as I seem to be calling it for the moment is fairly straight forward
+
+```js
+land.addHideMethod({
+
+    name : 'all-in-left-top-zero',
+
+    method : function () {
+
+        console.log('I am the all-in-left-top-zero hide method');
+
+        // set total, and amount of cell 0 to the amount of total pebble for the stack
+        this.cells[0].total = this.totalPebble;
+        this.cells[0].amount = this.cells[0].total;
+
+    }
+
+});
+```
+
+This simple example places all the stack pebble in cell 0, which should be the left, top cell in the top layer.
+
+
 
 ## Cheat Tools
 

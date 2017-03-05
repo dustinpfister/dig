@@ -426,6 +426,9 @@ var land = (function () {
 
         hidePebble(api.currentHideMethod);
 
+        // set amount to total
+        api.amount = api.totalPebble;
+
     };
 
     //setupLand();
@@ -594,19 +597,11 @@ land.addHideMethod({
 
     method : function () {
 
-        console.log('I am the social hide method');
+        console.log('I am the all-in-left-top-zero hide method');
 
-        console.log('total pebble to hide');
-        console.log(this.totalPebble);
-
+        // set total, and amount of cell 0 to the amount of total pebble for the stack
         this.cells[0].total = this.totalPebble;
         this.cells[0].amount = this.cells[0].total;
-
-        this.amount = this.totalPebble;
-        console.log('amount');
-        console.log(this.amount);
-
-        console.log(this.cells[0])
 
     }
 
