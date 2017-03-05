@@ -73,12 +73,22 @@ This simple example places all the stack pebble in cell 0, which should be the l
 
 ## Cheat Tools
 
-There are ways of cheating by calling public methods in the JavaScript console. In chrome press Ctrl + shift + j, and make sure you have the console tab selected.
+There are ways of cheating by calling public methods in the JavaScript console. To make this process very easy, I have suppled a file called egg.s that contains many helpful methods for hacking the game. In chrome press Ctrl + shift + j, and make sure you have the console tab selected.
 
 ### Show where pebble is.
 
+All tiles that have pebble will have the letter P placed over them.
+
 ```
 > egg('show')
+```
+
+### westside!
+
+West side sets the current pebble hide method to the "all-in-left-top-zero" method which is suppled with egg.js.
+
+```
+> egg('westside')
 ```
 
 ### get a list of hide methods

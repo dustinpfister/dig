@@ -31,6 +31,12 @@ var egg = (function () {
 
             break;
 
+        case 'hidelist':
+
+            console.log(land.getInfo().hideMethods)
+
+            break;
+
         case 'show':
 
             console.log('Show pebble toggled');
@@ -50,6 +56,37 @@ var egg = (function () {
         }
 
         return '********************';
+
+    };
+
+    // work with hide methods
+    api.hide = function (index) {
+
+        var methods = land.getInfo().hideMethods;
+
+        if (index === undefined) {
+
+            console.log(methods);
+
+            return 'current: ' + land.currentHideMethod;
+
+        } else {
+
+            console.log(typeof index);
+
+            if (typeof index === 'number') {
+
+                land.currentHideMethod = methods[index];
+
+            }
+
+            if (typeof index === 'string') {
+
+                land.currentHideMethod = index;
+
+            }
+
+        }
 
     };
 
