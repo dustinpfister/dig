@@ -5,7 +5,7 @@ This is a branch I made to test some things out without making any changes to ma
 
 ## bower_components removed from .gitignore
 
-I have a copy of phaser stored in this branch.
+I have a copy of phaser stored in this branch. This was not called for, but it happened just for the hell of it.
 
 ## Problems with cdn.rawgit.com, and raw.githubusercontent.com
 
