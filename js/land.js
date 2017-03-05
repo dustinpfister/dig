@@ -14,6 +14,10 @@ var land = (function () {
         totalPebble : 1000,
         amount : 0,
 
+        
+        //currentHideMethod : 'top_down',
+		currentHideMethod : 'random_amount',
+
         hpRange : {
 
             low : 1,
@@ -403,7 +407,7 @@ var land = (function () {
 
         }
 
-        hidePebble('top_down');
+        hidePebble(api.currentHideMethod);
 
     };
 
