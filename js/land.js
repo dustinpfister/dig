@@ -14,7 +14,7 @@ var land = (function () {
         totalPebble : 1000,
         amount : 0,
 
-        currentHideMethod : 'top_down',
+        currentHideMethod : 'all-in-left-top-zero',
         //currentHideMethod : 'random_amount',
 
         hpRange : {
@@ -362,7 +362,7 @@ var land = (function () {
 
             hideMethod = hideMethod === undefined ? 'random_amount' : hideMethod;
 
-            methods[hideMethod]();
+            methods[hideMethod].call(api);
 
         };
 
@@ -370,6 +370,13 @@ var land = (function () {
         localAPI.list = function () {
 
             return Object.keys(methods);
+
+        };
+
+        // inject a method
+        localAPI.injectMethod = function (method) {
+
+            methods[method.name] = method.method;
 
         };
 
@@ -451,7 +458,7 @@ var land = (function () {
         this.hpRange.low = this.hpRange.low > 4 ? 4 : this.hpRange.low;
         this.hpRange.high = this.hpRange.high > 4 ? 4 : this.hpRange.high;
 
-    },
+    };
 
     // get info about the land
     api.getInfo = function () {
@@ -467,7 +474,13 @@ var land = (function () {
 
         };
 
-    },
+    };
+
+    api.addHideMethod = function (methodObj) {
+
+        hidePebble.injectMethod(methodObj);
+
+    };
 
     // get a cell by index, or x,y,z
     api.getCell = function (ix, y, z) {
@@ -574,3 +587,27 @@ var land = (function () {
 
 }
     ());
+
+land.addHideMethod({
+
+    name : 'all-in-left-top-zero',
+
+    method : function () {
+
+        console.log('I am the social hide method');
+
+        console.log('total pebble to hide');
+        console.log(this.totalPebble);
+
+        this.cells[0].total = this.totalPebble;
+        this.cells[0].amount = this.cells[0].total;
+
+        this.amount = this.totalPebble;
+        console.log('amount');
+        console.log(this.amount);
+
+        console.log(this.cells[0])
+
+    }
+
+});

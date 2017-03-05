@@ -1,5 +1,6 @@
-2.13.x - 
+2.13.x - Hide methods revisited
 
+    * add a method that allows for importing an external hide method into land.js
 
 
 
