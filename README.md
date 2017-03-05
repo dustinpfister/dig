@@ -1,6 +1,14 @@
-# dig
+# game_dig 2.x
 
 Dig is a game about digging in a lot of land to gain an in game currency I call pebble. When I started thinking about the differences between lateral and linear thinking, the idea for this game started to come together, and things just started moving forward from there. the first prototype started out as a simple vanilla js game (1.x), and is now my first game that makes use of the [phaser](https://phaser.io/) game framework (2.x).
+
+<div align="center">
+<a href="https://dustinpfister.github.io/game_dig">
+<img width="320" height="240" src="./screenshots/title_2_11_7.png">
+<p>play at: <a href="https://dustinpfister.github.io/game_dig">dustinpfister.github.io</a></p>
+</div>
+
+
 
 # Lateral thinking
 
@@ -10,11 +18,6 @@ The word lateral in it's adjective form, means to be of, at, toward, or from the
 
 Linear is a word that means that something is arranged in or extending along a straight or nearly straight line. One way of thinking about it is picking a direction, and staying true to that single course. In many cases this way of thinking may be silly, however in some cases it makes sense, and is actually a better course of action compared to a more lateral approach. For example is it better to be a master of a single trade, or a jack of everything? I think most people would agree that it is better to be really good at a single think, than to just have superficial knowledge of a wide range of disciplines. However be it as it may, I would not jump the gun and say that this way of thinking is superior as well.
 
-## dig 2.x
-
-<div align="center">
-<img width="320" height="240" src="./screenshots/title_2_11_7.png">
-</div>
 
 <div align="center">
 <img width="320" height="240" src="./screenshots/game_run_2_11_7.png">
