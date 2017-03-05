@@ -39,3 +39,33 @@ When a tile bursts you have the option to drop down to the layer below, or conti
 ### Digs
 
 You have a number of digs, this repentants the total number of tile hit points you can reduce. Once you run out of digs the current game will be over. You will than have the option to play again.
+
+## Cheat Tools
+
+There are ways of cheating by calling public methods in the JavaScript console. In chrome press Ctrl + shift + j, and make sure you have the console tab selected.
+
+### Show where pebble is.
+
+```
+> egg('show')
+```
+
+### get a list of hide methods
+```
+> land.getInfo().hideMethods
+```
+
+### find, or set the current hide method
+
+type and enter this to find the current hide method that is being used to hide pebble
+```
+> land.currentHideMethod
+```
+
+Use land.getInfo to get a list of hide methods, you can set the hide method to anything listed there.
+
+```
+> land.getInfo().hideMethods
+< > ["random_amount", "common_to_rare", "top_down", "top_layer"]
+> land.currentHideMethod = 'random_amount'
+```

@@ -360,9 +360,6 @@ var land = (function () {
         // local API for hidePebble
         localAPI = function (hideMethod) {
 
-            //console.log(hideMethod);
-            console.log(this);
-
             hideMethod = hideMethod === undefined ? 'random_amount' : hideMethod;
 
             methods[hideMethod]();
