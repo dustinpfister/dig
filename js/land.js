@@ -14,9 +14,8 @@ var land = (function () {
         totalPebble : 1000,
         amount : 0,
 
-        
-        //currentHideMethod : 'top_down',
-		currentHideMethod : 'random_amount',
+        currentHideMethod : 'top_down',
+        //currentHideMethod : 'random_amount',
 
         hpRange : {
 
@@ -356,15 +355,29 @@ var land = (function () {
 
             }
 
-        };
+        },
 
-        return function (hideMethod) {
+        // local API for hidePebble
+        localAPI = function (hideMethod) {
+
+            //console.log(hideMethod);
+            console.log(this);
 
             hideMethod = hideMethod === undefined ? 'random_amount' : hideMethod;
 
             methods[hideMethod]();
 
-        }
+        };
+
+        // list all hide methods
+        localAPI.list = function () {
+
+            return Object.keys(methods);
+
+        };
+
+        // return the localAPI
+        return localAPI;
 
     }
         ()),
@@ -452,7 +465,8 @@ var land = (function () {
 
             tab : tab,
             tabString : tab.remaining + '/' + tab.total,
-            layers : this.d
+            layers : this.d,
+            hideMethods : hidePebble.list()
 
         };
 
