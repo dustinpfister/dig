@@ -14,8 +14,6 @@ var land = (function () {
         totalPebble : 1000,
         amount : 0,
 
-        //currentHideMethod : 'top-down',
-        //currentHideMethod : 'all-in-left-top-zero',
         currentHideMethod : 'random_amount',  // default to single built in method
 
         hpRange : {
@@ -93,32 +91,6 @@ var land = (function () {
 
     },
 
-    makeOptions = function (z) {
-
-        var options = [];
-
-        api.cells.forEach(function (cell, index) {
-
-            if (z === undefined) {
-
-                options.push(index);
-
-            } else {
-
-                if (cell.z === z) {
-
-                    options.push(index);
-
-                }
-
-            }
-
-        });
-
-        return options;
-
-    },
-
     // tabulate pebble
     tabulate = function () {
 
@@ -162,28 +134,12 @@ var land = (function () {
 
     hidePebble = (function () {
 
-        // splice out a random index from the given options array, and return that cell
-        var spliceFromOptions = function (options) {
-
-            return api.cells[options.splice(Math.floor(Math.random() * options.length), 1)[0]];
-
-        },
-
-        // do what needs to get done when setting an amount for the given cell
-        setAmount = function (cell, amount) {
-
-            api.amount += amount;
-            cell.total = amount;
-            cell.amount = cell.total;
-
-        },
-
-        methods = {
+        var methods = {
 
             // a random flat amount per loot tile
             random_amount : function () {
 
-                var options = makeOptions(),
+                var options = hideKit.makeOptions(),
                 i,
                 cell,
                 stackIndex,
@@ -208,9 +164,9 @@ var land = (function () {
                 i = 0;
                 while (i < tileCount) {
 
-                    cell = spliceFromOptions(options);
+                    cell = hideKit.spliceFromOptions(options);
 
-                    setAmount(cell, amount);
+                    hideKit.setAmount(cell, amount);
 
                     i += 1;
 
@@ -218,46 +174,11 @@ var land = (function () {
 
                 if (remainAmount) {
 
-                    cell = spliceFromOptions(options);
+                    cell = hideKit.spliceFromOptions(options);
 
-                    setAmount(cell, remainAmount);
-
-                }
-
-            },
-
-            // everything on the top layer
-            top_layer : function () {
-
-                // the top layer will always have allot of loot cells, say 50%
-                var options = makeOptions(0),
-                topCount = Math.floor(api.w * api.h * .5),
-                i = 0,
-                amount,
-                cell,
-                stackIndex;
-
-                api.amount = 0;
-                amount = Math.floor(api.totalPebble / topCount);
-
-                // hide in top layer
-                while (i < topCount) {
-
-                    cell = spliceFromOptions(options);
-
-                    amount = amount;
-
-                    setAmount(cell, amount);
-
-                    i += 1;
+                    hideKit.setAmount(cell, remainAmount);
 
                 }
-
-                cell = spliceFromOptions(options);
-
-                amount = api.totalPebble - amount * topCount;
-
-                setAmount(cell, amount);
 
             }
 

@@ -36,6 +36,11 @@ var app = (function () {
         // create
         create : function () {
 
+            // set to top down hide method
+            land.currentHideMethod = 'top-down';
+            land.reset();
+
+
             app.state.add('load', Load);
             app.state.start('load');
 
