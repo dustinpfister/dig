@@ -2,9 +2,8 @@
 
     * added land.addHideMethod() method that allows for importing an external hide method into land.js
     * pulled top_down into a land.addHidMethod call that will come with land.js
-
-
-    * I made it so that setting total amounts of all cells is just part of the process
+    * added a hideKit api that helps with the authoring og hide methods
+    * I made it so that setting total amounts of all cells is just part of the process via the hideKit api
 
 
 

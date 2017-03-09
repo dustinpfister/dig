@@ -54,13 +54,12 @@ land.addHideMethod({
 
     name : 'all-in-left-top-zero',
 
-    method : function () {
+    method : function (hideKit) {
 
         console.log('I am the all-in-left-top-zero hide method');
 
         // set total, and amount of cell 0 to the amount of total pebble for the stack
-        this.cells[0].total = this.totalPebble;
-        this.cells[0].amount = this.cells[0].total;
+        hideKit.setAmount(this.cells[0], this.totalPebble);
 
     }
 
