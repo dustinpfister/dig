@@ -14,7 +14,18 @@ var land = (function () {
         totalPebble : 1000,
         amount : 0,
 
-        currentHideMethod : 'random_amount',  // default to single built in method
+        currentHideMethod : 'random_amount', // default to single built in method
+
+        hideMethod : {
+
+            current : 'rabbithole',
+            params : {
+
+                mode : 'the_white_rabbit'
+
+            }
+
+        },
 
         hpRange : {
 
@@ -86,6 +97,21 @@ var land = (function () {
             api.amount += amount;
             cell.total = amount;
             cell.amount = cell.total;
+
+        },
+
+        // for all layers
+        forDepth : function (method) {
+
+            var l = 0,
+            len = api.d;
+            while (l < len) {
+
+                method(api.getLayer(l),l);
+
+                l += 1;
+
+            }
 
         }
 
@@ -189,7 +215,7 @@ var land = (function () {
 
             hideMethod = hideMethod === undefined ? 'random_amount' : hideMethod;
 
-            methods[hideMethod].call(api, hideKit);
+            methods[hideMethod].call(api, hideKit, api.hideMethod.params, api);
 
         };
 
@@ -251,7 +277,9 @@ var land = (function () {
 
         }
 
-        hidePebble(api.currentHideMethod);
+        // use the current hide method
+        //hidePebble(api.currentHideMethod);
+        hidePebble(api.hideMethod.current);
 
         // set amount to total
         api.amount = api.totalPebble;
