@@ -8,17 +8,16 @@ var land = (function () {
         w : 8,
         h : 8,
         d : 3,
-        //level : 1,
 
         // the total amount of pebble in the land
         totalPebble : 1000,
         amount : 0,
 
-        currentHideMethod : 'random_amount', // default to single built in method
+        //currentHideMethod : 'random_amount', // default to single built in method
 
         hideMethod : {
 
-            current : 'rabbithole',
+            current : 'random_amount',
             params : {
 
                 mode : 'the_white_rabbit'
