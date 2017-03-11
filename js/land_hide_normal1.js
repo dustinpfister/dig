@@ -25,9 +25,9 @@ land.addHideMethod({
             layerCount,
             per,
             layers = [],
-            total = 0;
+            totalLootTiles = 0;
 
-            // find starts for each layer
+            // find stats for each layer
             while (i < land.d) {
 
                 per = (i + 1) / land.d;
@@ -38,10 +38,18 @@ land.addHideMethod({
                 // min of one per layer
                 layerCount = layerCount <= 0 ? 1 : layerCount;
 
-                // push the layer count
-                layers.push(layerCount);
+                // percent of stack pebble
 
-                total += layerCount;
+
+                // push the layer count
+                layers.push({
+
+                    lootTileCount : layerCount,
+                    percentOfStackPebble : params.maxPer / land.d * (land.d - i)
+
+                });
+
+                totalLootTiles += layerCount;
 
                 i += 1;
 
@@ -51,7 +59,7 @@ land.addHideMethod({
             return {
 
                 layers : layers,
-                total : total
+                totalLootTiles : totalLootTiles
 
             };
 
@@ -67,7 +75,7 @@ land.addHideMethod({
 
             cell = hideKit.spliceFromOptions(options);
 
-            amount = Math.floor(stats.layers[d] + (land.totalPebble- stats.total) / land.d);
+            amount = Math.floor(stats.layers[d].lootTileCount + (land.totalPebble - stats.totalLootTiles) / land.d);
 
             console.log(amount);
 

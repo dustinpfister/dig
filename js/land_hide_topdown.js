@@ -33,7 +33,7 @@ land.addHideMethod({
 
             var lootTiles;
 
-            per = startPer / (depth) * (depth - layerIndex);
+            per = startPer / depth * (depth - layerIndex);
 
             lootTiles = Math.ceil(tilesPerLayer * per);
 
