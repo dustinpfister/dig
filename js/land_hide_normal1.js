@@ -16,18 +16,21 @@ land.addHideMethod({
         console.log('total stack pebble to hide: ' + land.totalPebble);
 
         // can I find a way to do this by way of a single expression?
-        var startLTCount = land.w * land.h * params.topPer,
+        var startLTCount = land.w * land.h * params.topLTPer,
 
         // find stats for the stack
         stats = (function () {
 
             var i = 0,
             layerCount,
+            per,
             layers = [],
             total = 0;
 
             // find starts for each layer
             while (i < land.d) {
+
+                per = (i + 1) / land.d;
 
                 // loot tiles for the layer
                 layerCount = Math.floor(startLTCount - (startLTCount - 1) * (i / (land.d - 1)));
@@ -35,7 +38,8 @@ land.addHideMethod({
                 // min of one per layer
                 layerCount = layerCount <= 0 ? 1 : layerCount;
 
-                console.log('layer ' + i + ' lt count = ' + layerCount);
+                // push the layer count
+                layers.push(layerCount);
 
                 total += layerCount;
 
@@ -54,7 +58,7 @@ land.addHideMethod({
         }
             ());
 
-        console.log(stats);
+        console.log('stats');
         console.log(stats);
 
         hideKit.forDepth(function (layer, d) {
@@ -63,9 +67,11 @@ land.addHideMethod({
 
             cell = hideKit.spliceFromOptions(options);
 
-            console.log(stats.layer[d]);
+            amount = Math.floor(stats.layers[d] + (land.totalPebble- stats.total) / land.d);
 
-            hideKit.setAmount(cell, 100);
+            console.log(amount);
+
+            hideKit.setAmount(cell, amount);
 
         });
 

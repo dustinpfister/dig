@@ -20,7 +20,8 @@ var land = (function () {
             current : 'random_amount',
             params : {
 
-                topPer : .5
+                topLTPer : .5,
+                bottomPebPer : .5
 
             }
 
@@ -106,7 +107,7 @@ var land = (function () {
             len = api.d;
             while (l < len) {
 
-                method(api.getLayer(l),l);
+                method(api.getLayer(l), l);
 
                 l += 1;
 
