@@ -8,6 +8,14 @@
 
 
 
+	* normal 1
+
+	A per layer pebble amount is found my just diving the totalStack pebble over the number of layers
+
+	var perLayer = land.totalPebble / land.d;
+
+	Only a percentage of the perLayer amount goes to each layer, the largest of each is at the bottom
+	
     maybes:
     * more than one effect
     * can set which effect, as well as disable the effect in egg.js.

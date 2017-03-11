@@ -21,7 +21,7 @@ var land = (function () {
             params : {
 
                 topLTPer : .5,
-                bottomPebPer : .5,
+                bestPebPer : .5,
                 maxPer : .5
 
             }

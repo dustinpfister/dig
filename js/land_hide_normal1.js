@@ -12,13 +12,12 @@ land.addHideMethod({
 
     method : function (hideKit, params) {
 
-        console.log('I am the normal hide method.');
-        console.log('total stack pebble to hide: ' + land.totalPebble);
+        console.log('I am the \"normal1\" hide method, but you can call me Jerry.');
 
         // can I find a way to do this by way of a single expression?
         var startLTCount = land.w * land.h * params.topLTPer,
 
-        // find stats for the stack
+        // find starting stats for the stack
         stats = (function () {
 
             var i = 0,
@@ -44,8 +43,7 @@ land.addHideMethod({
                 // push the layer count
                 layers.push({
 
-                    lootTileCount : layerCount,
-                    percentOfStackPebble : params.maxPer / land.d * (land.d - i)
+                    lootTileCount : layerCount
 
                 });
 
@@ -66,6 +64,42 @@ land.addHideMethod({
         }
             ());
 
+        // loop threw layers from the bottom up, and find amounts
+        var i = land.d,
+        pebPer = 1,
+        perLayer = land.totalPebble / land.d,
+        layerAmount,
+        totalUsed = 0,
+        remain,
+        layer;
+        while (i--) {
+
+            layer = stats.layers[i];
+
+            //console.log('layer: ' + i);
+
+            //pebPer = 1 - params.bestPebPer - (1 - params.bestPebPer) / land.d * ((land.d - i) / land.d);
+
+            pebPer = 1 - (land.d - i - 1) / land.d;
+            layerAmount = Math.floor(perLayer * pebPer);
+            totalUsed += layerAmount;
+            console.log('layer # : ' + i + ' pebble amount = ' + layerAmount);
+
+            layer.amount = layerAmount;
+
+            //console.log(layer);
+
+            // total pebble for the whole layer
+            //layer.totalPebble =
+
+        }
+
+        remain = land.totalPebble - totalUsed;
+
+        console.log('total stack pebble = ' + land.totalPebble);
+        console.log('totalUsed = ' + totalUsed);
+        console.log('remain = ' + remain);
+
         console.log('stats');
         console.log(stats);
 
@@ -76,8 +110,6 @@ land.addHideMethod({
             cell = hideKit.spliceFromOptions(options);
 
             amount = Math.floor(stats.layers[d].lootTileCount + (land.totalPebble - stats.totalLootTiles) / land.d);
-
-            console.log(amount);
 
             hideKit.setAmount(cell, amount);
 
