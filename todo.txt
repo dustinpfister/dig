@@ -12,7 +12,7 @@
 
 	A per layer pebble amount is found my just diving the totalStack pebble over the number of layers
 
-	var perLayer = land.totalPebble / land.d;
+	var perLayer = Math.floor(land.totalPebble / land.d);
 
 	Only a percentage of the perLayer amount goes to each layer, the largest of each is at the bottom
 	

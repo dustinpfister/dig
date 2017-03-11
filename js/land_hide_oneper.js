@@ -54,7 +54,6 @@ land.addHideMethod({
         console.log('total stack pebble = ' + land.totalPebble);
         console.log('totalUsed = ' + totalUsed);
         console.log('remain = ' + remain);
-
         console.log('stats');
         console.log(stats);
 
@@ -64,9 +63,6 @@ land.addHideMethod({
 
             cell = hideKit.spliceFromOptions(options);
 
-            //amount = Math.floor(stats.layers[d].lootTileCount + (land.totalPebble - stats.totalLootTiles) / land.d);
-
-            //hideKit.setAmount(cell, amount);
             hideKit.setAmount(cell, stats.layers[d].amount);
 
         });

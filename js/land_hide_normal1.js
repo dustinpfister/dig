@@ -79,34 +79,73 @@ land.addHideMethod({
             pebPer = 1 - (land.d - i - 1) / land.d;
             layerAmount = Math.floor(perLayer * pebPer);
             totalUsed += layerAmount;
-            console.log('layer # : ' + i + ' pebble amount = ' + layerAmount);
+
+            //console.log('layer # : ' + i + ' pebble amount = ' + layerAmount);
 
             layer.amount = layerAmount;
-
 
         }
 
         // find remain, and stuff it into the bottom layer
         remain = land.totalPebble - totalUsed;
-        stats.layers[land.d-1].amount += remain;
+        stats.layers[land.d - 1].amount += remain;
 
+        /*
         console.log('total stack pebble = ' + land.totalPebble);
         console.log('totalUsed = ' + totalUsed);
         console.log('remain = ' + remain);
-
         console.log('stats');
         console.log(stats);
+         */
 
         hideKit.forDepth(function (layer, d) {
 
             var options = hideKit.makeOptions(d),
+            layerAmount,
+            tileAmount,
+            ltCount,
+            i,
+            remain = 0,
+            cell;
 
-            cell = hideKit.spliceFromOptions(options);
+            layerAmount = stats.layers[d].amount;
+            ltCount = stats.layers[d].lootTileCount;
 
-            //amount = Math.floor(stats.layers[d].lootTileCount + (land.totalPebble - stats.totalLootTiles) / land.d);
+            // set ltCount to pebble amount, if there is not enough to go around
+            if (layerAmount / ltCount < 1) {
 
-            //hideKit.setAmount(cell, amount);
-            hideKit.setAmount(cell, stats.layers[d].amount);
+                ltCount = layerAmount;
+
+            }
+
+            tileAmount = Math.floor(layerAmount / ltCount);
+            remain = layerAmount % ltCount;
+            console.log('amount per lt for layer: ' + tileAmount);
+            if (remain) {
+
+                console.log('with a remainder of: ' + remain);
+
+            }
+
+            i = 0;
+            while (i < ltCount) {
+
+                cell = hideKit.spliceFromOptions(options);
+
+                if (i === ltCount - 1 && remain) {
+
+                    console.log('last one, and we have a remained to stuff in it.');
+                    hideKit.setAmount(cell, tileAmount + remain);
+                } else {
+
+                    hideKit.setAmount(cell, tileAmount);
+
+                }
+
+                i += 1;
+            }
+
+            console.log('');
 
         });
 
