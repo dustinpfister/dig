@@ -38,7 +38,7 @@ var app = (function () {
 
             // set to top down hide method
             //land.currentHideMethod = 'top-down';
-            land.hideMethod.current = 'normal1';
+            land.hideMethod.current = 'oneper';
             land.reset();
 
             app.state.add('load', Load);

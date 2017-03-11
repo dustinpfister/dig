@@ -1,68 +1,28 @@
 /*
 
-land_hide_normal1.js
+land_hide_oneper.js
 
-first attempt at a finale 'normal' game mode hide method.
+oneper hide method makes it so there is just one loot tile per layer, with the most valuable one at the bottom.
 
  */
 
 land.addHideMethod({
 
-    name : 'normal1',
+    name : 'oneper',
 
     method : function (hideKit, params) {
 
-        console.log('I am the \"normal1\" hide method, but you can call me Jerry.');
+        console.log('I am the \"oneper\" hide method.');
 
         // can I find a way to do this by way of a single expression?
         var startLTCount = land.w * land.h * params.topLTPer,
 
         // find starting stats for the stack
-        stats = (function () {
+        stats = {
 
-            var i = 0,
-            layerCount,
-            per,
-            layers = [],
-            totalLootTiles = 0;
+            layers : []
 
-            // find stats for each layer
-            while (i < land.d) {
-
-                per = (i + 1) / land.d;
-
-                // loot tiles for the layer
-                layerCount = Math.floor(startLTCount - (startLTCount - 1) * (i / (land.d - 1)));
-
-                // min of one per layer
-                layerCount = layerCount <= 0 ? 1 : layerCount;
-
-                // percent of stack pebble
-
-
-                // push the layer count
-                layers.push({
-
-                    lootTileCount : layerCount
-
-                });
-
-                totalLootTiles += layerCount;
-
-                i += 1;
-
-            }
-
-            // return stats
-            return {
-
-                layers : layers,
-                totalLootTiles : totalLootTiles
-
-            };
-
-        }
-            ());
+        };
 
         // loop threw layers from the bottom up, and find amounts
         var i = land.d,
@@ -74,7 +34,7 @@ land.addHideMethod({
         layer;
         while (i--) {
 
-            layer = stats.layers[i];
+            layer = {};
 
             pebPer = 1 - (land.d - i - 1) / land.d;
             layerAmount = Math.floor(perLayer * pebPer);
@@ -83,12 +43,13 @@ land.addHideMethod({
 
             layer.amount = layerAmount;
 
+            stats.layers[i] = layer;
 
         }
 
         // find remain, and stuff it into the bottom layer
         remain = land.totalPebble - totalUsed;
-        stats.layers[land.d-1].amount += remain;
+        stats.layers[land.d - 1].amount += remain;
 
         console.log('total stack pebble = ' + land.totalPebble);
         console.log('totalUsed = ' + totalUsed);
