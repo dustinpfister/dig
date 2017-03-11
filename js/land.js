@@ -20,7 +20,7 @@ var land = (function () {
             current : 'random_amount',
             params : {
 
-                mode : 'the_white_rabbit'
+                topPer : .5
 
             }
 
