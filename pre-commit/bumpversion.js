@@ -45,7 +45,7 @@ fs.readFile('package.json', 'utf8', function (err, data) {
 
             } else {
 
-                console.log('lookig good');
+                console.log('lookig good, bumped up to: ' + versionNumber);
 
             }
 

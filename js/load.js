@@ -27,6 +27,9 @@ var Load = (function () {
             app.load.bitmapFont('desyrel', 'img/desyrel.png', 'img/font1.xml');
             app.load.image('logo', 'img/logo.png');
 
+            //JSON
+            app.load.json('package', 'package.json');
+
         },
 
         create : function () {
