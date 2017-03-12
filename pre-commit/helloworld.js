@@ -1,0 +1,1 @@
+console.log('yes I am a pre-commit script, how do you do?');
