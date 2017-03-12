@@ -1,1 +1,1 @@
-console.log('yes I am a pre-commit script, how do you do?');
+console.log('helloworld.js: yes I am a pre-commit script, how do you do?');
