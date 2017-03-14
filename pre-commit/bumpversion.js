@@ -1,6 +1,31 @@
 
 var fs = require('fs'),
-beautify = require('js-beautify').js_beautify;
+beautify = require('js-beautify').js_beautify,
+
+// update hard_settings.json for development version in js folder
+updateHardSet = function () {
+
+    console.log('updating hard settings...');
+
+    fs.readFile('./js/hard_settings.json', 'utf-8', function (err, data_hs) {
+
+        fs.readFile('package.json', 'utf-8', function (err, data_pack) {
+
+            var hs = JSON.parse(data_hs);
+
+            hs.version = JSON.parse(data_pack).version;
+
+            fs.writeFile('./js/hard_settings.json', JSON.stringify(hs), 'utf-8', function (err) {
+
+                console.log('production hard settings version updated.');
+
+            });
+
+        });
+
+    });
+
+};
 
 console.log('bumpversion.js:');
 
@@ -37,7 +62,9 @@ fs.readFile('package.json', 'utf8', function (err, data) {
         pack.version = versionNumber;
 
         // write the change
-        fs.writeFile('package.json', beautify(JSON.stringify(pack), { indent_size: 2 }), 'utf8', function (err) {
+        fs.writeFile('package.json', beautify(JSON.stringify(pack), {
+                indent_size : 2
+            }), 'utf8', function (err) {
 
             if (err) {
 
@@ -48,6 +75,8 @@ fs.readFile('package.json', 'utf8', function (err, data) {
                 console.log('lookig good, bumped up to: ' + versionNumber);
 
             }
+
+            updateHardSet();
 
         });
 

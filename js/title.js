@@ -49,14 +49,6 @@ var Title = (function () {
             //  Add a Tileset image to the map
             map.addTilesetImage('tiles');
 
-            // get package.json data
-            var pack = app.cache.getJSON('package');
-
-            app.add.bitmapText(5, app.height-30, 'desyrel', 'v'+pack.version, 20);
-
-            console.log('the version?');
-            console.log(pack.version);
-
             layer1 = map.create('level1', 4, 4, 32, 32);
             layer1.width = app.height;
             layer1.height = app.height;
@@ -87,6 +79,16 @@ var Title = (function () {
             logo.height = 1 * (app.width / 3);
             logo.x = app.width / 2 - logo.width / 2;
             logo.y = app.world.centerY - logo.height;
+
+            // get package.json data
+            var pack = app.cache.getJSON('hard_settings');
+
+            app.add.bitmapText(5, app.height - 30, 'desyrel', 'v' + pack.version + ' ( ' + pack.env + ' )', 20);
+
+            console.log('the version?');
+
+            console.log(pack);
+            console.log(pack.version);
 
         }
     };

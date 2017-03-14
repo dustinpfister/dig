@@ -1,6 +1,6 @@
 {
   "name": "game_dig",
-  "version": "2.14.5",
+  "version": "2.14.6",
   "description": "A game about digging for money",
   "main": "server.js",
   "scripts": {
@@ -11,13 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/dustinpfister/game_dig.git"
   },
-  "keywords": [
-    "js",
-    "phaser",
-    "game",
-    "dig",
-    "money"
-  ],
+  "keywords": ["js", "phaser", "game", "dig", "money"],
   "author": "Dustin Pfister",
   "license": "GPL-3.0",
   "bugs": {
@@ -29,7 +23,5 @@
     "node-minify": "^2.0.3",
     "pre-commit": "^1.2.2"
   },
-  "pre-commit": [
-    "bumpversion"
-  ]
+  "pre-commit": ["bumpversion"]
 }

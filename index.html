@@ -30,7 +30,19 @@
     <textarea id = "errorlog"></textarea>
 
     <script src="https://cdn.rawgit.com/photonstorm/phaser/bea71e7879d9e50bd2f3a72c1e40f43e8b83f0ba/v2/build/phaser.min.js"></script>
+    <script>
 
+    // Patch Phaser tell dig it is a production version
+    Phaser.DJP_PATCH = {
+
+        env: 'production'
+
+    };
+
+    console.log(Phaser);
+
+
+    </script>
     <script src="js-min/game-dig-min.js"></script>
 
 </body>

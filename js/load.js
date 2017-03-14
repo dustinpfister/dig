@@ -28,7 +28,37 @@ var Load = (function () {
             app.load.image('logo', 'img/logo.png');
 
             //JSON
-            app.load.json('package', 'package.json');
+            if (Phaser.DJP_PATCH) {
+
+                // if we have a DJP_PATCH object patched into Phaser
+
+                if (!Phaser.DJP_PATCH.env || Phaser.DJP_PATCH.env === 'development') {
+
+                    // default to what is in the dev folder
+                    Phaser.DJP_PATCH.env = 'development';
+                    app.load.json('hard_settings', 'js/hard_settings.json');
+
+                } else {
+
+                    // use what is in the env folder
+
+                    app.load.json('hard_settings', 'js-min/hard_settings.json');
+
+                }
+
+            } else {
+
+                Phaser.DJP_PATCH = {
+
+                    env : 'development'
+
+                };
+
+                // else default to what is in the dev folder
+
+                app.load.json('hard_settings', 'js/hard_settings.json');
+
+            }
 
         },
 

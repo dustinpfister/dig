@@ -7,10 +7,10 @@
 console.log('starting pre-stage processing...');
 
 var fs = require('fs'),
-compressor = require('node-minify');
+compressor = require('node-minify'),
 path = './js',
 
-// the compress files method
+// compress dev files into a ./js-min/game-dig-min.js file
 compressFiles = function (done) {
 
     done = done === undefined ? function () {}
@@ -18,6 +18,7 @@ compressFiles = function (done) {
      : done;
 
     console.log('starting node-minify compression.');
+
     // Using UglifyJS
     compressor.minify({
         compressor : 'uglifyjs',
@@ -40,69 +41,37 @@ compressFiles = function (done) {
         }
     });
 
+},
+
+// update hard_settings.json for production version in js-min folder
+updateHardSet = function () {
+
+    console.log('updating hard settings...');
+
+    fs.readFile('./js-min/hard_settings.json', 'utf-8', function (err, data_hs) {
+
+        fs.readFile('package.json', 'utf-8', function (err, data_pack) {
+
+            var hs = JSON.parse(data_hs);
+
+            hs.version = JSON.parse(data_pack).version;
+
+            fs.writeFile('./js-min/hard_settings.json', JSON.stringify(hs), 'utf-8', function (err) {
+
+                console.log('production hard settings version updated.');
+
+            });
+
+        });
+
+    });
+
 };
 
 // start compression of files
 compressFiles(function () {
 
     console.log('node-minify compression complete.');
+    updateHardSet();
 
 });
-
-/*
-
-readJSFile = function (path,fileName) {
-
-fs.readFile(path + '/' + fileName, 'utf8', function (err, data) {
-
-if (err) {
-
-console.log('error reading js file:');
-console.log(err);
-
-} else {
-
-console.log(fileName + ' pre min file length (chars) : ' + data.length);
-
-
-console.log('*****');
-}
-
-});
-
-};
-
-// read file names in the path
-fs.readdir(path, function (err, files) {
-
-var i = files.length,
-fileName,
-fileNameParts;
-
-if (err) {
-
-console.log('error getting files');
-console.log(err);
-
-} else {
-
-// loop threw the files
-while (i--) {
-
-fileName = files[i],
-fileNameParts = fileName.split('.');
-
-if (fileNameParts.length >= 2 && fileNameParts[fileNameParts.length - 1] === 'js') {
-
-// call the read file method with the given path, and filename
-readJSFile(path, fileName);
-
-}
-
-}
-
-}
-
-});
-
-*/

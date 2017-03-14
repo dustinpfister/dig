@@ -3,6 +3,7 @@
     * started using node.js
     * made a script that bumps the version number on each commit
     * displaying current version number in the title screen by getting the package.json data
+    * added a pre-stage.js file that I can call with npm run before committing
 
     what else?
     * scripts to run before $ git add *:
