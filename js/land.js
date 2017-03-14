@@ -8,11 +8,25 @@ var land = (function () {
         w : 8,
         h : 8,
         d : 3,
-        //level : 1,
 
         // the total amount of pebble in the land
         totalPebble : 1000,
         amount : 0,
+
+        //currentHideMethod : 'random_amount', // default to single built in method
+
+        hideMethod : {
+
+            current : 'random_amount',
+            params : {
+
+                topLTPer : .5,
+                bestPebPer : .5,
+                maxPer : .5
+
+            }
+
+        },
 
         hpRange : {
 
@@ -42,29 +56,65 @@ var land = (function () {
 
     },
 
-    makeOptions = function (z) {
+    // a set of tools to be used in hide methods
+    hideKit = {
 
-        var options = [];
+        makeOptions : function (z) {
 
-        api.cells.forEach(function (cell, index) {
+            var options = [];
 
-            if (z === undefined) {
+            api.cells.forEach(function (cell, index) {
 
-                options.push(index);
-
-            } else {
-
-                if (cell.z === z) {
+                if (z === undefined) {
 
                     options.push(index);
 
+                } else {
+
+                    if (cell.z === z) {
+
+                        options.push(index);
+
+                    }
+
                 }
+
+            });
+
+            return options;
+
+        },
+
+        // splice out a random index from the given options array, and return that cell
+        spliceFromOptions : function (options) {
+
+            return api.cells[options.splice(Math.floor(Math.random() * options.length), 1)[0]];
+
+        },
+
+        // do what needs to get done when setting an amount for the given cell
+        setAmount : function (cell, amount) {
+
+            api.amount += amount;
+            cell.total = amount;
+            cell.amount = cell.total;
+
+        },
+
+        // for all layers
+        forDepth : function (method) {
+
+            var l = 0,
+            len = api.d;
+            while (l < len) {
+
+                method(api.getLayer(l), l);
+
+                l += 1;
 
             }
 
-        });
-
-        return options;
+        }
 
     },
 
@@ -111,28 +161,12 @@ var land = (function () {
 
     hidePebble = (function () {
 
-        // splice out a random index from the given options array, and return that cell
-        var spliceFromOptions = function (options) {
-
-            return api.cells[options.splice(Math.floor(Math.random() * options.length), 1)[0]];
-
-        },
-
-        // do what needs to get done when setting an amount for the given cell
-        setAmount = function (cell, amount) {
-
-            api.amount += amount;
-            cell.total = amount;
-            cell.amount = cell.total;
-
-        },
-
-        methods = {
+        var methods = {
 
             // a random flat amount per loot tile
             random_amount : function () {
 
-                var options = makeOptions(),
+                var options = hideKit.makeOptions(),
                 i,
                 cell,
                 stackIndex,
@@ -157,9 +191,9 @@ var land = (function () {
                 i = 0;
                 while (i < tileCount) {
 
-                    cell = spliceFromOptions(options);
+                    cell = hideKit.spliceFromOptions(options);
 
-                    setAmount(cell, amount);
+                    hideKit.setAmount(cell, amount);
 
                     i += 1;
 
@@ -167,200 +201,41 @@ var land = (function () {
 
                 if (remainAmount) {
 
-                    cell = spliceFromOptions(options);
+                    cell = hideKit.spliceFromOptions(options);
 
-                    setAmount(cell, remainAmount);
-
-                }
-
-            },
-
-            // common but low value loot tiles on the top, rate but valuable loot at the bottom
-            common_to_rare : function () {
-
-                // the top layer will always have allot say 50%
-                var options = makeOptions(0),
-                topCount = Math.floor(api.w * api.h * .5);
-
-            },
-
-            top_down : function () {
-
-                // locals that may become arguments
-                var depth = api.d,
-                startPer = .24,
-                tilesPerLayer = api.w * api.h,
-                totalPebble = api.totalPebble,
-                basePer = .2, // base percentage of totalpebble / depth per layer
-
-                // other locals
-                layerIndex = 0,
-                per,
-                layerData = [],
-                totalTiles = 0,
-                perLayer,
-                totalUsed,
-                sanity = false;
-
-                // this will be called recursively
-                nextLayer = function (done) {
-
-                    var lootTiles;
-
-                    per = startPer / (depth) * (depth - layerIndex);
-
-                    lootTiles = Math.ceil(tilesPerLayer * per);
-
-                    totalTiles += lootTiles;
-
-                    layerData.push({
-
-                        layerIndex : layerIndex,
-                        lootTiles : lootTiles,
-                        per : per
-
-                    });
-
-                    if (layerIndex < depth - 1) {
-
-                        layerIndex += 1;
-
-                        nextLayer(done);
-
-                    } else {
-
-                        // we are done with all the layers
-                        perLayer = totalPebble / depth;
-                        totalUsed = 0;
-
-                        layerData.forEach(function (layerObj) {
-
-                            var log = Math.log(layerObj.layerIndex + 1) / Math.log(depth),
-                            baseAmount = Math.floor(perLayer * basePer);
-
-                            layerObj.pebble = Math.floor(baseAmount + perLayer * log * (1 - basePer));
-                            totalUsed += layerObj.pebble;
-
-                        });
-
-                        // stuff any remaining pebble into the last layer
-                        layerData[layerData.length - 1].pebble += totalPebble - totalUsed;
-
-                        // sanity check
-                        totalUsed = 0;
-                        layerData.forEach(function (layerObj) {
-
-                            totalUsed += layerObj.pebble
-
-                        });
-
-                        sanity = totalUsed === totalPebble;
-
-                        done({
-
-                            sanity : sanity,
-                            totalTiles : totalTiles,
-                            totalUsed : totalUsed,
-                            layerData : layerData
-
-                        });
-
-                    }
-
-                };
-
-                nextLayer(function (data) {
-
-                    //document.body.innerHTML = JSON.stringify(data);
-
-                    var options,
-                    amount,
-                    remain;
-
-                    api.amount = 0;
-
-                    data.layerData.forEach(function (layerObj) {
-
-                        // The loot tile count can not be greater than the amount of pebble for the layer
-                        if (layerObj.lootTiles > layerObj.pebble) {
-
-                            layerObj.lootTiles = layerObj.pebble;
-
-                        }
-
-                        options = makeOptions(layerObj.layerIndex);
-                        amount = Math.floor(layerObj.pebble / layerObj.lootTiles);
-                        i = 0;
-                        while (i < layerObj.lootTiles) {
-
-                            cell = spliceFromOptions(options);
-
-                            amount = amount;
-
-                            setAmount(cell, amount);
-
-                            i += 1;
-                        }
-
-                    });
-
-                    // place any remaining pebble in what should be the deepest layer
-                    remain = api.totalPebble - api.amount;
-                    if (remain > 0) {
-
-                        cell = spliceFromOptions(options);
-                        setAmount(cell, Math.floor(api.totalPebble - api.amount));
-
-                    }
-
-                });
-
-            },
-
-            // everything on the top layer
-            top_layer : function () {
-
-                // the top layer will always have allot of loot cells, say 50%
-                var options = makeOptions(0),
-                topCount = Math.floor(api.w * api.h * .5),
-                i = 0,
-                amount,
-                cell,
-                stackIndex;
-
-                api.amount = 0;
-                amount = Math.floor(api.totalPebble / topCount);
-
-                // hide in top layer
-                while (i < topCount) {
-
-                    cell = spliceFromOptions(options);
-
-                    amount = amount;
-
-                    setAmount(cell, amount);
-
-                    i += 1;
+                    hideKit.setAmount(cell, remainAmount);
 
                 }
-
-                cell = spliceFromOptions(options);
-
-                amount = api.totalPebble - amount * topCount;
-
-                setAmount(cell, amount);
 
             }
 
-        };
+        },
 
-        return function (hideMethod) {
+        // local API for hidePebble
+        localAPI = function (hideMethod) {
 
             hideMethod = hideMethod === undefined ? 'random_amount' : hideMethod;
 
-            methods[hideMethod]();
+            methods[hideMethod].call(api, hideKit, api.hideMethod.params, api);
 
-        }
+        };
+
+        // list all hide methods
+        localAPI.list = function () {
+
+            return Object.keys(methods);
+
+        };
+
+        // inject a method
+        localAPI.injectMethod = function (method) {
+
+            methods[method.name] = method.method;
+
+        };
+
+        // return the localAPI
+        return localAPI;
 
     }
         ()),
@@ -403,7 +278,12 @@ var land = (function () {
 
         }
 
-        hidePebble('top_down');
+        // use the current hide method
+        //hidePebble(api.currentHideMethod);
+        hidePebble(api.hideMethod.current);
+
+        // set amount to total
+        api.amount = api.totalPebble;
 
     };
 
@@ -437,7 +317,7 @@ var land = (function () {
         this.hpRange.low = this.hpRange.low > 4 ? 4 : this.hpRange.low;
         this.hpRange.high = this.hpRange.high > 4 ? 4 : this.hpRange.high;
 
-    },
+    };
 
     // get info about the land
     api.getInfo = function () {
@@ -448,11 +328,18 @@ var land = (function () {
 
             tab : tab,
             tabString : tab.remaining + '/' + tab.total,
-            layers : this.d
+            layers : this.d,
+            hideMethods : hidePebble.list()
 
         };
 
-    },
+    };
+
+    api.addHideMethod = function (methodObj) {
+
+        hidePebble.injectMethod(methodObj);
+
+    };
 
     // get a cell by index, or x,y,z
     api.getCell = function (ix, y, z) {

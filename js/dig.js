@@ -316,21 +316,27 @@ var DIG = (function () {
     return {
 
         // show pebble method is used by egg.js
-        showPebble : function () {
+        showPebble : function (setTo) {
 
             showPebble = !showPebble;
+
+            if (typeof setTo === 'boolean') {
+
+                showPebble = setTo
+
+            }
+
             Layers.genLayer('activeLayer', state.current.layer);
 
         },
 
         // external reGen method is used by egg.js
-        /*
+
         reGen : function () {
 
-        //Layers.genLayer();
+            Layers.genLayer('activeLayer', state.current.layer);
 
         },
-         */
 
         // DIG.run Phaser state (the actual main game state, running at the current layer)
         run : (function () {

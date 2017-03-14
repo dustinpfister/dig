@@ -1,14 +1,34 @@
-2.13.x - 
+2.14.x - node.js, and pre-commit scripts
 
+    * started using node.js
+    * made a script that bumps the version number on each commit
+    * displaying current version number in the title screen by getting the package.json data
+    * added a pre-stage.js file that I can call with npm run before committing.
+    * automatically creating a game-dig-min.js file in a new js-min folder when calling $ npm run pre-stage. 
+    * I am now using hard_settings.json files in both js, and js-min folders.
+    * hard_settings.json files let dig know what version it is, and if it is a development or production release.
+    * I now have an index.html, and index-dev.html files.
+    * index.html uses what is in the js-min folder, and index-dev uses what is in the js folder
 
+2.x.x - games modes
 
+    * add a state.addGameMode method
+    * a game mode can:
+        * have one or more hide methods
+        * it can treat tile hp in different ways
+        * the number of stacks can be 1 to endless
+        * loss or win conditions can change
+        * have a level value associated with it
 
-
-    maybes:
-    * more than one effect
-    * can set which effect, as well as disable the effect in egg.js.
 
 GAME MODES:
+
+    * normal
+
+        * You start out with 3 layers, and a few digs.
+        * leveing up increaes the number of digs, the amount of stack pebble, and total layers.
+        * uses the 'normal1' hide method.
+
 
     * stack 64
 
@@ -21,6 +41,18 @@ GAME MODES:
         * At the bottom layer there is just one tile with pebble.
         * the single loot tile at the bottom is the most valuable.
 
+    * To China.
+
+        Although not a true endless mode, for the most part it is.
+
+        * earths diameter is 7917 miles or 12,738,453 m
+
+        * unlimited digs
+        * progress saved on each drop down
+        * fixed 1 hp for each tile for first 10% of layers
+        * auto dig option
+        * leveling once china is reached.
+        * leveling up just increases stack pebble
 
 IDEAS:
 

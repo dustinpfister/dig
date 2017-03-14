@@ -47,6 +47,7 @@ var state = (function () {
 
             current.pebble = saveData.pebble;
             current.landLevel = saveData.landLevel;
+            //current.landLevel = 100;
             current.maxDigs = saveData.maxDigs;
             current.digs = current.maxDigs;
 
@@ -81,6 +82,7 @@ var state = (function () {
 
         },
 
+        // yes this is where I am setting the level
         levelUp : function () {
 
             var rawLevel = Math.log(current.pebble) / Math.log(4),
@@ -104,17 +106,19 @@ var state = (function () {
 
         },
 
+        /*
         stepLayer : function () {
 
-            current.ayer += 1;
+        current.layer += 1;
 
-            if (current.layer >= land.d) {
+        if (current.layer >= land.d) {
 
-                current.layer = 0;
+        current.layer = 0;
 
-            }
+        }
 
         },
+         */
 
         reset : function () {
 

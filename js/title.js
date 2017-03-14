@@ -80,6 +80,11 @@ var Title = (function () {
             logo.x = app.width / 2 - logo.width / 2;
             logo.y = app.world.centerY - logo.height;
 
+            // get package.json data
+            var pack = app.cache.getJSON('hard_settings');
+
+            app.add.bitmapText(5, app.height - 30, 'desyrel', 'v' + pack.version + ' ( ' + pack.env + ' )', 20);
+
         }
     };
 
