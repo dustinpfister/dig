@@ -120,12 +120,6 @@ land.addHideMethod({
 
             tileAmount = Math.floor(layerAmount / ltCount);
             remain = layerAmount % ltCount;
-            console.log('amount per lt for layer: ' + tileAmount);
-            if (remain) {
-
-                console.log('with a remainder of: ' + remain);
-
-            }
 
             i = 0;
             while (i < ltCount) {
@@ -134,8 +128,8 @@ land.addHideMethod({
 
                 if (i === ltCount - 1 && remain) {
 
-                    console.log('last one, and we have a remained to stuff in it.');
                     hideKit.setAmount(cell, tileAmount + remain);
+
                 } else {
 
                     hideKit.setAmount(cell, tileAmount);
@@ -144,8 +138,6 @@ land.addHideMethod({
 
                 i += 1;
             }
-
-            console.log('');
 
         });
 

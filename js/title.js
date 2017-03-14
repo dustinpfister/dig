@@ -85,11 +85,6 @@ var Title = (function () {
 
             app.add.bitmapText(5, app.height - 30, 'desyrel', 'v' + pack.version + ' ( ' + pack.env + ' )', 20);
 
-            console.log('the version?');
-
-            console.log(pack);
-            console.log(pack.version);
-
         }
     };
 

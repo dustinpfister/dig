@@ -3,15 +3,12 @@
     * started using node.js
     * made a script that bumps the version number on each commit
     * displaying current version number in the title screen by getting the package.json data
-    * added a pre-stage.js file that I can call with npm run before committing
-
-    what else?
-    * scripts to run before $ git add *:
-        * use js-beautify to beautify js dev files
-        * use js-beautify to automatically make min versions of js files
-        * have it so index.html uses the min files.
-        * maybe jslint?
-
+    * added a pre-stage.js file that I can call with npm run before committing.
+    * automatically creating a game-dig-min.js file in a new js-min folder when calling $ npm run pre-stage. 
+    * I am now using hard_settings.json files in both js, and js-min folders.
+    * hard_settings.json files let dig know what version it is, and if it is a development or production release.
+    * I now have an index.html, and index-dev.html files.
+    * index.html uses what is in the js-min folder, and index-dev uses what is in the js folder
 
 2.x.x - games modes
 
