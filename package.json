@@ -1,26 +1,35 @@
 {
-    "name" : "game_dig",
-    "version" : "2.14.4",
-    "description" : "A game about digging for money",
-    "main" : "server.js",
-    "scripts" : {
-        "bumpversion" : "node ./pre-commit/bumpversion.js",
-        "pre-stage" : "node ./pre-commit/pre-stage.js"
-    },
-    "repository" : {
-        "type" : "git",
-        "url" : "git+https://github.com/dustinpfister/game_dig.git"
-    },
-    "keywords" : ["js", "phaser", "game", "dig", "money"],
-    "author" : "Dustin Pfister",
-    "license" : "GPL-3.0",
-    "bugs" : {
-        "url" : "https://github.com/dustinpfister/game_dig/issues"
-    },
-    "homepage" : "https://github.com/dustinpfister/game_dig#readme",
-    "devDependencies" : {
-        "js-beautify" : "^1.6.11",
-        "pre-commit" : "^1.2.2"
-    },
-    "pre-commit" : ["bumpversion"]
+  "name": "game_dig",
+  "version": "2.14.5",
+  "description": "A game about digging for money",
+  "main": "server.js",
+  "scripts": {
+    "bumpversion": "node ./pre-commit/bumpversion.js",
+    "pre-stage": "node ./pre-commit/pre-stage.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dustinpfister/game_dig.git"
+  },
+  "keywords": [
+    "js",
+    "phaser",
+    "game",
+    "dig",
+    "money"
+  ],
+  "author": "Dustin Pfister",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dustinpfister/game_dig/issues"
+  },
+  "homepage": "https://github.com/dustinpfister/game_dig#readme",
+  "devDependencies": {
+    "js-beautify": "^1.6.11",
+    "node-minify": "^2.0.3",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "bumpversion"
+  ]
 }

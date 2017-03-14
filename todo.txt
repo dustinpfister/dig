@@ -15,7 +15,7 @@
 2.x.x - games modes
 
     * add a state.addGameMode method
-	* a game mode can:
+    * a game mode can:
         * have one or more hide methods
         * it can treat tile hp in different ways
         * the number of stacks can be 1 to endless
@@ -28,8 +28,8 @@ GAME MODES:
     * normal
 
         * You start out with 3 layers, and a few digs.
-		* leveing up increaes the number of digs, the amount of stack pebble, and total layers.
-		* uses the 'normal1' hide method.
+        * leveing up increaes the number of digs, the amount of stack pebble, and total layers.
+        * uses the 'normal1' hide method.
 
 
     * stack 64
