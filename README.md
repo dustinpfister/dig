@@ -68,7 +68,40 @@ land.addHideMethod({
 
 This simple example places all the stack pebble in cell 0, which should be the left, top cell in the top layer.
 
+## the hideKit API
 
+
+### hideKit.makeOptions(layerIndex);
+
+Make an array of index values for each tile for a given layerIndex.
+
+### hideKit.spliceFromOptions(options);
+
+Splice out a random tile using a tile index made with makeOptions
+
+```js
+ 
+var options = hideKit.makeOptions(land.d-1),
+ 
+tile = hideKit.spliceFromOptions(options);
+ 
+```
+
+### hideKit.setAmount(cell,amount);
+
+set the pebble amount for a given cell
+
+### hideKit.forDepth(method);
+
+useful for when you want to do something for each layer
+
+```js
+    hideKit.forDepth(function (layer, d) {
+ 
+        // do something for each layer
+ 
+    });
+```
 
 ## Cheat Tools
 

@@ -1,26 +1,36 @@
-2.13.x - Hide methods revisited
+2.14.x - node.js, and pre-commit scripts
 
-    * added land.addHideMethod() method that allows for importing an external hide method into land.js
-    * pulled top_down into a *.js file that calls land.addHideMethod()
-    * pulled top_layer into a *.js file that calls land.addHideMethod()
-    * added a hideKit api that helps with the authoring og hide methods
-    * I made it so that setting total amounts of all cells is just part of the process via the hideKit api
+    * started using node.js
+    * made a script that bumps the version number on each commit
+    * displaying current version number in the title screen by getting the package.json data
+
+    what else?
+    * scripts to run before $ git add *:
+        * use js-beautify to beautify js dev files
+        * use js-beautify to automatically make min versions of js files
+        * have it so index.html uses the min files.
+        * maybe jslint?
 
 
+2.x.x - games modes
 
-	* normal 1
+    * add a state.addGameMode method
+	* a game mode can:
+        * have one or more hide methods
+        * it can treat tile hp in different ways
+        * the number of stacks can be 1 to endless
+        * loss or win conditions can change
+        * have a level value associated with it
 
-	A per layer pebble amount is found my just diving the totalStack pebble over the number of layers
-
-	var perLayer = Math.floor(land.totalPebble / land.d);
-
-	Only a percentage of the perLayer amount goes to each layer, the largest of each is at the bottom
-	
-    maybes:
-    * more than one effect
-    * can set which effect, as well as disable the effect in egg.js.
 
 GAME MODES:
+
+    * normal
+
+        * You start out with 3 layers, and a few digs.
+		* leveing up increaes the number of digs, the amount of stack pebble, and total layers.
+		* uses the 'normal1' hide method.
+
 
     * stack 64
 
@@ -33,6 +43,18 @@ GAME MODES:
         * At the bottom layer there is just one tile with pebble.
         * the single loot tile at the bottom is the most valuable.
 
+    * To China.
+
+        Although not a true endless mode, for the most part it is.
+
+        * earths diameter is 7917 miles or 12,738,453 m
+
+        * unlimited digs
+        * progress saved on each drop down
+        * fixed 1 hp for each tile for first 10% of layers
+        * auto dig option
+        * leveling once china is reached.
+        * leveling up just increases stack pebble
 
 IDEAS:
 
