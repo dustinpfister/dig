@@ -1,6 +1,6 @@
 {
   "name": "game_dig",
-  "version": "2.14.7",
+  "version": "2.15.0",
   "description": "A game about digging for money",
   "main": "server.js",
   "scripts": {
